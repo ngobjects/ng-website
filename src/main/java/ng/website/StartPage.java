@@ -1,10 +1,10 @@
 package ng.website;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
+import ng.website.Application.Page;
 
 public class StartPage extends NGComponent {
 
@@ -15,11 +15,6 @@ public class StartPage extends NGComponent {
 	}
 
 	public List<Page> pages() {
-		return Arrays.asList(
-				new Page( "APIs", null ),
-				new Page( "Components", null ),
-				new Page( "WebObjects integration", null ) );
+		return Application.pages();
 	}
-
-	public record Page( String name, String url ) {};
 }
