@@ -1,4 +1,4 @@
-package ng.website;
+package ng.website.components;
 
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;

@@ -8,6 +8,9 @@ import ng.appserver.NGApplication;
 import ng.appserver.NGComponent;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
+import ng.appserver.templating._NGUtilities;
+import ng.website.components.DocumentationPage;
+import ng.website.components.StartPage;
 
 public class Application extends NGApplication {
 
@@ -16,8 +19,9 @@ public class Application extends NGApplication {
 	}
 
 	public Application() {
+		_NGUtilities.addClass( NGComponent.class );
 
-		// This route maps the given request
+		// This route maps the given request to a content page
 		routeTable().map( "/page/", ( request ) -> {
 			final String pageName = request.parsedURI().getString( 1 );
 

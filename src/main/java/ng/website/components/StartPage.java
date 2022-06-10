@@ -1,9 +1,10 @@
-package ng.website;
+package ng.website.components;
 
 import java.util.List;
 
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
+import ng.website.Application;
 import ng.website.Application.Page;
 
 public class StartPage extends NGComponent {
