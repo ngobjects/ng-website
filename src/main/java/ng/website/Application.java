@@ -11,6 +11,7 @@ import ng.appserver.NGResponse;
 import ng.appserver.templating._NGUtilities;
 import ng.website.components.DocumentationPage;
 import ng.website.components.StartPage;
+import ng.website.components.WrapperComponent;
 
 public class Application extends NGApplication {
 
@@ -19,7 +20,7 @@ public class Application extends NGApplication {
 	}
 
 	public Application() {
-		_NGUtilities.addClass( NGComponent.class );
+		_NGUtilities.addClass( WrapperComponent.class );
 
 		// This route maps the given request to a content page
 		routeTable().map( "/page/", ( request ) -> {
