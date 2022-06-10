@@ -50,8 +50,9 @@ public class Application extends NGApplication {
 
 	public static List<Page> pages() {
 		return Arrays.asList(
-				new Page( "APIs", "api", null ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
+				new Page( "Demo", "docs", DocumentationPage.class ),
+				new Page( "API", "api", null ),
 				new Page( "WebObjects integration", "wo-integration", null ) );
 	}
 }
