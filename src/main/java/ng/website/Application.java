@@ -10,6 +10,7 @@ import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
 import ng.appserver.templating._NGUtilities;
 import ng.website.components.DocumentationPage;
+import ng.website.components.GettingStartedPage;
 import ng.website.components.StartPage;
 import ng.website.components.WrapperComponent;
 
@@ -43,6 +44,9 @@ public class Application extends NGApplication {
 
 	public record Page( String name, String id, Class<? extends NGComponent> componentClass ) {
 
+		/**
+		 * @return The public URL for the oage
+		 */
 		public String url() {
 			return "/page/" + id;
 		}
@@ -50,6 +54,7 @@ public class Application extends NGApplication {
 
 	public static List<Page> pages() {
 		return Arrays.asList(
+				new Page( "Getting started", "getting-started", GettingStartedPage.class ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
 				new Page( "Demo", "docs", DocumentationPage.class ),
 				new Page( "API", "api", null ),

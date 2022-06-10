@@ -12,4 +12,8 @@ public class WrapperComponent extends NGComponent {
 	public WrapperComponent( NGContext context ) {
 		super( context );
 	}
+
+	public Boolean hideHeader() {
+		return (Boolean)valueForBinding( "hideHeader" );
+	}
 }
