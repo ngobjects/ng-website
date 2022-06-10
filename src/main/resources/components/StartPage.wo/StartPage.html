@@ -28,7 +28,7 @@
 					<ul class="nav flex-column">
 						<wo:repetition list="$pages" item="$currentPage">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="#"><wo:str value="$currentPage.name" /></a>
+								<wo:link class="nav-link active" aria-current="page" href="$currentPage.url"><wo:str value="$currentPage.name" /></wo:link>
 							</li>
 						</wo:repetition>
 					</ul> 
