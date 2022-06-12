@@ -7,7 +7,6 @@ import ng.appserver.NGComponent;
 import ng.website.Page.Type;
 import ng.website.components.DemoPage;
 import ng.website.components.DocumentationPage;
-import ng.website.components.GettingStartedPage;
 import ng.website.components.WebObjectsIntegrationPage;
 
 /**
@@ -44,7 +43,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	 */
 	public static List<Page> pages() {
 		return Arrays.asList(
-				new Page( "Getting started", "getting-started", GettingStartedPage.class ),
+				new Page( "Getting started", "getting-started", "getting-started" ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
 				new Page( "Demo", "demo", DemoPage.class ),
 				new Page( "API", "api", "api" ),
