@@ -44,7 +44,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 		return Arrays.asList(
 				new Page( "Getting started", "getting-started", "getting-started" ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "API", "api", "api" ),
+				new Page( "templating", "templating", "templating" ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
 }
