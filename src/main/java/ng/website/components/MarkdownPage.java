@@ -15,32 +15,37 @@ import ng.appserver.privates.NGUtils;
 
 public class MarkdownPage extends NGComponent {
 
+	/**
+	 * Name of the markdown file in app-resources (without suffix)
+	 */
 	public String markdownFilename;
 
 	public MarkdownPage( NGContext context ) {
 		super( context );
 	}
 
+	/**
+	 * @return The loaded markdown string from resources
+	 */
 	private String markdownString() {
 		String path = "md/" + markdownFilename + ".md";
 		byte[] bytes = NGUtils.readAppResource( path ).get();
 		return new String( bytes, StandardCharsets.UTF_8 );
 	}
 
+	/**
+	 * @return The markdownString rendered to HTML for display
+	 */
 	public String renderedMarkdownString() {
 		MutableDataSet options = new MutableDataSet();
 
 		options.set( Parser.EXTENSIONS, Arrays.asList( TablesExtension.create() ) );
 
-		// uncomment to convert soft-breaks to hard breaks
-		// options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
-
 		Parser parser = Parser.builder( options ).build();
 		HtmlRenderer renderer = HtmlRenderer.builder( options ).build();
 
-		// You can re-use parser and renderer instances
 		Node document = parser.parse( markdownString() );
-		String html = renderer.render( document ); // "<p>This is <em>Sparta</em></p>\n"
+		String html = renderer.render( document );
 		return html;
 	}
 }
