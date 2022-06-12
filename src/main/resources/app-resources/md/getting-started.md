@@ -3,7 +3,7 @@
 
 Start by creating a standard maven project. Make sure you're using Java 17 or newer and add the following dependency:
 
-```
+```xml
 <dependency>
     <groupId>the.group.we.will.pick</groupId>
     <artifactId>the.name.we.will.pick</artifactId>
@@ -15,7 +15,7 @@ Start by creating a standard maven project. Make sure you're using Java 17 or ne
 
 Now create a class called Application.java and paste in the following code:
 
-```
+```java
 package ng.website;
 
 import ng.appserver.NGApplication;

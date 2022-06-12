@@ -32,7 +32,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	}
 
 	/**
-	 * @return The public URL for the oage
+	 * @return The public URL for the page
 	 */
 	public String url() {
 		return "/page/" + id();
