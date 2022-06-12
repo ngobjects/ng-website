@@ -37,15 +37,12 @@ public class MarkdownPage extends NGComponent {
 	 * @return The markdownString rendered to HTML for display
 	 */
 	public String renderedMarkdownString() {
-		MutableDataSet options = new MutableDataSet();
-
+		final MutableDataSet options = new MutableDataSet();
 		options.set( Parser.EXTENSIONS, Arrays.asList( TablesExtension.create() ) );
 
-		Parser parser = Parser.builder( options ).build();
-		HtmlRenderer renderer = HtmlRenderer.builder( options ).build();
-
-		Node document = parser.parse( markdownString() );
-		String html = renderer.render( document );
-		return html;
+		final Parser parser = Parser.builder( options ).build();
+		final HtmlRenderer renderer = HtmlRenderer.builder( options ).build();
+		final Node document = parser.parse( markdownString() );
+		return renderer.render( document );
 	}
 }

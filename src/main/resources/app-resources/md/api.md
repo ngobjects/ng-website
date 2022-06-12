@@ -9,3 +9,7 @@ Markdown test page
     <version>0.64.0</version>
 </dependency>
 ```
+
+|Hello|Yes|
+|-----|---|
+|Hugi|Smu|
