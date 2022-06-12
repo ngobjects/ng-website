@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import ng.appserver.NGComponent;
+import ng.website.components.DemoPage;
 import ng.website.components.DocumentationPage;
 import ng.website.components.GettingStartedPage;
 import ng.website.components.WebObjectsIntegrationPage;
@@ -18,7 +19,7 @@ public record Page( String name, String id, Class<? extends NGComponent> compone
 	 * @return The public URL for the oage
 	 */
 	public String url() {
-		return "/page/" + id;
+		return "/page/" + id();
 	}
 
 	/**
@@ -28,7 +29,7 @@ public record Page( String name, String id, Class<? extends NGComponent> compone
 		return Arrays.asList(
 				new Page( "Getting started", "getting-started", GettingStartedPage.class ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "Demo", "docs", DocumentationPage.class ),
+				new Page( "Demo", "docs", DemoPage.class ),
 				new Page( "API", "api", null ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
