@@ -29,7 +29,7 @@ public record Page( String name, String id, Class<? extends NGComponent> compone
 		return Arrays.asList(
 				new Page( "Getting started", "getting-started", GettingStartedPage.class ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "Demo", "docs", DemoPage.class ),
+				new Page( "Demo", "demo", DemoPage.class ),
 				new Page( "API", "api", null ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
