@@ -5,7 +5,6 @@ import java.util.List;
 
 import ng.appserver.NGComponent;
 import ng.website.Page.Type;
-import ng.website.components.DemoPage;
 import ng.website.components.DocumentationPage;
 import ng.website.components.WebObjectsIntegrationPage;
 
@@ -45,7 +44,6 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 		return Arrays.asList(
 				new Page( "Getting started", "getting-started", "getting-started" ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "Demo", "demo", DemoPage.class ),
 				new Page( "API", "api", "api" ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
