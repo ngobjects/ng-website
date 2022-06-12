@@ -5,6 +5,7 @@ import ng.appserver.NGApplication;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
 import ng.appserver.templating._NGUtilities;
+import ng.website.components.MarkdownPage;
 import ng.website.components.StartPage;
 import ng.website.components.WrapperComponent;
 
@@ -23,7 +24,14 @@ public class Application extends NGApplication {
 
 			for( Page page : Page.pages() ) {
 				if( page.id().equals( pageName ) ) {
-					return pageWithName( page.componentClass(), request.context() );
+					return switch( page.type() ) {
+					case Component -> pageWithName( page.componentClass(), request.context() );
+					case Markdown -> {
+						MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
+						p.markdownFilename = page.markdownFilename();
+						yield p;
+					}
+					};
 				}
 			}
 

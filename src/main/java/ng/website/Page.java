@@ -29,7 +29,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	}
 
 	public Page( String name, String id, String markdownFilename ) {
-		this( name, id, Type.Component, null, markdownFilename );
+		this( name, id, Type.Markdown, null, markdownFilename );
 	}
 
 	/**
@@ -47,7 +47,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 				new Page( "Getting started", "getting-started", GettingStartedPage.class ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
 				new Page( "Demo", "demo", DemoPage.class ),
-				new Page( "API", "api", "api.md" ),
+				new Page( "API", "api", "api" ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
 }
