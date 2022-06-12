@@ -12,6 +12,7 @@ import ng.appserver.templating._NGUtilities;
 import ng.website.components.DocumentationPage;
 import ng.website.components.GettingStartedPage;
 import ng.website.components.StartPage;
+import ng.website.components.WebObjectsIntegrationPage;
 import ng.website.components.WrapperComponent;
 
 public class Application extends NGApplication {
@@ -58,6 +59,6 @@ public class Application extends NGApplication {
 				new Page( "Documentation", "docs", DocumentationPage.class ),
 				new Page( "Demo", "docs", DocumentationPage.class ),
 				new Page( "API", "api", null ),
-				new Page( "WebObjects integration", "wo-integration", null ) );
+				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
 }
