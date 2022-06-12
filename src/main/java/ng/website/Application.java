@@ -1,18 +1,11 @@
 package ng.website;
 
-import java.util.Arrays;
-import java.util.List;
-
 import ng.appserver.NGActionResults;
 import ng.appserver.NGApplication;
-import ng.appserver.NGComponent;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
 import ng.appserver.templating._NGUtilities;
-import ng.website.components.DocumentationPage;
-import ng.website.components.GettingStartedPage;
 import ng.website.components.StartPage;
-import ng.website.components.WebObjectsIntegrationPage;
 import ng.website.components.WrapperComponent;
 
 public class Application extends NGApplication {
@@ -28,9 +21,9 @@ public class Application extends NGApplication {
 		routeTable().map( "/page/", ( request ) -> {
 			final String pageName = request.parsedURI().getString( 1 );
 
-			for( Page page : pages() ) {
+			for( Page page : Page.pages() ) {
 				if( page.id().equals( pageName ) ) {
-					return pageWithName( page.componentClass, request.context() );
+					return pageWithName( page.componentClass(), request.context() );
 				}
 			}
 
@@ -43,22 +36,4 @@ public class Application extends NGApplication {
 		return pageWithName( StartPage.class, request.context() );
 	}
 
-	public record Page( String name, String id, Class<? extends NGComponent> componentClass ) {
-
-		/**
-		 * @return The public URL for the oage
-		 */
-		public String url() {
-			return "/page/" + id;
-		}
-	}
-
-	public static List<Page> pages() {
-		return Arrays.asList(
-				new Page( "Getting started", "getting-started", GettingStartedPage.class ),
-				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "Demo", "docs", DocumentationPage.class ),
-				new Page( "API", "api", null ),
-				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
-	}
 }

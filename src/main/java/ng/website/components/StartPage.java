@@ -4,8 +4,7 @@ import java.util.List;
 
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
-import ng.website.Application;
-import ng.website.Application.Page;
+import ng.website.Page;
 
 public class StartPage extends NGComponent {
 
@@ -16,6 +15,6 @@ public class StartPage extends NGComponent {
 	}
 
 	public List<Page> pages() {
-		return Application.pages();
+		return Page.pages();
 	}
 }
