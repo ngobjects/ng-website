@@ -2,9 +2,9 @@
 \
 The template parser in ng-objects is a total rip-off of the *Woognl* parser in [Project Wonder](https://github.com/wocommunity/wonder) (although without the "ognl"-part, which is [an entirely different thing](https://commons.apache.org/proper/commons-ognl/)).\
 \
-The parser was originally created by Mike Schrag and has since been iterated on by the good people of the WOCommunity. Without the parser, this project would not have been possible.\
+The parser was originally created by Mike Schrag and has since been iterated on by the good people of the WOCommunity. Without this parser, this project would have taken much, much more time.\
 \
-Mike knows we're using his parser, huge thanks to him for his support and to all the others that have contributed to it!
+Huge thanks to Mike for the parser and to all the others that have contributed to it!
 
 # Templating
 
