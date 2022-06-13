@@ -3,6 +3,7 @@ package ng.website.components;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -38,7 +39,7 @@ public class MarkdownPage extends NGComponent {
 	 */
 	public String renderedMarkdownString() {
 		final MutableDataSet options = new MutableDataSet();
-		options.set( Parser.EXTENSIONS, Arrays.asList( TablesExtension.create() ) );
+		options.set( Parser.EXTENSIONS, Arrays.asList( TablesExtension.create(), AsideExtension.create() ) );
 
 		final Parser parser = Parser.builder( options ).build();
 		final HtmlRenderer renderer = HtmlRenderer.builder( options ).build();
