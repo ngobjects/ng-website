@@ -27,8 +27,8 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 		this( name, id, Type.Component, componentClass, null );
 	}
 
-	public Page( String name, String id, String markdownFilename ) {
-		this( name, id, Type.Markdown, null, markdownFilename );
+	public Page( String name, String id ) {
+		this( name, id, Type.Markdown, null, id );
 	}
 
 	/**
@@ -43,10 +43,12 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	 */
 	public static List<Page> pages() {
 		return Arrays.asList(
-				new Page( "Getting started", "getting-started", "getting-started" ),
-				new Page( "Documentation", "docs", DocumentationPage.class ),
+				new Page( "Getting started", "getting-started" ),
+				new Page( "Templating", "templating" ),
 				new Page( "Dynamic elements", "dynamic-elements", DynamicElementsPage.class ),
-				new Page( "Templating", "templating", "templating" ),
+				new Page( "Documentation", "docs", DocumentationPage.class ),
+				new Page( "KeyValueCoding", "key-value-coding" ),
+				new Page( "Glossary", "glossary" ),
 				new Page( "For WebObjects developers", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
 }
