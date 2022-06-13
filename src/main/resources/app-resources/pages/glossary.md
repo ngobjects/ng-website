@@ -2,16 +2,16 @@
 
 ### Adaptor
 
-The web server part, whose job it is to abstract our API from working with raw HTTP.
+The web server part of your application, whose responsibility it is to abstract our API from working with raw HTTP.
 
 It accepts HTTP requests, converts them to an ```NGRequest``` object and forwards them to ```NGApplication.dispatchRequest()```.\
-That returns an ```NGResponse``` which the adaptor will convert to a raw HTTP response and return to the client.
+That returns an ```NGResponse``` to the adaptor which will convert to a raw HTTP response and send it to the client.
 
 Our main adaptor is currently Jetty based (found in the project ```ng-adaptor-jetty```), but an experimental socket-based adaptor ```NGAdaptorRaw``` is also included in ```ng-appserver```.
 
 ### Binding
 
-Dynamic tags can have multiple bindings, shown in templates as attributes on Dynamic Tags. Bindings are the mechanism by which values are passed between the template and the dynamic tag's class.
+Bindings are the API Dynamic elements and Components expose to the template parser. Dynamic tags can have multiple bindings, shown in templates as attributes on the tags. Bindings are the mechanism by which values are passed between the template and the dynamic tag's class.
 
 ### Dynamic Element
 
@@ -25,12 +25,14 @@ Tags used in templates that get processed by our template engine. A Dynamic tag 
 
 A page or a reusable component that can be embedded in a page. Usually consists of an HTML template and an associated java class.
 
+<!--
+
+TODO these are work in progress
+
 ### KeyValueCoding
 
 
 ### KeyPath
 
-
-### Template
-
-The 
+[//]: # Template
+-->

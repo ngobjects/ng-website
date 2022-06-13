@@ -1,7 +1,8 @@
 package ng.website.components;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
@@ -21,6 +22,11 @@ public class MarkdownPage extends NGComponent {
 	 */
 	public String markdownFilename;
 
+	/**
+	 * The directory to locate the markdown file in
+	 */
+	public String markdownDirectory;
+
 	public MarkdownPage( NGContext context ) {
 		super( context );
 	}
@@ -29,9 +35,14 @@ public class MarkdownPage extends NGComponent {
 	 * @return The loaded markdown string from resources
 	 */
 	private String markdownString() {
-		String path = "md/" + markdownFilename + ".md";
-		byte[] bytes = NGUtils.readAppResource( path ).get();
-		return new String( bytes, StandardCharsets.UTF_8 );
+		final String path = markdownDirectory + "/" + markdownFilename + ".md";
+		final Optional<byte[]> resource = NGUtils.readAppResource( path );
+
+		if( resource.isEmpty() ) {
+			return "No content file found";
+		}
+
+		return new String( resource.get(), StandardCharsets.UTF_8 );
 	}
 
 	/**
@@ -39,7 +50,7 @@ public class MarkdownPage extends NGComponent {
 	 */
 	public String renderedMarkdownString() {
 		final MutableDataSet options = new MutableDataSet();
-		options.set( Parser.EXTENSIONS, Arrays.asList( TablesExtension.create(), AsideExtension.create() ) );
+		options.set( Parser.EXTENSIONS, List.of( TablesExtension.create(), AsideExtension.create() ) );
 
 		final Parser parser = Parser.builder( options ).build();
 		final HtmlRenderer renderer = HtmlRenderer.builder( options ).build();

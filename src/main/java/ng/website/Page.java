@@ -1,6 +1,5 @@
 package ng.website;
 
-import java.util.Arrays;
 import java.util.List;
 
 import ng.appserver.NGComponent;
@@ -40,7 +39,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	 * @return The list of all our pages
 	 */
 	public static List<Page> pages() {
-		return Arrays.asList(
+		return List.of(
 				new Page( "Getting started", "getting-started" ),
 				new Page( "Templating", "templating" ),
 				new Page( "Dynamic elements", "dynamic-elements", DynamicElementsPage.class ),

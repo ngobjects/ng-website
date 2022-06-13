@@ -20,18 +20,35 @@ public class Application extends NGApplication {
 
 		// This route maps the given request to a content page
 		routeTable().map( "/page/", ( request ) -> {
-			final String pageName = request.parsedURI().getString( 1 );
+			final String id = request.parsedURI().getString( 1 );
 
 			for( Page page : Page.pages() ) {
-				if( page.id().equals( pageName ) ) {
+				if( page.id().equals( id ) ) {
 					return switch( page.type() ) {
 					case Component -> pageWithName( page.componentClass(), request.context() );
 					case Markdown -> {
 						MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
 						p.markdownFilename = page.markdownFilename();
+						p.markdownDirectory = "pages";
 						yield p;
 					}
 					};
+				}
+			}
+
+			return new NGResponse( "Page not found", 404 );
+		} );
+
+		// This route maps the given request to a content page
+		routeTable().map( "/blog/", ( request ) -> {
+			final String id = request.parsedURI().getString( 1 );
+
+			for( BlogEntry blogEntry : BlogEntry.all() ) {
+				if( blogEntry.id().equals( id ) ) {
+					MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
+					p.markdownFilename = blogEntry.id();
+					p.markdownDirectory = "blog";
+					return p;
 				}
 			}
 

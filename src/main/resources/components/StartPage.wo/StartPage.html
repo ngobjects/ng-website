@@ -7,7 +7,7 @@
 				It's compatible with WebObjects deployment environments, allowing you to seamlessly deploy <code>ng-objects</code> applications to existing WO environments. 
 			</p>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-				<button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">Documentation</button>
+				<a type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" href="/page/getting-started">Quick start</a>
 				<a type="button" class="btn btn-outline-secondary btn-lg px-4" href="https://www.github.com/ngobjects/ng-objects"><wo:img filename="GitHub-Mark-32px.png" width="26" /> GitHub</a>
 			</div>
 		</div>
@@ -31,10 +31,12 @@
 		</div>
 		<div class="col">
 			<h3>Blog</h3>
-			<h6>Dynamic elements</h6>
-			<p>Smusmu</p>
-			<h6>Have you checked out the bla bla</h6>
-			<p>Smusmu</p>
+			<wo:repetition list="$blogEntries" item="$currentBlogEntry">
+				<h5 style="margin-bottom: 2rem">
+					<small style="color: gray; font-size: smaller"><wo:str value="$currentBlogEntry.date" /></small><br>
+					<wo:link href="$currentBlogEntry.url"><wo:str value="$currentBlogEntry.title" /></wo:link>
+				</h5>
+			</wo:repetition>
 		</div>
 	</div>
 </wo:WrapperComponent>
