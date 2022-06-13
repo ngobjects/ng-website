@@ -15,6 +15,6 @@ public record BlogEntry( LocalDate date, String title, String id ) {
 	public static List<BlogEntry> all() {
 		return List.of(
 				new BlogEntry( LocalDate.of( 2022, 6, 13 ), "Work progressing nicely", "2022-06-13" ),
-				new BlogEntry( LocalDate.of( 2022, 6, 10 ), "This is also nice", "2022-06-11" ) );
+				new BlogEntry( LocalDate.of( 2022, 6, 10 ), "Routing mechanism", "2022-06-10" ) );
 	}
 }
