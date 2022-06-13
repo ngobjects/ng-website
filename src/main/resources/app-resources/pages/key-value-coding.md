@@ -19,6 +19,9 @@ When you write out a dynamic binding in a template, say something like ```<wo:st
 
 
 
+| ℹ **Fun fact**\
+KeyValueCoding originates With Apple's/WebObjects' ```NSKeyValueCoding```. Our implementation, ```NGKeyValueCoding``` basically duplicates the functionality of Apple's implementation, so if you're familiar with that you're good to go. 
+
 ## KeyPaths
 
 The paths in dynamic bindings can have multiple components, separated by a period, and we call them ```KeyPaths```.
