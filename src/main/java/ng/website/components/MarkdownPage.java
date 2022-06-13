@@ -14,6 +14,7 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
 import ng.appserver.privates.NGUtils;
+import ng.website.MarkdownProcessor;
 
 public class MarkdownPage extends NGComponent {
 
@@ -42,7 +43,11 @@ public class MarkdownPage extends NGComponent {
 			return "No content file found";
 		}
 
-		return new String( resource.get(), StandardCharsets.UTF_8 );
+		String markdownString = new String( resource.get(), StandardCharsets.UTF_8 );
+
+		markdownString = MarkdownProcessor.process( markdownString );
+
+		return markdownString;
 	}
 
 	/**

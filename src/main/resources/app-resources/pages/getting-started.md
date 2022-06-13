@@ -8,9 +8,9 @@ Start by creating a standard maven project. Make sure you're using Java 17 or ne
 
 ```xml
 <dependency>
-    <groupId>the.group.we.will.pick</groupId>
-    <artifactId>the.name.we.will.pick</artifactId>
-    <version>0.64.0</version>
+    <groupId>${maven.groupId}</groupId>
+    <artifactId>${maven.artifactId}</artifactId>
+    <version>${maven.version}</version>
 </dependency>
 ```
 
@@ -30,7 +30,7 @@ public class Application extends NGApplication {
 }
 ```
 
-Run this class as a java application and point your browser to http://localhost:1200/ .
+Run this class as a java application and point your browser to [http://localhost:1200/](http://localhost:1200/).
 
 Congratulations, your first application is up and running!
 

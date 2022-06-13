@@ -29,13 +29,13 @@ public class MyComponent extends NGComponent {
 
 ## Dynamic tags
 
-A dynamic tag always starts with ```<wo:``` followed by a ```tag identifier``` and then an optional list of ```bindings```.\
+A dynamic tag always starts with ```<wo:``` followed by a ```tag identifier``` and then an optional list of ```bindings``` (the tag's attributes).\
 Dynamic tags must always be "closed", i.e. if they have no associated closing tag, you must end the "opening" tag with ```/>```
 
  ```<wo:tagIdentifier binding1="$someVariable" binding2="SomeConstant" />```.
 
 * **tagIdentifier**\
-identifies which dynamic tag to use. This can be a fully qualified class name ```(ng.appserver.elements.NGString)```, the simple class name ```(NGString)``` or a shortcut provided for the tag ```(str)```
+identifies what the element actually is (which is always either a component or a dynamic element). This can be a fully qualified class name ```(ng.appserver.elements.NGString)```, the simple class name ```(NGString)``` or a shortcut provided for the tag ```(str)```
 
 * **$someVariable**\
 Bindings whose value starts with a ```$``` are dynamic and resolved against the template's java class. The identifier is usually a field name or a method name on the java class, but for a full description of the mechanics of the resolution see [KeyValueCoding](key-value-coding).
