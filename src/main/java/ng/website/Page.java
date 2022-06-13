@@ -10,7 +10,7 @@ import ng.website.components.DynamicElementsPage;
  * Represents a content page in our site
  */
 
-public record Page( String name, String id, Type type, Class<? extends NGComponent> componentClass, String markdownFilename ) {
+public record Page( String name, String id, Type type, Class<? extends NGComponent> componentClass ) {
 
 	public enum Type {
 		// A plain WebObjects component-type page
@@ -21,11 +21,11 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	}
 
 	public Page( String name, String id, Class<? extends NGComponent> componentClass ) {
-		this( name, id, Type.Component, componentClass, null );
+		this( name, id, Type.Component, componentClass );
 	}
 
 	public Page( String name, String id ) {
-		this( name, id, Type.Markdown, null, id );
+		this( name, id, Type.Markdown, null );
 	}
 
 	/**

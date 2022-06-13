@@ -3,8 +3,8 @@
 KeyValueCoding is the mechanism by which templates link the values of ```dynamic bindings``` to their associated java class.\
 When you write out a dynamic binding in a template, say something like ```<wo:str value="$someName" />```, the template will attempt to resolve ```someName``` against the java class in the following order, returning the value from the first implemented method:
 
-1. Check if the class implements ```NGKeyValueCodingAdditions```. If so, invoke the method ```public Object valueForKeyPath( String )``` with the string "someName" as a parameter
-2. Check if the class implements ```NGKeyValueCoding```. If so, invoke the method ```public Object valueForKey( String )``` with the string "someName" as a parameter
+1. If class implements ```NGKeyValueCodingAdditions``` invoke ```public Object valueForKeyPath( String )``` with "someName" as a parameter
+2. If class implements ```NGKeyValueCoding``` invoke ```public Object valueForKey( String )``` with "someName" as a parameter
 3. Check for method ```getSomeName()```
 4. Check for method  ```someName()```
 5. Check for method  ```isSomeName()```

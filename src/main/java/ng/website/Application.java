@@ -28,7 +28,7 @@ public class Application extends NGApplication {
 					case Component -> pageWithName( page.componentClass(), request.context() );
 					case Markdown -> {
 						MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
-						p.markdownFilename = page.markdownFilename();
+						p.markdownFilename = page.id();
 						p.markdownDirectory = "pages";
 						yield p;
 					}
