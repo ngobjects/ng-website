@@ -1,6 +1,6 @@
 # KeyValueCoding
 
-KeyValueCoding is the mechanism by which templates link the values of ```dynamic bindings``` to their associated java class.\
+KeyValueCoding is the mechanism by which templates link values of ```dynamic bindings``` to their associated java class.\
 When you write out a dynamic binding in a template, say something like ```<wo:str value="$someName" />```, the template will attempt to resolve ```someName``` against the java class in the following order, returning the value from the first implemented method:
 
 1. If class implements ```NGKeyValueCodingAdditions``` invoke ```public Object valueForKeyPath( String )``` with "someName" as a parameter
@@ -15,18 +15,18 @@ When you write out a dynamic binding in a template, say something like ```<wo:st
 10. Check for field ```_isSomeName```
 11. Check for field ```someName```
 12. Check for field ```isSomeName```
-13. Finally, if none of these methods work out, an ```NGKeyValueCoding.UnknownKeyException``` will be thrown.
+13. Finally, if none of these methods work out, an ```NGKeyValueCoding.UnknownKeyException``` is thrown.
 
-
+This work is done by the method ```NSKeyValueCodingAdditions.Utility::valueForKeyPath( Object object, String key )```, for the curius that's an excellent place to look.
 
 | ℹ **Fun fact**\
-KeyValueCoding originates With Apple's/WebObjects' ```NSKeyValueCoding```. Our implementation, ```NGKeyValueCoding``` basically duplicates the functionality of Apple's implementation, so if you're familiar with that you're good to go. 
+As is probably obvious for those who know, the KeyValueCoding concept originates With Apple's Foundation ```NSKeyValueCoding``` which is heavily used by WebObjects. Our implementation, ```NGKeyValueCoding``` basically duplicates the functionality of Apple's implementation, so if you're familiar with that you're good to go. 
 
 ## KeyPaths
 
-The paths in dynamic bindings can have multiple components, separated by a period, and we call them ```KeyPaths```.
+The keys in dynamic bindings can have multiple components, separated by a period, and we call them ```KeyPaths```.
 
-If you write ```<wo:str value="$company.manager.name" />``` the object graph will be traversed through that path and the lookups specified above are performed on the value returned by each component of the path to end up with the final value.
+If you write ```<wo:str value="$company.manager.name" />``` the object graph will be traversed through that path and the lookups order specified above is performed on the value returned by each component of the path to get the final value.
 
 
 ### ```Nulls``` in keyPaths
