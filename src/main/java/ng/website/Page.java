@@ -47,6 +47,6 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 				new Page( "Documentation", "docs", DocumentationPage.class ),
 				new Page( "Dynamic elements", "dynamic-elements", DynamicElementsPage.class ),
 				new Page( "Templating", "templating", "templating" ),
-				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
+				new Page( "For WebObjects developers", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
 }
