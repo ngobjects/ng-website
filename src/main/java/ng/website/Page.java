@@ -5,9 +5,7 @@ import java.util.List;
 
 import ng.appserver.NGComponent;
 import ng.website.Page.Type;
-import ng.website.components.DocumentationPage;
 import ng.website.components.DynamicElementsPage;
-import ng.website.components.WebObjectsIntegrationPage;
 
 /**
  * Represents a content page in our site
@@ -46,9 +44,9 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 				new Page( "Getting started", "getting-started" ),
 				new Page( "Templating", "templating" ),
 				new Page( "Dynamic elements", "dynamic-elements", DynamicElementsPage.class ),
-				new Page( "Documentation", "docs", DocumentationPage.class ),
+				new Page( "Documentation", "documentation" ),
 				new Page( "KeyValueCoding", "key-value-coding" ),
 				new Page( "Glossary", "glossary" ),
-				new Page( "For WebObjects developers", "wo-integration", WebObjectsIntegrationPage.class ) );
+				new Page( "For WebObjects developers", "wo-integration" ) );
 	}
 }

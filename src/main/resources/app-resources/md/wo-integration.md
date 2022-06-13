@@ -1,0 +1,3 @@
+# ng-objects for WebObjects developers
+
+Work in progress...
