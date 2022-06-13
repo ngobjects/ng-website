@@ -45,7 +45,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 		return Arrays.asList(
 				new Page( "Getting started", "getting-started", "getting-started" ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "Dynamic elements", "docs", DynamicElementsPage.class ),
+				new Page( "Dynamic elements", "dynamic-elements", DynamicElementsPage.class ),
 				new Page( "Templating", "templating", "templating" ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
