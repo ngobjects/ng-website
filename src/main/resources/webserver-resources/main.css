@@ -4,3 +4,12 @@ pre {
 	display: inline-block;
 	min-width: 50%;
 }
+
+
+aside {
+	float: right;
+	width: 20rem;
+	padding: 1rem; 
+	background-color: rgb(240,240,250);
+	border-left: 4px solid rgb(230,230,250);
+}
