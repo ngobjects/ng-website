@@ -6,6 +6,7 @@ import java.util.List;
 import ng.appserver.NGComponent;
 import ng.website.Page.Type;
 import ng.website.components.DocumentationPage;
+import ng.website.components.DynamicElementsPage;
 import ng.website.components.WebObjectsIntegrationPage;
 
 /**
@@ -44,7 +45,8 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 		return Arrays.asList(
 				new Page( "Getting started", "getting-started", "getting-started" ),
 				new Page( "Documentation", "docs", DocumentationPage.class ),
-				new Page( "templating", "templating", "templating" ),
+				new Page( "Dynamic elements", "docs", DynamicElementsPage.class ),
+				new Page( "Templating", "templating", "templating" ),
 				new Page( "WebObjects integration", "wo-integration", WebObjectsIntegrationPage.class ) );
 	}
 }
