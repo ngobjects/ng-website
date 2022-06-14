@@ -38,7 +38,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 	/**
 	 * @return The list of all our pages
 	 */
-	public static List<Page> pages() {
+	public static List<Page> allPages() {
 		return List.of(
 				new Page( "Getting started", "getting-started" ),
 				new Page( "Templating", "templating" ),

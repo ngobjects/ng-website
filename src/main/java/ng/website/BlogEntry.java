@@ -12,7 +12,10 @@ public record BlogEntry( LocalDate date, String title, String id ) {
 		return "/blog/" + id();
 	}
 
-	public static List<BlogEntry> all() {
+	/**
+	 * @return All of our blog entries
+	 */
+	public static List<BlogEntry> allBlogEntries() {
 		return List.of(
 				new BlogEntry( LocalDate.of( 2022, 6, 13 ), "Work progressing nicely", "2022-06-13" ),
 				new BlogEntry( LocalDate.of( 2022, 6, 10 ), "Routing mechanism", "2022-06-10" ) );

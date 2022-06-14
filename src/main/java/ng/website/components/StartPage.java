@@ -17,10 +17,10 @@ public class StartPage extends NGComponent {
 	}
 
 	public List<Page> pages() {
-		return Page.pages();
+		return Page.allPages();
 	}
 
 	public List<BlogEntry> blogEntries() {
-		return BlogEntry.all();
+		return BlogEntry.allBlogEntries();
 	}
 }

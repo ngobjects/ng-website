@@ -22,7 +22,7 @@ public class Application extends NGApplication {
 		routeTable().map( "/page/", ( request ) -> {
 			final String id = request.parsedURI().getString( 1 );
 
-			for( Page page : Page.pages() ) {
+			for( Page page : Page.allPages() ) {
 				if( page.id().equals( id ) ) {
 					return switch( page.type() ) {
 					case Component -> pageWithName( page.componentClass(), request.context() );
@@ -43,7 +43,7 @@ public class Application extends NGApplication {
 		routeTable().map( "/blog/", ( request ) -> {
 			final String id = request.parsedURI().getString( 1 );
 
-			for( BlogEntry blogEntry : BlogEntry.all() ) {
+			for( BlogEntry blogEntry : BlogEntry.allBlogEntries() ) {
 				if( blogEntry.id().equals( id ) ) {
 					MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
 					p.markdownFilename = blogEntry.id();

@@ -23,6 +23,6 @@ public class WrapperComponent extends NGComponent {
 	}
 
 	public List<Page> pages() {
-		return Page.pages();
+		return Page.allPages();
 	}
 }
