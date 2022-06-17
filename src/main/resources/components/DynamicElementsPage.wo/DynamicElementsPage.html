@@ -1,4 +1,18 @@
 <wo:WrapperComponent>
 	<h2>Dynamic elements</h2>
-	<p>TODO: Display the structured dynamic element documentation from ng-appserver.</p>
+	<wo:repetition list="$all" item="$current">
+		<h4><wo:str value="$current.elementClass.getSimpleName" /></h4>
+		<h5><code><wo:str value="$current.elementClass.getName" /></code></h5>
+		<wo:str value="$current.text" />
+		<h6>Bindings</h6>
+		<ul>
+		<wo:repetition list="$current.bindings" item="$currentBinding">
+			<li>
+				<strong><wo:str value="$currentBinding.name" /></strong><br>
+				<wo:str value="$currentBinding.text" />
+			</li>
+		</wo:repetition>
+		</ul>
+		<hr>
+	</wo:repetition>
 </wo:WrapperComponent>
