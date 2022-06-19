@@ -1,4 +1,13 @@
 <wo:WrapperComponent>
+	<aside>
+		<p>💡 <strong>On this page</strong><br />
+			Dynamic element documentation is currently constructed from information coded in <code>NGDynamicElementDescription.java</code><br>
+			<br>
+			The docs would probably be better stored with the actual elements, for example using annotations.
+			Information coded in such a way would also be useful for a future template editor, providing inline documentation and info for a validator (which bindings are required, which binding combinations are valid etc).  
+		</p>
+	</aside>
+
 	<h2>Dynamic elements</h2>
 	<wo:repetition list="$all" item="$current">
 		<h4><wo:str value="$current.elementClass.getSimpleName" /></h4>
