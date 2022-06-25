@@ -15,7 +15,7 @@ public class MarkdownProcessor {
 
 	private static final Pattern VAR_PATTERN = Pattern.compile( "\\$\\{.*?\\}" );
 
-	public static Map<String, String> variableMap() {
+	private static Map<String, String> variableMap() {
 		final Map<String, String> v = new HashMap<>();
 		v.put( "maven.groupId", "future.group.id" );
 		v.put( "maven.artifactId", "future.artifact.id" );
@@ -23,6 +23,9 @@ public class MarkdownProcessor {
 		return v;
 	}
 
+	/**
+	 * @return templateString where variables have been replaced with their corresponding values
+	 */
 	public static String process( final String templateString ) {
 		String result = templateString;
 		Matcher m = VAR_PATTERN.matcher( templateString );
