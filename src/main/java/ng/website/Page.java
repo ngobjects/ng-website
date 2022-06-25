@@ -46,6 +46,7 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 				new Page( "Documentation", "documentation" ),
 				new Page( "KeyValueCoding", "key-value-coding" ),
 				new Page( "Glossary", "glossary" ),
+				new Page( "Component actions", "component-actions" ),
 				new Page( "For WebObjects developers", "wo-integration" ) );
 	}
 }
