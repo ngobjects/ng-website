@@ -11,6 +11,7 @@ public class DynamicElementsPage extends NGComponent {
 
 	public NGDynamicElementDescription current;
 	public NGBindingDescription currentBinding;
+	public String currentAlias;
 
 	public DynamicElementsPage( NGContext context ) {
 		super( context );
