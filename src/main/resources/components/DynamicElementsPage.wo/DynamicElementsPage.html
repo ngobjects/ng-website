@@ -10,8 +10,8 @@
 
 	<h2>Dynamic elements</h2>
 	<wo:repetition list="$all" item="$current">
-		<h4><wo:str value="$current.elementClass.getSimpleName" /></h4>
-		<h5><code><wo:str value="$current.elementClass.getName" /></code></h5>
+		<h4><wo:str value="$current.elementClass.getSimpleName" /> <code style="font-size: 1rem"><wo:str value="$current.elementClass.getName" /></code></h4>
+		<wo:if condition="$current.isContainerElement"><span class="badge bg-secondary">Container element</span><br></wo:if>
 		<wo:str value="$current.text" />
 		<h6>Bindings</h6>
 		<ul>
