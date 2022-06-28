@@ -12,13 +12,13 @@
 	<p>Documentation for the standard dynamic elements that come with the framework.</p>
 	<hr />
 	<wo:repetition list="$all" item="$current">
-		<h4>
+		<h4 style="margin-bottom: 0px">
 			<wo:str value="$current.elementClass.getSimpleName" />
-			<code style="font-size: 1rem"><wo:str value="$current.elementClass.getName" /></code>
 			<wo:repetition list="$current.aliases" item="$currentAlias">
-				<span class="badge" style="color: rgb(150,150,150); font-size: 1rem">(wo:<wo:str value="$currentAlias" />) </span>
+				<span class="badge" style="color: rgb(130,130,130); font-size: 1.2rem; font-weight: normal">wo:<wo:str value="$currentAlias" /> </span>
 			</wo:repetition>
 		</h4>
+		<h5><code style="font-size: 1rem"><wo:str value="$current.elementClass.getName" /></code></h5>
 		<p><wo:str value="$current.text" /></p>
 		<wo:if condition="$current.isContainerElement"><p><span class="badge bg-primary">Container element</span></p></wo:if>
 		<h5>Bindings</h5>
