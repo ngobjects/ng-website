@@ -1,3 +1,4 @@
 # Logging
 
-Work in progress...
+Logging is handled by slf4j.
+
