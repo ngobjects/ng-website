@@ -43,11 +43,11 @@ public record Page( String name, String id, Type type, Class<? extends NGCompone
 				new Page( "Getting started", "getting-started" ),
 				new Page( "Templating", "templating" ),
 				new Page( "Dynamic elements", "dynamic-elements", DynamicElementsPage.class ),
-				new Page( "Documentation", "documentation" ),
 				new Page( "KeyValueCoding", "key-value-coding" ),
-				new Page( "Glossary", "glossary" ),
-				new Page( "Component actions", "component-actions" ),
 				new Page( "Routing", "routing" ),
-				new Page( "For WebObjects developers", "wo-integration" ) );
+				new Page( "Logging", "logging" ),
+				new Page( "Component actions", "component-actions" ),
+				new Page( "For WebObjects developers", "wo-integration" ),
+				new Page( "Glossary", "glossary" ) );
 	}
 }

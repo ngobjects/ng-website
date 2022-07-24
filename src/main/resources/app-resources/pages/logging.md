@@ -1,3 +1,3 @@
-# Documentation
+# Logging
 
 Work in progress...
