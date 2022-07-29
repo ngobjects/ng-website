@@ -17,9 +17,9 @@ public class Application extends NGApplication {
 
 	@Override
 	public NGResponse dispatchRequest( NGRequest request ) {
-		System.out.println( "====" );
-		System.out.println( request.headers() );
-		System.out.println( "====" );
+		//		System.out.println( "====" );
+		//		System.out.println( request.headers() );
+		//		System.out.println( "====" );
 		return super.dispatchRequest( request );
 	}
 
