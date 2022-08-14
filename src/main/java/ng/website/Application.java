@@ -6,6 +6,7 @@ import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
 import ng.appserver.templating._NGUtilities;
 import ng.website.components.MarkdownPage;
+import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
 import ng.website.components.WrapperComponent;
 
@@ -61,6 +62,10 @@ public class Application extends NGApplication {
 			}
 
 			return new NGResponse( "Page not found", 404 );
+		} );
+
+		routeTable().map( "/search", ( request ) -> {
+			return pageWithName( SearchResultsPage.class, request.context() );
 		} );
 	}
 

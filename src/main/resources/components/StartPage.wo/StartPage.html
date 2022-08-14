@@ -17,6 +17,9 @@
 	</div>
 	<div class="row">
 		<div class="col">
+			<form action="/search" style="margin-bottom: 10px">
+				<input type="text" name="searchString" size="20" style="border: none" placeholder="Search..." />
+			</form>
 			<ul class="nav flex-column">
 				<wo:repetition list="$pages" item="$currentPage">
 					<li class="nav-item">
