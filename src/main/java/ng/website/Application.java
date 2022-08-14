@@ -16,14 +16,6 @@ public class Application extends NGApplication {
 		NGApplication.run( args, Application.class );
 	}
 
-	@Override
-	public NGResponse dispatchRequest( NGRequest request ) {
-		//		System.out.println( "====" );
-		//		System.out.println( request.headers() );
-		//		System.out.println( "====" );
-		return super.dispatchRequest( request );
-	}
-
 	public Application() {
 		_NGUtilities.addClass( WrapperComponent.class );
 
