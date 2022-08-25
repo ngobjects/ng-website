@@ -10,6 +10,10 @@ import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
 import ng.website.components.WrapperComponent;
 
+/**
+ * Hook test
+ */
+
 public class Application extends NGApplication {
 
 	public static void main( String[] args ) {
