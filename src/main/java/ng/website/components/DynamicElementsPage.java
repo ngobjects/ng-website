@@ -20,4 +20,16 @@ public class DynamicElementsPage extends NGComponent {
 	public List<NGDynamicElementDescription> all() {
 		return NGDynamicElementDescription.all();
 	}
+
+	public String currentAlias() {
+		if( current.isContainerElement() ) {
+			return "<wo:%s>".formatted( currentAlias, currentAlias );
+		}
+
+		return "<wo:%s />".formatted( currentAlias );
+	}
+
+	public String currentAnchor() {
+		return "#" + current.elementClass().getSimpleName();
+	}
 }

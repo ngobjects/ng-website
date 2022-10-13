@@ -6,14 +6,12 @@
 			The docs would probably be better stored with the actual elements, for example using annotations.
 			Information coded in such a way would also be useful for a future template editor, providing inline documentation and info for a validator (which bindings are required, which binding combinations are valid etc).  
 		</p>
-		<!-- 		
 		<strong>TOC</strong>
 		<ul>
 			<wo:repetition list="$all" item="$current">
-				<li><wo:str value="$current.elementClass.getSimpleName" /></li>
+				<li><wo:link href="$currentAnchor"><wo:str value="$current.elementClass.getSimpleName" /></wo:link></li>
 			</wo:repetition>
 		</ul>
-		 -->
 	</aside>
 
 	<h2>Dynamic elements</h2>
@@ -21,14 +19,13 @@
 	<hr />
 	<wo:repetition list="$all" item="$current">
 		<h4 style="margin-bottom: 0px">
-			<wo:str value="$current.elementClass.getSimpleName" />
 			<wo:repetition list="$current.aliases" item="$currentAlias">
-				<span class="badge" style="color: rgb(110,110,110); font-size: 1.25rem; font-weight: normal">&lt;wo:<wo:str value="$currentAlias" />&gt; </span>
+				<wo:container elementName="a" id="$current.elementClass.simpleName" style="color: rgb(70,70,80); font-size: 1.5rem; font-weight: normal"><wo:str value="$currentAlias" /> </wo:container>
 			</wo:repetition>
 		</h4>
-		<h5><code style="font-size: 1rem"><wo:str value="$current.elementClass.getName" /></code></h5>
+		<h5><code style="font-size: 0.9rem"><wo:str value="$current.elementClass.getName" /></code></h5>
 		<p><wo:str value="$current.text" /></p>
-		<wo:if condition="$current.isContainerElement"><p><span class="badge bg-primary">Container element</span></p></wo:if>
+		<wo:if condition="$current.isContainerElement"><span class="badge bg-primary" style="margin: 0px 0px 15px 0px">Container element</span></wo:if>
 		<h5>Bindings</h5>
 		<ul>
 		<wo:repetition list="$current.bindings" item="$currentBinding">
