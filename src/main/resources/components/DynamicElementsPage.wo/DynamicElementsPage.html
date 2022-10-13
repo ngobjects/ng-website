@@ -1,12 +1,9 @@
 <wo:WrapperComponent>
 	<aside>
 		<p>💡 <strong>On this page</strong><br />
-			Dynamic element documentation is currently constructed from information coded in <code>NGDynamicElementDescription.java</code><br>
-			<br>
-			The docs would probably be better stored with the actual elements, for example using annotations.
-			Information coded in such a way would also be useful for a future template editor, providing inline documentation and info for a validator (which bindings are required, which binding combinations are valid etc).  
+			Dynamic element documentation is constructed in code by <a href="https://github.com/ngobjects/ng-objects/blob/master/ng-appserver/src/main/java/ng/appserver/elements/docs/NGDynamicElementDescription.java">NGDynamicElementDescription</a><br>  
 		</p>
-		<strong>TOC</strong>
+		<p>📚 <strong>Table of Contents</strong></p>
 		<ul>
 			<wo:repetition list="$all" item="$current">
 				<li><wo:link href="$currentAnchor"><wo:str value="$current.elementClass.getSimpleName" /></wo:link></li>
