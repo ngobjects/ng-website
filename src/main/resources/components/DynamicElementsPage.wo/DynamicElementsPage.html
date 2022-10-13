@@ -17,21 +17,23 @@
 	<wo:repetition list="$all" item="$current">
 		<h4 style="margin-bottom: 0px">
 			<wo:repetition list="$current.aliases" item="$currentAlias">
-				<wo:container elementName="a" id="$current.elementClass.simpleName" style="color: rgb(70,70,80); font-size: 1.5rem; font-weight: normal"><wo:str value="$currentAlias" /> </wo:container>
+				<wo:container elementName="a" id="$current.elementClass.simpleName" style="color: rgb(70,70,80); font-size: 1.4rem; font-weight: normal"><wo:str value="$currentAlias" /> </wo:container>
 			</wo:repetition>
 		</h4>
 		<h5><code style="font-size: 0.9rem"><wo:str value="$current.elementClass.getName" /></code></h5>
 		<p><wo:str value="$current.text" /></p>
-		<wo:if condition="$current.isContainerElement"><span class="badge bg-primary" style="margin: 0px 0px 15px 0px">Container element</span></wo:if>
-		<h5>Bindings</h5>
-		<ul>
-		<wo:repetition list="$current.bindings" item="$currentBinding">
-			<li>
-				<strong><wo:str value="$currentBinding.name" /></strong><br>
-				<wo:str value="$currentBinding.text" />
-			</li>
-		</wo:repetition>
-		</ul>
+		<wo:if condition="$current.isContainerElement"><span class="badge bg-primary" style="margin: 0px 0px 15px 0px; font-size: 0.7rem">Container element</span></wo:if>
+		<wo:if condition="$currentHasBindings">
+			<h6 style="font-weight: normal">Bindings</h6>
+			<ul>
+			<wo:repetition list="$current.bindings" item="$currentBinding">
+				<li>
+					<strong><wo:str value="$currentBinding.name" /></strong><br>
+					<wo:str value="$currentBinding.text" />
+				</li>
+			</wo:repetition>
+			</ul>
+		</wo:if>
 		<hr>
 	</wo:repetition>
 </wo:WrapperComponent>

@@ -32,4 +32,8 @@ public class DynamicElementsPage extends NGComponent {
 	public String currentAnchor() {
 		return "#" + current.elementClass().getSimpleName();
 	}
+
+	public boolean currentHasBindings() {
+		return !current.bindings().isEmpty();
+	}
 }
