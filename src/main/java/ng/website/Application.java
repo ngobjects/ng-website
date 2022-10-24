@@ -4,7 +4,7 @@ import ng.appserver.NGActionResults;
 import ng.appserver.NGApplication;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
-import ng.appserver.templating._NGUtilities;
+import ng.appserver.templating.NGElementUtils;
 import ng.website.components.MarkdownPage;
 import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
@@ -17,7 +17,7 @@ public class Application extends NGApplication {
 	}
 
 	public Application() {
-		_NGUtilities.addClass( WrapperComponent.class );
+		NGElementUtils.addClass( WrapperComponent.class );
 
 		// This route maps the given request to a content page
 		routeTable().map( "/page/", ( request ) -> {
