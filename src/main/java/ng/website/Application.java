@@ -41,7 +41,7 @@ public class Application extends NGApplication {
 		} );
 
 		// This route maps the given request to a content page
-		routeTable().map( "/blog/", ( request ) -> {
+		routeTable().map( "/blog/", request -> {
 			final String id = request.parsedURI().getString( 1 );
 
 			for( BlogEntry blogEntry : BlogEntry.allBlogEntries() ) {
