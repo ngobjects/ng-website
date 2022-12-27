@@ -22,6 +22,11 @@ public class WrapperComponent extends NGComponent {
 		return (Boolean)valueForBinding( "hideHeader" );
 	}
 
+	@Override
+	public boolean isSynchronized() {
+		return false;
+	}
+
 	public List<Page> pages() {
 		return Page.allPages();
 	}
