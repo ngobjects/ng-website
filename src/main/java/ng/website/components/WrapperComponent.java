@@ -23,7 +23,7 @@ public class WrapperComponent extends NGComponent {
 	}
 
 	@Override
-	public boolean isSynchronized() {
+	public boolean synchronizesVariablesWithBindings() {
 		return false;
 	}
 
