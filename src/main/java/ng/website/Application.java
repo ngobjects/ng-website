@@ -19,7 +19,6 @@ public class Application extends NGApplication {
 
 	public Application() {
 		NGElementUtils.addClass( WrapperComponent.class );
-		NGElementUtils.addClass( NGOverview.class );
 
 		// This route maps the given request to a content page
 		routeTable().map( "/page/", ( request ) -> {
@@ -61,11 +60,13 @@ public class Application extends NGApplication {
 		routeTable().map( "/search", ( request ) -> {
 			return pageWithName( SearchResultsPage.class, request.context() );
 		} );
+
+		// FIXME: ng-control should be contributing this route on it's own
+		routeTable().mapComponent( "/control", NGOverview.class );
 	}
 
 	@Override
 	public NGActionResults defaultResponse( NGRequest request ) {
 		return pageWithName( StartPage.class, request.context() );
 	}
-
 }
