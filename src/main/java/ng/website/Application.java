@@ -69,4 +69,12 @@ public class Application extends NGApplication {
 	public NGActionResults defaultResponse( NGRequest request ) {
 		return pageWithName( StartPage.class, request.context() );
 	}
+
+	@Override
+	public NGResponse dispatchRequest( NGRequest request ) {
+		System.out.println( "=================" );
+		System.out.println( request.headers() );
+		System.out.println( "=================" );
+		return super.dispatchRequest( request );
+	}
 }
