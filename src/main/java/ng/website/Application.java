@@ -70,11 +70,11 @@ public class Application extends NGApplication {
 		return pageWithName( StartPage.class, request.context() );
 	}
 
-	//	@Override
-	//	public NGResponse dispatchRequest( NGRequest request ) {
-	//		System.out.println( "=================" );
-	//		System.out.println( request.headers() );
-	//		System.out.println( "=================" );
-	//		return super.dispatchRequest( request );
-	//	}
+	@Override
+	public NGResponse dispatchRequest( NGRequest request ) {
+		System.out.println( "=================" );
+		System.out.println( request.headers() );
+		System.out.println( "=================" );
+		return super.dispatchRequest( request );
+	}
 }
