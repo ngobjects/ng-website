@@ -5,7 +5,6 @@ import ng.appserver.NGApplication;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
 import ng.appserver.templating.NGElementUtils;
-import ng.control.NGOverview;
 import ng.website.components.MarkdownPage;
 import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
@@ -60,9 +59,6 @@ public class Application extends NGApplication {
 		routeTable().map( "/search", ( request ) -> {
 			return pageWithName( SearchResultsPage.class, request.context() );
 		} );
-
-		// FIXME: ng-control should be contributing this route on it's own
-		routeTable().mapComponent( "/control", NGOverview.class );
 	}
 
 	@Override
