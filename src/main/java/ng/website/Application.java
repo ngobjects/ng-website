@@ -1,5 +1,7 @@
 package ng.website;
 
+import java.time.LocalDateTime;
+
 import ng.appserver.NGActionResults;
 import ng.appserver.NGApplication;
 import ng.appserver.NGRequest;
@@ -69,7 +71,7 @@ public class Application extends NGApplication {
 	@Override
 	public NGResponse dispatchRequest( NGRequest request ) {
 		System.out.println( "=================" );
-		System.out.println( request.headers() );
+		System.out.println( LocalDateTime.now() + " : " + request.headers() );
 		System.out.println( "=================" );
 		return super.dispatchRequest( request );
 	}
