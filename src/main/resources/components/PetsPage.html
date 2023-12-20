@@ -1,0 +1,11 @@
+<wo:form>
+	<wo:textfield value="$myName" /> <wo:submit action="$addMyName" value="Skrá mig!" />
+</wo:form>
+
+<p><wo:link action="$clearNames">Hreinsa listann!</wo:link></p>
+
+<hr/ >
+
+<wo:repetition list="$pets" item="$currentPet">
+	<wo:link action="$petCurrentPet"><wo:str value="$currentPet.name" /></wo:link><br>
+</wo:repetition>
