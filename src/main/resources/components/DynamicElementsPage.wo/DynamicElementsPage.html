@@ -19,10 +19,9 @@
 			<wo:repetition list="$current.aliases" item="$currentAlias">
 				<wo:container elementName="a" id="$current.elementClass.simpleName" style="color: rgb(70,70,80); font-size: 1.4rem; font-weight: normal"><wo:str value="$currentAlias" /> </wo:container>
 			</wo:repetition>
-		</h4>
-		<h5><code style="font-size: 0.9rem"><wo:str value="$current.elementClass.getName" /></code></h5>
+		</h4> <wo:if condition="$current.isContainerElement"><span class="badge bg-primary" style="margin: 0px; font-size: 0.7rem; font-weight: normal">Container element</span></wo:if>
+		<h5><code style="font-size: 0.8rem"><wo:str value="$current.elementClass.getName" /></code></h5>
 		<p><wo:str value="$current.text" /></p>
-		<wo:if condition="$current.isContainerElement"><span class="badge bg-primary" style="margin: 0px 0px 15px 0px; font-size: 0.7rem">Container element</span></wo:if>
 		<wo:if condition="$currentHasBindings">
 			<h6 style="font-weight: normal">Bindings</h6>
 			<ul>
