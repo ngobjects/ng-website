@@ -69,12 +69,17 @@ public class Application extends NGApplication {
 
 	@Override
 	public NGResponse dispatchRequest( NGRequest request ) {
-		System.out.println( "=================" );
-		System.out.println( request.httpVersion() + " : " + request.method() + " : " + request.uri() );
-		System.out.println( "-- headers --" );
-		System.out.println( LocalDateTime.now() + " : " + request.headers() );
-		System.out.println( "-- cookies --" );
-		System.out.println( "=================" );
+		System.out.println( ">>================= START REQUEST " + LocalDateTime.now() );
+		System.out.println( request.method() + " " + request.uri() );
+		System.out.println( "---- headers ----" );
+		System.out.println( request.headers() );
+		System.out.println( "---- request parameters ----" );
+		System.out.println( request.formValues() );
+		System.out.println( "---- cookies ----" );
+		System.out.println( request.cookieValues() );
+		System.out.println( "<<================= END REQUEST" );
+		System.out.println();
+		System.out.println();
 		return super.dispatchRequest( request );
 	}
 }
