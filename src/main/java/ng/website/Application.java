@@ -2,6 +2,7 @@ package ng.website;
 
 import java.time.LocalDateTime;
 
+import ng.appserver.NGActionResults;
 import ng.appserver.NGApplication;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
@@ -22,51 +23,51 @@ public class Application extends NGApplication {
 		NGElementUtils.addClass( WrapperComponent.class );
 
 		routeTable().mapComponent( "/", StartPage.class );
-
-		// This route maps the given request to a content page
-		routeTable().map( "/page/*", ( request ) -> {
-			final String id = request.parsedURI().getString( 1 );
-
-			for( Page page : Page.allPages() ) {
-				if( page.id().equals( id ) ) {
-					return switch( page.type() ) {
-						case Component -> pageWithName( page.componentClass(), request.context() );
-						case Markdown -> {
-							MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
-							p.markdownFilename = page.id();
-							p.markdownDirectory = "pages";
-							yield p;
-						}
-					};
-				}
-			}
-
-			return new NGResponse( "Page not found", 404 );
-		} );
-
-		// This route maps the given request to a content page
-		routeTable().map( "/blog/*", request -> {
-			final String id = request.parsedURI().getString( 1 );
-
-			for( BlogEntry blogEntry : BlogEntry.allBlogEntries() ) {
-				if( blogEntry.id().equals( id ) ) {
-					MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
-					p.markdownFilename = blogEntry.id();
-					p.markdownDirectory = "blog";
-					return p;
-				}
-			}
-
-			return new NGResponse( "Page not found", 404 );
-		} );
+		routeTable().map( "/page/*", this::servePage );
+		routeTable().map( "/blog/*", this::serveBlogEntry );
 
 		routeTable().map( "/pets", request -> {
 			return pageWithName( PetsPage.class, request.context() );
 		} );
 
-		routeTable().map( "/search", ( request ) -> {
+		routeTable().map( "/search", request -> {
 			return pageWithName( SearchResultsPage.class, request.context() );
 		} );
+	}
+
+	private NGActionResults servePage( NGRequest request ) {
+		final String id = request.parsedURI().getString( 1 );
+
+		for( Page page : Page.allPages() ) {
+			if( page.id().equals( id ) ) {
+				return switch( page.type() ) {
+					case Component -> pageWithName( page.componentClass(), request.context() );
+					case Markdown -> {
+						MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
+						p.markdownFilename = page.id();
+						p.markdownDirectory = "pages";
+						yield p;
+					}
+				};
+			}
+		}
+
+		return new NGResponse( "Page not found", 404 );
+	}
+
+	private NGActionResults serveBlogEntry( NGRequest request ) {
+		final String id = request.parsedURI().getString( 1 );
+
+		for( BlogEntry blogEntry : BlogEntry.allBlogEntries() ) {
+			if( blogEntry.id().equals( id ) ) {
+				MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
+				p.markdownFilename = blogEntry.id();
+				p.markdownDirectory = "blog";
+				return p;
+			}
+		}
+
+		return new NGResponse( "Page not found", 404 );
 	}
 
 	@Override
