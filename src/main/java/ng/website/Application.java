@@ -2,7 +2,6 @@ package ng.website;
 
 import java.time.LocalDateTime;
 
-import ng.appserver.NGActionResults;
 import ng.appserver.NGApplication;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
@@ -21,6 +20,8 @@ public class Application extends NGApplication {
 
 	public Application() {
 		NGElementUtils.addClass( WrapperComponent.class );
+
+		routeTable().mapComponent( "/", StartPage.class );
 
 		// This route maps the given request to a content page
 		routeTable().map( "/page/*", ( request ) -> {
@@ -66,11 +67,6 @@ public class Application extends NGApplication {
 		routeTable().map( "/search", ( request ) -> {
 			return pageWithName( SearchResultsPage.class, request.context() );
 		} );
-	}
-
-	@Override
-	public NGActionResults defaultResponse( NGRequest request ) {
-		return pageWithName( StartPage.class, request.context() );
 	}
 
 	@Override
