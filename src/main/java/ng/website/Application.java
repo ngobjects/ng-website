@@ -60,10 +60,10 @@ public class Application extends NGApplication {
 		return new NGResponse( "Blog entry not found", 404 );
 	}
 
-	private NGActionResults markdownPage( final NGContext context, final String type, final String id ) {
+	private NGActionResults markdownPage( final NGContext context, final String dir, final String id ) {
 		MarkdownPage p = pageWithName( MarkdownPage.class, context );
 		p.markdownFilename = id;
-		p.markdownDirectory = "blog";
+		p.markdownDirectory = dir;
 		return p;
 	}
 
