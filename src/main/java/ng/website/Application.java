@@ -23,19 +23,19 @@ public class Application extends NGApplication {
 		NGElementUtils.addClass( WrapperComponent.class );
 
 		// This route maps the given request to a content page
-		routeTable().map( "/page/", ( request ) -> {
+		routeTable().map( "/page/*", ( request ) -> {
 			final String id = request.parsedURI().getString( 1 );
 
 			for( Page page : Page.allPages() ) {
 				if( page.id().equals( id ) ) {
 					return switch( page.type() ) {
-					case Component -> pageWithName( page.componentClass(), request.context() );
-					case Markdown -> {
-						MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
-						p.markdownFilename = page.id();
-						p.markdownDirectory = "pages";
-						yield p;
-					}
+						case Component -> pageWithName( page.componentClass(), request.context() );
+						case Markdown -> {
+							MarkdownPage p = pageWithName( MarkdownPage.class, request.context() );
+							p.markdownFilename = page.id();
+							p.markdownDirectory = "pages";
+							yield p;
+						}
 					};
 				}
 			}
@@ -44,7 +44,7 @@ public class Application extends NGApplication {
 		} );
 
 		// This route maps the given request to a content page
-		routeTable().map( "/blog/", request -> {
+		routeTable().map( "/blog/*", request -> {
 			final String id = request.parsedURI().getString( 1 );
 
 			for( BlogEntry blogEntry : BlogEntry.allBlogEntries() ) {
