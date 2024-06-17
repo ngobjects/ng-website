@@ -67,6 +67,13 @@ public class Application extends NGApplication {
 		return p;
 	}
 
+	private NGActionResults markdownPage( final NGContext context, final String type, final String id ) {
+		MarkdownPage p = pageWithName( MarkdownPage.class, context );
+		p.markdownFilename = id;
+		p.markdownDirectory = "blog";
+		return p;
+	}
+
 	@Override
 	public NGResponse dispatchRequest( NGRequest request ) {
 		System.out.println( "=================" );
