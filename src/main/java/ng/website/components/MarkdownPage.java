@@ -13,6 +13,8 @@ import com.vladsch.flexmark.util.data.MutableDataSet;
 
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
+import ng.appserver.resources.NGResource;
+import ng.appserver.resources.StandardNamespace;
 import ng.website.MarkdownProcessor;
 
 public class MarkdownPage extends NGComponent {
@@ -36,13 +38,13 @@ public class MarkdownPage extends NGComponent {
 	 */
 	private String markdownString() {
 		final String path = markdownDirectory + "/" + markdownFilename + ".md";
-		final Optional<byte[]> resource = application().resourceManager().bytesForAppResourceNamed( path );
+		final Optional<NGResource> resource = application().resourceManager().obtainAppResource( StandardNamespace.App.identifier(), path );
 
 		if( resource.isEmpty() ) {
 			return "No content file found";
 		}
 
-		String markdownString = new String( resource.get(), StandardCharsets.UTF_8 );
+		String markdownString = new String( resource.get().bytes(), StandardCharsets.UTF_8 );
 
 		markdownString = MarkdownProcessor.process( markdownString );
 
