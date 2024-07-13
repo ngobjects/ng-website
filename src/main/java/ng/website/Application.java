@@ -67,19 +67,27 @@ public class Application extends NGApplication {
 		return p;
 	}
 
+	private static boolean enableRequestLogging() {
+		return false;
+	}
+
 	@Override
 	public NGResponse dispatchRequest( NGRequest request ) {
-		System.out.println( ">>================= START REQUEST " + LocalDateTime.now() );
-		System.out.println( request.method() + " " + request.uri() );
-		System.out.println( "---- headers ----" );
-		System.out.println( request.headers() );
-		System.out.println( "---- request parameters ----" );
-		System.out.println( request.formValues() );
-		System.out.println( "---- cookies ----" );
-		System.out.println( request.cookieValues() );
-		System.out.println( "<<================= END REQUEST" );
-		System.out.println();
-		System.out.println();
+
+		if( enableRequestLogging() ) {
+			System.out.println( ">>================= START REQUEST " + LocalDateTime.now() );
+			System.out.println( request.method() + " " + request.uri() );
+			System.out.println( "---- headers ----" );
+			System.out.println( request.headers() );
+			System.out.println( "---- request parameters ----" );
+			System.out.println( request.formValues() );
+			System.out.println( "---- cookies ----" );
+			System.out.println( request.cookieValues() );
+			System.out.println( "<<================= END REQUEST" );
+			System.out.println();
+			System.out.println();
+		}
+
 		return super.dispatchRequest( request );
 	}
 }
