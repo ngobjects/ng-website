@@ -16,11 +16,6 @@ import ng.website.components.WrapperComponent;
 
 public class Application extends NGApplication {
 
-	// FIXME: Remove once we have mroe functional class locating // Hugi 2024-06-17
-	static {
-		NGElementUtils.addClass( WrapperComponent.class );
-	}
-
 	public static void main( String[] args ) {
 		NGApplication.run( args, Application.class );
 	}
@@ -31,6 +26,9 @@ public class Application extends NGApplication {
 		routeTable().map( "/blog/*", this::serveBlogEntry );
 		routeTable().map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) );
 		routeTable().map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) );
+
+		// FIXME: Remove once we have mroe functional class locating // Hugi 2024-06-17
+		NGElementUtils.addClass( WrapperComponent.class );
 	}
 
 	private NGActionResults servePage( NGRequest request ) {
