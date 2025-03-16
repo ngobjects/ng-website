@@ -3,7 +3,6 @@ package ng.website;
 import java.util.List;
 
 import ng.appserver.NGComponent;
-import ng.website.Page.Type;
 import ng.website.components.DynamicElementsPage;
 
 /**

@@ -4,8 +4,8 @@ import java.util.List;
 
 import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
-import ng.appserver.elements.docs.NGDynamicElementDescription;
-import ng.appserver.elements.docs.NGDynamicElementDescription.NGBindingDescription;
+import ng.appserver.templating.NGDynamicElementDescription;
+import ng.appserver.templating.NGDynamicElementDescription.NGBindingDescription;
 
 public class DynamicElementsPage extends NGComponent {
 
