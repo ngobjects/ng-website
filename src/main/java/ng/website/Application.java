@@ -7,7 +7,6 @@ import ng.appserver.NGApplication;
 import ng.appserver.NGContext;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
-import ng.appserver.templating.NGElementUtils;
 import ng.website.components.MarkdownPage;
 import ng.website.components.PetsPage;
 import ng.website.components.SearchResultsPage;
@@ -27,8 +26,8 @@ public class Application extends NGApplication {
 		routeTable().map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) );
 		routeTable().map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) );
 
-		// FIXME: Remove once we have mroe functional class locating // Hugi 2024-06-17
-		NGElementUtils.addClass( WrapperComponent.class );
+		// FIXME: Remove once we have more functional class locating // Hugi 2024-06-17
+		elementManager().registerElementClass( WrapperComponent.class );
 	}
 
 	private NGActionResults servePage( NGRequest request ) {
