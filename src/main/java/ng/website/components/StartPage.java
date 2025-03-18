@@ -2,8 +2,8 @@ package ng.website.components;
 
 import java.util.List;
 
-import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
+import ng.appserver.templating.NGComponent;
 import ng.website.BlogEntry;
 import ng.website.Page;
 

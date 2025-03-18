@@ -11,10 +11,10 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.Node;
 import com.vladsch.flexmark.util.data.MutableDataSet;
 
-import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
 import ng.appserver.resources.NGResource;
 import ng.appserver.resources.StandardNamespace;
+import ng.appserver.templating.NGComponent;
 import ng.website.MarkdownProcessor;
 
 public class MarkdownPage extends NGComponent {

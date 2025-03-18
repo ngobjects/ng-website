@@ -1,7 +1,7 @@
 package ng.website.components;
 
-import ng.appserver.NGComponent;
 import ng.appserver.NGContext;
+import ng.appserver.templating.NGComponent;
 
 public class SearchResultsPage extends NGComponent {
 

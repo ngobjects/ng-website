@@ -2,7 +2,7 @@ package ng.website;
 
 import java.util.List;
 
-import ng.appserver.NGComponent;
+import ng.appserver.templating.NGComponent;
 import ng.website.components.DynamicElementsPage;
 
 /**
