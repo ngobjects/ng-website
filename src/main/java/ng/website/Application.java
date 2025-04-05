@@ -19,6 +19,11 @@ public class Application extends NGApplication {
 		NGApplication.run( args, Application.class );
 	}
 
+	@Override
+	public String adaptorClassName() {
+		return "ng.adaptor.jetty.NGAdaptorJetty";
+	}
+
 	public Application() {
 		routeTable().mapComponent( "/", StartPage.class );
 		routeTable().map( "/page/*", this::servePage );
