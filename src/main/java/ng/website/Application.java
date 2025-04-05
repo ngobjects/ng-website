@@ -86,6 +86,9 @@ public class Application extends NGApplication {
 			System.out.println( "---- cookies ----" );
 			System.out.println( request.cookieValues() );
 			System.out.println( "<<================= END REQUEST" );
+			//			System.out.println( ">>================= START RESPONSE " + LocalDateTime.now() );
+			//			System.out.println( response);
+			//			System.out.println( "<<================= END RESPONSE" );
 			System.out.println();
 			System.out.println();
 		}
