@@ -39,12 +39,15 @@ public class UploadTest extends NGComponent {
 
 	}
 
-	public NGActionResults submit() {
-		//		System.out.println( "someString: " + someString );
-		//		System.out.println( "filename: " + filename );
-		//		System.out.println( "data: " + data );
+	public NGActionResults clear() {
+		files.clear();
+		return null;
+	}
 
-		System.out.println( "=====================================" );
+	public NGActionResults submit() {
+
+		files.add( new OurUploadedFile( filename, "image/jpeg", data, data.length ) );
+
 		for( Entry<String, UploadedFile> entry : context().request()._uploadedFiles().entrySet() ) {
 			System.out.println( entry.getValue().name() );
 		}
