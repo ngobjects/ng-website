@@ -1,0 +1,41 @@
+<wo:WrapperComponent>
+	<wo:form enctype="multipart/form-data">
+		<wo:textfield value="$someString" name="textfield" /><br>
+		<wo:fileUpload data="$data" filename="$filename" /><br>
+		<wo:submit action="$submit" />
+	</wo:form>
+	<div class="zone btn btn-default" style="width: 180px !important; height: 200px; background-color: red">Hlaða upp nýju merki</div>
+	<script type="text/javascript">
+	  function createGuid() {
+	      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	          var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+	          return v.toString(16);
+	      });
+	  }
+	
+	  document.addEventListener("DOMContentLoaded", function() {		
+	  	var storageURL = '<wo:actionURL action="$upload" />';
+	  	var params = { url:storageURL, createImageThumbnails:true, maxFilesize:1000 };
+	  	var dropzone = new Dropzone( 'div.zone', params );
+	
+	  	dropzone.on("complete", function(file) {
+	  		console.log( file );
+	  	});
+	  });
+	</script>
+	<hr />
+	<wo:repetition list="$files" item="$current">
+		<div>
+			<h2><wo:str value="$current.name" /></h2>
+			<wo:img data="$current.data" mimeType="$current.contentType" width="300" alt="$current.alt" /><br><br>
+		</div>
+	</wo:repetition>
+
+	<ul>
+		<wo:repetition list="$files" item="$current">
+			<li><wo:str value="$current.name" /></li>
+		</wo:repetition>
+	</ul>
+	<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+</wo:WrapperComponent>

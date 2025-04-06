@@ -7,10 +7,12 @@ import ng.appserver.NGApplication;
 import ng.appserver.NGContext;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
+import ng.appserver.NGSessionRestorationException;
 import ng.website.components.MarkdownPage;
 import ng.website.components.PetsPage;
 import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
+import ng.website.components.UploadTest;
 import ng.website.components.WrapperComponent;
 
 public class Application extends NGApplication {
@@ -30,6 +32,7 @@ public class Application extends NGApplication {
 		routeTable().map( "/blog/*", this::serveBlogEntry );
 		routeTable().map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) );
 		routeTable().map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) );
+		routeTable().map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
 
 		// FIXME: Remove once we have more functional class locating // Hugi 2024-06-17
 		elementManager().registerElementClass( WrapperComponent.class );
@@ -94,5 +97,13 @@ public class Application extends NGApplication {
 		}
 
 		return super.dispatchRequest( request );
+	}
+
+	/**
+	 * FIXME: This whole mechanism is a problem with ng-objects really // Hugi 2024-06-29
+	 */
+	@Override
+	public NGActionResults responseForSessionRestorationException( final NGSessionRestorationException exception ) {
+		return resetSessionCookieWithRedirectToURL( "/upload" );
 	}
 }
