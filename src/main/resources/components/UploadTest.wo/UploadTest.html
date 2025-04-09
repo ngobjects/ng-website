@@ -6,6 +6,59 @@
 		<wo:submit action="$clear" value="Hreinsa" />
 	</wo:form>
 	<div class="zone btn btn-default" style="width: 180px !important; height: 200px; background-color: rgba(255,0,0,0.3)">Hlaða upp nýju merki</div>
+	<script>
+	
+	function phew( data ) {
+		for (const p of data ) {
+			console.log(p)
+		}
+	} 
+		fetch('http://localhost:1201/')
+    		.then(x => x.formData())
+    		.then(data => phew(data));
+
+/*
+async function doit() {
+  const response = await fetch("http://localhost:1200/multipart")
+  const reader = response.body.getReader()
+  const decoder = new TextDecoder()
+  let result = await reader.read()
+  while (!result.done) {
+    const text = decoder.decode(result.value)
+    console.log("chunk is", text)
+    result = await reader.read()
+  }
+
+  console.log('borkaborka');
+  
+}
+
+doit()
+*/
+	</script>
+	<scripty>
+
+async function request(host, port) {
+  const url = `http://${host}:${port}/`;
+  console.log( url );
+  const res = await fetch(url);
+  
+  console.log( 1 );
+  const fd = await res.text();
+  
+  // const fd = await res.formData();
+  // console.log( 2 );
+  // const message1 = fd.get('smu');
+  // const message2 = fd.get('bork');
+  // return [message1, message2];
+  return fd;
+}
+
+(async () => {
+  const response = await request('localhost', 1201 );
+  console.log(response); // [ '{"hello":"world"}', '{"foo":"bar"}' ]
+})();
+	</scripty>
 	<script type="text/javascript">
 	  function createGuid() {
 	      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
