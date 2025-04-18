@@ -8,6 +8,7 @@ import ng.appserver.NGContext;
 import ng.appserver.NGRequest;
 import ng.appserver.NGResponse;
 import ng.appserver.NGSessionRestorationException;
+import ng.plugins.Routes;
 import ng.website.components.MarkdownPage;
 import ng.website.components.PetsPage;
 import ng.website.components.SearchResultsPage;
@@ -20,13 +21,16 @@ public class Application extends NGApplication {
 		NGApplication.run( args, Application.class );
 	}
 
-	public Application() {
-		routeTable().map( "/", StartPage.class );
-		routeTable().map( "/page/*", this::servePage );
-		routeTable().map( "/blog/*", this::serveBlogEntry );
-		routeTable().map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) );
-		routeTable().map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) );
-		routeTable().map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
+	@Override
+	public Routes routes() {
+		return Routes
+				.create()
+				.map( "/", StartPage.class )
+				.map( "/page/*", this::servePage )
+				.map( "/blog/*", this::serveBlogEntry )
+				.map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) )
+				.map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) )
+				.map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
 	}
 
 	private NGActionResults servePage( NGRequest request ) {
