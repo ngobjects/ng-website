@@ -13,7 +13,6 @@ import ng.website.components.PetsPage;
 import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
 import ng.website.components.UploadTest;
-import ng.website.components.WrapperComponent;
 
 public class Application extends NGApplication {
 
@@ -28,9 +27,6 @@ public class Application extends NGApplication {
 		routeTable().map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) );
 		routeTable().map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) );
 		routeTable().map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
-
-		// FIXME: Remove once we have more functional class locating // Hugi 2024-06-17
-		elementManager().registerElementClass( WrapperComponent.class );
 	}
 
 	private NGActionResults servePage( NGRequest request ) {
