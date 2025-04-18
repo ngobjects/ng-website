@@ -22,7 +22,7 @@ public class Application extends NGApplication {
 	}
 
 	public Application() {
-		routeTable().mapComponent( "/", StartPage.class );
+		routeTable().map( "/", StartPage.class );
 		routeTable().map( "/page/*", this::servePage );
 		routeTable().map( "/blog/*", this::serveBlogEntry );
 		routeTable().map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) );
