@@ -13,7 +13,6 @@ import ng.website.components.MarkdownPage;
 import ng.website.components.PetsPage;
 import ng.website.components.SearchResultsPage;
 import ng.website.components.StartPage;
-import ng.website.components.UploadTest;
 
 public class Application extends NGApplication {
 
@@ -29,8 +28,8 @@ public class Application extends NGApplication {
 				.map( "/page/*", this::servePage )
 				.map( "/blog/*", this::serveBlogEntry )
 				.map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) )
-				.map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) )
-				.map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
+				.map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) );
+		//				.map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
 	}
 
 	private NGActionResults servePage( NGRequest request ) {
