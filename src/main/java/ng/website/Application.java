@@ -67,7 +67,7 @@ public class Application extends NGApplication {
 	}
 
 	private static boolean enableRequestLogging() {
-		return false;
+		return true;
 	}
 
 	@Override
