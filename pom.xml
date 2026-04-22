@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>is.rebbi</groupId>
 	<artifactId>ng-website</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>ng-website</name>
 	<packaging>woapplication</packaging>
 	<properties>
@@ -46,17 +46,17 @@
 		<dependency>
 			<groupId>is.rebbi.ng</groupId>
 			<artifactId>ng-appserver</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>0.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>is.rebbi.ng</groupId>
 			<artifactId>ng-adaptor-jetty</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>0.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>is.rebbi.ng</groupId>
 			<artifactId>ng-control</artifactId>
-			<version>0.1.1-SNAPSHOT</version>
+			<version>0.1.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
