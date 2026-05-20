@@ -6,6 +6,7 @@ import ng.appserver.NGActionResults;
 import ng.appserver.NGApplication;
 import ng.appserver.NGContext;
 import ng.appserver.NGRequest;
+import ng.appserver.NGRespBuilder;
 import ng.appserver.NGResponse;
 import ng.appserver.NGSessionRestorationException;
 import ng.plugins.Routes;
@@ -44,7 +45,7 @@ public class Application extends NGApplication {
 			}
 		}
 
-		return new NGResponse( "Page not found", 404 );
+		return NGRespBuilder.of( "Page not found", 404 );
 	}
 
 	private NGActionResults serveBlogEntry( NGRequest request ) {
@@ -56,7 +57,7 @@ public class Application extends NGApplication {
 			}
 		}
 
-		return new NGResponse( "Blog entry not found", 404 );
+		return NGRespBuilder.of( "Blog entry not found", 404 );
 	}
 
 	private NGActionResults markdownPage( final NGContext context, final String dir, final String id ) {
