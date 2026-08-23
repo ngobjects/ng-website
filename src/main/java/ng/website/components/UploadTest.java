@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import ng.appserver.NGActionResults;
 import ng.appserver.NGContext;
-import ng.appserver.NGRespBuilder;
-import ng.appserver.NGStandardRequest.UploadedFile;
+import ng.appserver.http.NGRespBuilder;
+import ng.appserver.http.NGStandardRequest.UploadedFile;
 import ng.appserver.templating.NGComponent;
 
 public class UploadTest extends NGComponent {
