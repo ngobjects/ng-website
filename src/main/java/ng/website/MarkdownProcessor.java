@@ -19,7 +19,7 @@ public class MarkdownProcessor {
 		final Map<String, String> v = new HashMap<>();
 		v.put( "maven.groupId", "future.group.id" );
 		v.put( "maven.artifactId", "future.artifact.id" );
-		v.put( "maven.version", "0.0.1-SNAPSHOT" );
+		v.put( "maven.version", "future.version" );
 		return v;
 	}
 
