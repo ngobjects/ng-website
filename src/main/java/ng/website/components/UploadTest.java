@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import ng.appserver.NGActionResults;
 import ng.appserver.NGContext;
-import ng.appserver.http.NGRespBuilder;
+import ng.appserver.http.NGResponses;
 import ng.appserver.http.NGStandardRequest.UploadedFile;
 import ng.appserver.templating.NGComponent;
 
@@ -88,6 +88,6 @@ public class UploadTest extends NGComponent {
 			}
 		}
 
-		return NGRespBuilder.of();
+		return NGResponses.of();
 	}
 }
