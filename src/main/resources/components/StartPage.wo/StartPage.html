@@ -1,48 +1,63 @@
-<wo:WrapperComponent hideHeader="$true">
-	<div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg" style="margin-top: 2rem; margin-bottom: 2rem">
-		<div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
-			<h1 class="display-4 fw-bold lh-1">ng-objects! <span class="badge bg-danger" style="font-size: 1rem">alpha</span></h1>
+<wo:WrapperComponent hideSidebar="$true">
+	<section class="hero">
+		<div>
+			<h1>ng-objects <span class="badge">alpha</span></h1>
 			<p class="lead">
-				A <strong>free, open source, Java-based</strong> web development framework inspired by the design and principles of Apple's <strong>WebObjects</strong>.
-				Compatible with WebObjects deployment environments, allowing <code>ng-objects</code> apps to be seamlessly deployed alongside existing WO apps. 
+				A free, open source Java web framework built on the design and principles of Apple's WebObjects.
+				It runs in WebObjects deployment environments, so ng-objects apps can be deployed alongside your existing WO apps.
 			</p>
-			<div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-				<a type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold" href="/page/getting-started">Quick start</a>
-				<a type="button" class="btn btn-outline-secondary btn-lg px-4" href="https://www.github.com/ngobjects/ng-objects"><wo:img filename="GitHub-Mark-32px.png" width="26" /> GitHub</a>
+			<div class="actions">
+				<a class="button" href="/page/getting-started">Get started</a>
+				<a class="button secondary" href="https://github.com/ngobjects/ng-objects">View on GitHub</a>
 			</div>
 		</div>
-		<div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
-			<wo:img class="rounded-lg-3" filename="screenshot-eclipse-3.png" alt="Screenshot" width="880" height="344" />
+		<div class="specimen" aria-label="Example component">
+			<figure>
+				<figcaption>Greeting.html</figcaption>
+				<pre class="language-html"><code class="language-html">&lt;p&gt;Hello &lt;wo:str value="$name" /&gt;!&lt;/p&gt;</code></pre>
+			</figure>
+			<figure>
+				<figcaption>Greeting.java</figcaption>
+				<pre class="language-java"><code class="language-java">public class Greeting extends NGComponent {
+
+	public String name = "world";
+
+	public Greeting( NGContext context ) {
+		super( context );
+	}
+}</code></pre>
+			</figure>
+			<figure>
+				<figcaption>Rendered</figcaption>
+				<div class="output">Hello world!</div>
+			</figure>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<form action="/search" style="margin-bottom: 10px">
-				<input type="text" name="searchString" size="20" style="border: none" placeholder="Search..." />
-			</form>
-			<ul class="nav flex-column">
+	</section>
+	<section class="overview">
+		<div>
+			<h2>Documentation</h2>
+			<ul class="doc-list">
 				<wo:repetition list="$pages" item="$currentPage">
-					<li class="nav-item">
-						<wo:link class="nav-link active" aria-current="page" href="$currentPage.url"><wo:str value="$currentPage.name" /></wo:link>
+					<li><wo:link href="$currentPage.url"><wo:str value="$currentPage.name" /></wo:link></li>
+				</wo:repetition>
+			</ul>
+		</div>
+		<div class="status">
+			<h2>Status</h2>
+			<p>ng-objects is under development.</p>
+			<p>Development has progressed steadily over the past couple of years. We've reached the "working implementation" stage and are entering the "flesh out the API and make it nice" stage. This is a long-term project, and we want to get things as right as possible from the start to minimize annoying "API flux" once the libraries see real world use.</p>
+			<p>We currently plan to make our first release in 2025, but you can start checking it out now if you'd like to take part in the development process. Ideas and feedback are very welcome.</p>
+		</div>
+		<div id="blog">
+			<h2>Blog</h2>
+			<ul class="blog-list">
+				<wo:repetition list="$blogEntries" item="$currentBlogEntry">
+					<li>
+						<time><wo:str value="$currentBlogEntry.date" /></time>
+						<wo:link href="$currentBlogEntry.url"><wo:str value="$currentBlogEntry.title" /></wo:link>
 					</li>
 				</wo:repetition>
-			</ul> 
+			</ul>
 		</div>
-		<div class="col">
-			<h3>Our status</h3>
-			<p><code>ng-objects</code> is under development.</p>
-			<p>Development has progressed steadily over the past couple of years, and we've reached the "working implemenation"-stage and are entering the "fleshen out the API and make it nice"-stage. But be sure that this is a long-term project, we want to get things as right as possible from the start to minimize annoying "API flux" once the libraries see real world use.</p>
-			<p>We currently plan to make our first release in 2025, but you can definitely start checking it out now if you'd like to participate in the development process, Ideas and feedback are very welcome.</p>
-			<p>Oh, and of course this website runs on ng-objects and <a href="https://www.github.com/ngobjects/ng-website">it's source is on github</a>.</p>
-		</div>
-		<div class="col">
-			<h3>Blog</h3>
-			<wo:repetition list="$blogEntries" item="$currentBlogEntry">
-				<h5 style="margin-bottom: 2rem">
-					<small style="color: gray; font-size: smaller"><wo:str value="$currentBlogEntry.date" /></small><br>
-					<wo:link href="$currentBlogEntry.url"><wo:str value="$currentBlogEntry.title" /></wo:link>
-				</h5>
-			</wo:repetition>
-		</div>
-	</div>
+	</section>
 </wo:WrapperComponent>

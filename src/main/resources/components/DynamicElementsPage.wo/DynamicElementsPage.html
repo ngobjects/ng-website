@@ -1,9 +1,10 @@
 <wo:WrapperComponent>
+	<h1>Dynamic elements</h1>
+	<p>Documentation for the standard dynamic elements that come with the framework.</p>
+
 	<aside>
-		<p>💡 <strong>On this page</strong><br />
-			Dynamic element documentation is constructed in code by <a href="https://github.com/ngobjects/ng-objects/blob/master/ng-appserver/src/main/java/ng/appserver/elements/docs/NGDynamicElementDescription.java">NGDynamicElementDescription</a><br>  
-		</p>
-		<p>📚 <strong>Table of Contents</strong></p>
+		<p>This page is generated from <a href="https://github.com/ngobjects/ng-objects/blob/master/ng-appserver/src/main/java/ng/appserver/elements/docs/NGDynamicElementDescription.java">NGDynamicElementDescription</a>.</p>
+		<p><strong>Elements</strong></p>
 		<ul>
 			<wo:repetition list="$all" item="$current">
 				<li><wo:link href="$currentAnchor"><wo:str value="$current.elementClass.getSimpleName" /></wo:link></li>
@@ -11,28 +12,27 @@
 		</ul>
 	</aside>
 
-	<h2>Dynamic elements</h2>
-	<p>Documentation for the standard dynamic elements that come with the framework.</p>
-	<hr />
 	<wo:repetition list="$all" item="$current">
-		<h4 style="margin-bottom: 0px">
-			<wo:repetition list="$current.aliases" item="$currentAlias">
-				<wo:container elementName="a" id="$current.elementClass.simpleName" style="color: rgb(70,70,80); font-size: 1.4rem; font-weight: normal"><wo:str value="$currentAlias" /> </wo:container>
-			</wo:repetition>
-		</h4> <wo:if condition="$current.isContainerElement"><span class="badge bg-primary" style="margin: 0px; font-size: 0.7rem; font-weight: normal">Container element</span></wo:if>
-		<h5><code style="font-size: 0.8rem"><wo:str value="$current.elementClass.getName" /></code></h5>
-		<p><wo:str value="$current.text" /></p>
-		<wo:if condition="$currentHasBindings">
-			<h6 style="font-weight: normal">Bindings</h6>
-			<ul>
-			<wo:repetition list="$current.bindings" item="$currentBinding">
-				<li>
-					<strong><wo:str value="$currentBinding.name" /></strong><br>
-					<wo:str value="$currentBinding.text" />
-				</li>
-			</wo:repetition>
-			</ul>
-		</wo:if>
-		<hr>
+		<section class="element-doc">
+			<h3>
+				<wo:repetition list="$current.aliases" item="$currentAlias">
+					<wo:container elementName="a" id="$current.elementClass.simpleName"><wo:str value="$currentAlias" /></wo:container>
+				</wo:repetition>
+				<wo:if condition="$current.isContainerElement"><span class="badge">Container</span></wo:if>
+			</h3>
+			<div class="classname"><code><wo:str value="$current.elementClass.getName" /></code></div>
+			<p><wo:str value="$current.text" /></p>
+			<wo:if condition="$currentHasBindings">
+				<h4>Bindings</h4>
+				<ul class="bindings">
+					<wo:repetition list="$current.bindings" item="$currentBinding">
+						<li>
+							<strong><wo:str value="$currentBinding.name" /></strong><br>
+							<wo:str value="$currentBinding.text" />
+						</li>
+					</wo:repetition>
+				</ul>
+			</wo:if>
+		</section>
 	</wo:repetition>
 </wo:WrapperComponent>
