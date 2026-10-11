@@ -9,6 +9,7 @@ import ng.appserver.NGSessionRestorationException;
 import ng.appserver.http.NGRequest;
 import ng.appserver.http.NGResponse;
 import ng.appserver.http.NGResponses;
+import ng.appserver.privates.NGParsedURI;
 import ng.plugins.Routes;
 import ng.website.components.MarkdownPage;
 import ng.website.components.PetsPage;
@@ -34,7 +35,7 @@ public class Application extends NGApplication {
 	}
 
 	private NGActionResults servePage( NGRequest request ) {
-		final String id = request.parsedURI().getString( 1 );
+		final String id = NGParsedURI.of( request.uri() ).getString( 1 );
 
 		for( Page page : Page.allPages() ) {
 			if( page.id().equals( id ) ) {
@@ -49,7 +50,7 @@ public class Application extends NGApplication {
 	}
 
 	private NGActionResults serveBlogEntry( NGRequest request ) {
-		final String id = request.parsedURI().getString( 1 );
+		final String id = NGParsedURI.of( request.uri() ).getString( 1 );
 
 		for( BlogEntry blogEntry : BlogEntry.allBlogEntries() ) {
 			if( blogEntry.id().equals( id ) ) {
