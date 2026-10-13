@@ -565,9 +565,7 @@ pre code[class*="language-"] {
 .prose > pre,
 .prose > table,
 .prose > .front,
-.prose > .element-doc,
-.prose > .element-index,
-.prose > .undocumented {
+.prose > .element-reference {
 	max-width: none;
 }
 
@@ -867,11 +865,79 @@ pre code[class*="language-"] {
 /* ---------- Dynamic elements page ---------- */
 
 
+/* The element reference: the elements, and an index of them beside (above, on narrow screens) */
+.element-reference {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	grid-template-areas: "index" "body";
+	gap: 0 3rem;
+	align-items: start;
+}
+
+.element-reference-body {
+	grid-area: body;
+	min-width: 0;
+}
+
 .element-index {
+	grid-area: index;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.4rem;
 	margin: 0 0 2.5rem;
+}
+
+.element-index h2 {
+	display: none;
+}
+
+@media (min-width: 72rem) {
+	.element-reference {
+		grid-template-columns: minmax(0, 1fr) 12rem;
+		grid-template-areas: "body index";
+	}
+
+	.element-index {
+		position: sticky;
+		top: 1.5rem;
+		max-height: calc(100vh - 3rem);
+		overflow-y: auto;
+		flex-direction: column;
+		align-items: flex-start;
+		flex-wrap: nowrap;
+		gap: 0.15rem;
+		margin: 0;
+		padding-left: 1.25rem;
+		border-left: 1px solid var(--rule);
+	}
+
+	.element-index h2 {
+		display: block;
+		font-size: 0.8rem;
+		font-weight: 700;
+		color: var(--muted);
+		margin: 0 0 0.5rem;
+	}
+
+	.element-reference .element-index code {
+		font-size: 0.8rem;
+		padding: 0.1em 0;
+		border: 0;
+		background: none;
+		color: var(--muted);
+	}
+
+	.element-reference .element-index a.undocumented code {
+		font-style: italic;
+	}
+
+	.element-reference .element-index a {
+		line-height: 1.35;
+	}
+
+	.element-reference .element-index a:hover code {
+		color: var(--link);
+	}
 }
 
 .element-index a {
