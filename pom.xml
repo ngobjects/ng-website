@@ -9,6 +9,7 @@
 	<packaging>woapplication</packaging>
 	<properties>
 		<mainClass>ng.website.Application</mainClass>
+		<ng.version>0.1.4-SNAPSHOT</ng.version>
 	</properties>
 	<build>
 		<finalName>${project.artifactId}</finalName>
@@ -46,17 +47,17 @@
 		<dependency>
 			<groupId>is.rebbi.ng</groupId>
 			<artifactId>ng-appserver</artifactId>
-			<version>0.1.4-SNAPSHOT</version>
+			<version>${ng.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>is.rebbi.ng</groupId>
 			<artifactId>ng-adaptor-jetty</artifactId>
-			<version>0.1.4-SNAPSHOT</version>
+			<version>${ng.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>is.rebbi.ng</groupId>
 			<artifactId>ng-control</artifactId>
-			<version>0.1.4-SNAPSHOT</version>
+			<version>${ng.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
