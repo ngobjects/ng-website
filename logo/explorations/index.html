@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>engifer logo explorations</title>
+<style>
+	@font-face { font-family: Inter; font-weight: 400; src: url("../../src/main/resources/webserver-resources/fonts/inter/inter-400-normal-latin.woff2") format("woff2"); }
+	@font-face { font-family: Inter; font-weight: 600; src: url("../../src/main/resources/webserver-resources/fonts/inter/inter-600-normal-latin.woff2") format("woff2"); }
+	:root { --paper: #f5f8f6; --ink: #121a17; --muted: #56635c; --rule: #dde6e1; --band: #074b3c; }
+	* { box-sizing: border-box; }
+	body { margin: 0; padding: 2.5rem 1rem 4rem; background: var(--paper); color: var(--ink); font: 400 15px/1.55 Inter, system-ui, sans-serif; }
+	main { max-width: 1200px; margin: 0 auto; }
+	h1 { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 .25rem; }
+	h2 { font-size: 1.1rem; font-weight: 600; margin: 0; }
+	.intro { color: var(--muted); max-width: 70ch; margin: 0 0 2.5rem; }
+	.variant { display: grid; grid-template-columns: 15rem 1fr 1fr; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; margin-bottom: 1.5rem; }
+	.variant > * { background: #fff; padding: 1.5rem; }
+	.variant .about p { color: var(--muted); margin: .4rem 0 1rem; font-size: .9rem; }
+	.variant .dark { background: var(--band); }
+	.lockup { display: flex; align-items: center; justify-content: center; min-height: 7rem; }
+	.lockup img { height: 52px; width: auto; }
+	.sizes { display: flex; align-items: end; gap: .9rem; }
+	.sizes img { display: block; }
+	.sizes.dark { background: var(--band); padding: .6rem; border-radius: 6px; margin-top: .5rem; display: inline-flex; }
+	.key { font: 600 .7rem/1 Inter, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+	
+	.ng { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+	.ng > div { background: #fff; padding: 1.5rem; text-align: center; }
+	.ng img { height: 40px; }
+	.ng p { color: var(--muted); font-size: .85rem; margin: .75rem 0 0; }
+	@media (max-width: 52rem) { .variant, .ng { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+	<h1>engifer logo explorations</h1>
+	<p class="intro">Directions to consider, not decisions. Every wordmark is Inter SemiBold (the site's typeface) set slightly tight, so the word reads quieter than the current Atkinson Bold. Marks are shown at 64, 32 and 16 pixels on light and on the hero's emerald.</p>
+
+	<section class="variant">
+		<div class="about"><h2>Current</h2><p>For reference. Heavy outline, a bold wordmark and a large mark make it read cartoonish next to the site's type.</p>
+			<div class="sizes"><img src="../engifer-mark.svg" width="64"><img src="../engifer-mark.svg" width="32"><img src="../engifer-mark.svg" width="16"></div></div>
+		<div class="lockup"><img src="../engifer-logo.svg" alt="Current logo"></div>
+		<div class="lockup dark"><img src="../engifer-logo-on-dark.svg" alt="Current logo on dark"></div>
+	</section>
+
+	<div id="variants"></div>
+
+	<section class="variant">
+		<div class="about"><h2>D · Leaf for a dot</h2><p>No separate mark: the dot on the i becomes a leaf. The quietest option. Would need one of the other marks (B works well) for favicons.</p></div>
+		<div class="lockup"><img src="d-leaf-dot-logo.svg" alt=""></div>
+		<div class="lockup dark"><img src="d-leaf-dot-logo-on-dark.svg" alt=""></div>
+	</section>
+
+	<h2 id="ng" style="margin: 3rem 0 .5rem">Keeping “ng” visible</h2>
+	<p class="intro" style="margin-bottom: 1.25rem">The torch-red ng in the current logo is part of what makes it busy. Gentler ways to keep the old name in the new one:</p>
+	<div class="ng">
+		<div><img src="ng-none.svg" alt=""><p>Not marked at all</p></div>
+		<div><img src="ng-weight.svg" alt=""><p>By weight: ng in SemiBold, the rest Regular</p></div>
+		<div><img src="ng-emerald.svg" alt=""><p>In emerald, close to the ink</p></div>
+		<div><img src="ng-colour.svg" alt=""><p>In torch red, as now</p></div>
+	</div>
+</main>
+<script>
+	const variants = [
+		["a-root", "A · Flat root", "The current idea, cleaned up. No outline, one ginger colour, and a leaf in place of the stalk."],
+		["a2-root-flesh", "A2 · Flat root, current colours", "A in the current logo's pale ginger and green shoot, without the outline."],
+		["a3-root-flesh-deep", "A3 · Flat root, a shade deeper", "The same a touch deeper, so the root holds its edge on white without needing an outline."],
+		["b-tile", "B · Leaf tile", "The e on an emerald tile cut in the shape of a leaf: two round corners, two sharp. Holds up best as a favicon and app icon."],
+		["c-slice", "C · Slice", "A cross-section of the root: skin, flesh and fibres. Calm and round, sits easily beside text."],
+		["e-tag", "E · Sprouting tag", "A template tag whose slash grows a leaf. Nods to what the framework is about."],
+		["f-nodes", "F · Root graph", "The hand of ginger as three connected nodes. A more technical take."],
+	];
+	const sizes = (src) => [64, 32, 16].map(s => `<img src="${src}" width="${s}" height="${s}" alt="">`).join("");
+	document.getElementById("variants").innerHTML = variants.map(([key, name, about]) => `
+		<section class="variant">
+			<div class="about"><h2>${name}</h2><p>${about}</p>
+				<div class="sizes">${sizes(key + "-mark.svg")}</div>
+				<div class="sizes dark">${sizes(key + "-mark-on-dark.svg")}</div></div>
+			<div class="lockup"><img src="${key}-logo.svg" alt=""></div>
+			<div class="lockup dark"><img src="${key}-logo-on-dark.svg" alt=""></div>
+		</section>`).join("");
+</script>
+</body>
+</html>
