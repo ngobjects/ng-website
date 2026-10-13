@@ -1,63 +1,61 @@
-<wo:WrapperComponent hideSidebar="$true">
-	<section class="hero">
-		<div>
-			<h1>ng-objects <span class="badge">alpha</span></h1>
-			<p class="lead">
-				A free, open source Java web framework built on the design and principles of Apple's WebObjects.
-				It runs in WebObjects deployment environments, so ng-objects apps can be deployed alongside your existing WO apps.
-			</p>
-			<div class="actions">
-				<a class="button" href="/page/getting-started">Get started</a>
-				<a class="button secondary" href="https://github.com/ngobjects/ng-objects">View on GitHub</a>
+<wo:WrapperComponent>
+	<div class="front">
+		<section class="hero band">
+			<div class="hero-text">
+				<img class="hero-logo" src="/engifer-logo-on-dark.svg" alt="engifer" width="320" height="102" />
+				<h1>A Java web framework in the spirit of WebObjects</h1>
+				<p class="lead">Free and open source. Components pair an HTML template with a Java class, and engifer apps deploy alongside your existing WO apps.</p>
+				<div class="actions">
+					<a class="button" href="/page/getting-started">Get started</a>
+					<a class="button secondary" href="https://github.com/ngobjects/ng-objects">View on GitHub</a>
+				</div>
 			</div>
-		</div>
-		<div class="specimen" aria-label="Example component">
-			<figure>
-				<figcaption>Greeting.html</figcaption>
-				<pre class="language-html"><code class="language-html">&lt;p&gt;Hello &lt;wo:str value="$name" /&gt;!&lt;/p&gt;</code></pre>
-			</figure>
-			<figure>
-				<figcaption>Greeting.java</figcaption>
-				<pre class="language-java"><code class="language-java">public class Greeting extends NGComponent {
+			<figure class="hero-code">
+				<figcaption>Inbox.html</figcaption>
+				<pre class="language-html"><code class="language-html">&lt;h2&gt;Hello &lt;wo:str value="$user.name" /&gt;&lt;/h2&gt;
 
-	public String name = "world";
+&lt;wo:if condition="$hasMessages"&gt;
+	&lt;ul&gt;
+		&lt;wo:repetition list="$messages" item="$message"&gt;
+			&lt;li&gt;
+				&lt;wo:link action="$openMessage"&gt;
+					&lt;wo:str value="$message.subject" /&gt;
+				&lt;/wo:link&gt;
+			&lt;/li&gt;
+		&lt;/wo:repetition&gt;
+	&lt;/ul&gt;
+&lt;/wo:if&gt;</code></pre>
+			</figure>
+		</section>
 
-	public Greeting( NGContext context ) {
-		super( context );
-	}
-}</code></pre>
-			</figure>
-			<figure>
-				<figcaption>Rendered</figcaption>
-				<div class="output">Hello world!</div>
-			</figure>
+		<div class="front-grid">
+			<div class="front-main">
+				<section class="featured" aria-labelledby="featured-title">
+					<p class="section-label">Latest from the blog</p>
+					<time><wo:str value="$latestBlogEntry.date" /></time>
+					<h2 id="featured-title"><wo:link href="$latestBlogEntry.url"><wo:str value="$latestBlogEntry.title" /></wo:link></h2>
+					<p class="excerpt"><wo:str value="$latestBlogEntry.excerpt" /></p>
+					<p><wo:link href="$latestBlogEntry.url" class="read-more">Read the post</wo:link></p>
+				</section>
+
+				<section class="highlights" aria-labelledby="highlights-title">
+					<p class="section-label" id="highlights-title">Good places to start</p>
+					<ul>
+						<wo:repetition list="$featuredPages" item="$currentPage">
+							<li>
+								<wo:link href="$currentPage.url"><wo:str value="$currentPage.name" /></wo:link>
+								<p><wo:str value="$currentPage.description" /></p>
+							</li>
+						</wo:repetition>
+					</ul>
+				</section>
+			</div>
+
+			<aside class="status">
+				<h2>Status</h2>
+				<p>engifer is under development. We've reached the "working implementation" stage and are entering the "flesh out the API and make it nice" stage. This is a long-term project, and we want to get things as right as possible from the start to minimize annoying "API flux" once the libraries see real world use.</p>
+				<p>We currently plan to make our first release in 2025, but you can start checking it out now if you'd like to take part in the development process. Ideas and feedback are very welcome.</p>
+			</aside>
 		</div>
-	</section>
-	<section class="overview">
-		<div>
-			<h2>Documentation</h2>
-			<ul class="doc-list">
-				<wo:repetition list="$pages" item="$currentPage">
-					<li><wo:link href="$currentPage.url"><wo:str value="$currentPage.name" /></wo:link></li>
-				</wo:repetition>
-			</ul>
-		</div>
-		<div class="status">
-			<h2>Status</h2>
-			<p>ng-objects is under development.</p>
-			<p>Development has progressed steadily over the past couple of years. We've reached the "working implementation" stage and are entering the "flesh out the API and make it nice" stage. This is a long-term project, and we want to get things as right as possible from the start to minimize annoying "API flux" once the libraries see real world use.</p>
-			<p>We currently plan to make our first release in 2025, but you can start checking it out now if you'd like to take part in the development process. Ideas and feedback are very welcome.</p>
-		</div>
-		<div id="blog">
-			<h2>Blog</h2>
-			<ul class="blog-list">
-				<wo:repetition list="$blogEntries" item="$currentBlogEntry">
-					<li>
-						<time><wo:str value="$currentBlogEntry.date" /></time>
-						<wo:link href="$currentBlogEntry.url"><wo:str value="$currentBlogEntry.title" /></wo:link>
-					</li>
-				</wo:repetition>
-			</ul>
-		</div>
-	</section>
+	</div>
 </wo:WrapperComponent>

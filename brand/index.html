@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>engifer brand manual</title>
+<link rel="icon" type="image/svg+xml" href="../logo/engifer-mark.svg">
+<style>
+	@font-face {
+		font-family: "Inter";
+		font-weight: 400;
+		src: url("../src/main/resources/webserver-resources/fonts/inter/inter-400-normal-latin.woff2") format("woff2");
+	}
+
+	@font-face {
+		font-family: "Inter";
+		font-weight: 600;
+		src: url("../src/main/resources/webserver-resources/fonts/inter/inter-600-normal-latin.woff2") format("woff2");
+	}
+
+	@font-face {
+		font-family: "JetBrains Mono";
+		font-weight: 400;
+		src: url("../src/main/resources/webserver-resources/fonts/jetbrains-mono/jetbrains-mono-400-normal-latin.woff2") format("woff2");
+	}
+
+	:root {
+		--paper: #f5f8f6;
+		--ink: #121a17;
+		--muted: #56635c;
+		--rule: #dde6e1;
+		--band: #074b3c;
+		--mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+		color-scheme: light;
+	}
+
+	* { box-sizing: border-box; }
+
+	body {
+		margin: 0;
+		background: var(--paper);
+		color: var(--ink);
+		font: 17px/1.6 "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+	}
+
+	main {
+		max-width: 64rem;
+		margin: 0 auto;
+		padding: 0 1.5rem 5rem;
+	}
+
+	header.cover {
+		color: #f0f7f3;
+		background-color: var(--band);
+		background-image:
+			radial-gradient(ellipse 60% 140% at 100% 0%, rgba(62, 232, 165, 0.16), transparent 65%),
+			linear-gradient(rgba(168, 230, 200, 0.08) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(168, 230, 200, 0.08) 1px, transparent 1px),
+			linear-gradient(rgba(168, 230, 200, 0.04) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(168, 230, 200, 0.04) 1px, transparent 1px);
+		background-size: auto, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+		padding: 4rem 1.5rem 3.5rem;
+		margin-bottom: 3rem;
+	}
+
+	header.cover > div {
+		max-width: 64rem;
+		margin: 0 auto;
+	}
+
+	header.cover img {
+		width: min(26rem, 100%);
+		display: block;
+		margin-bottom: 1.5rem;
+	}
+
+	header.cover p {
+		max-width: 38rem;
+		color: #a8d5c0;
+		font-size: 1.15rem;
+		margin: 0;
+	}
+
+	h2 {
+		font-size: 1.7rem;
+		letter-spacing: -0.02em;
+		margin: 3.5rem 0 0.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--rule);
+	}
+
+	h3 {
+		font-size: 1.15rem;
+		margin: 2rem 0 0.5rem;
+	}
+
+	p, li { max-width: 44rem; }
+
+	code {
+		font-family: var(--mono);
+		font-size: 0.88em;
+	}
+
+	.meta {
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+
+	.status {
+		display: inline-block;
+		font-size: 0.8rem;
+		font-weight: 700;
+		padding: 0.15em 0.6em;
+		border-radius: 999px;
+		border: 1px solid currentColor;
+		vertical-align: middle;
+		margin-left: 0.4rem;
+	}
+
+	.status.site { color: #c41e4a; }
+	.status.app { color: #2f6f4a; }
+	.status.retired { color: var(--muted); }
+
+	.swatches {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+		gap: 0.75rem;
+		margin: 1rem 0;
+	}
+
+	.swatch {
+		border: 1px solid var(--rule);
+		border-radius: 8px;
+		overflow: hidden;
+		background: #fff;
+		font-size: 0.85rem;
+	}
+
+	.swatch .chip {
+		height: 4.5rem;
+		border-bottom: 1px solid var(--rule);
+	}
+
+	.swatch div:last-child {
+		padding: 0.5rem 0.7rem 0.6rem;
+	}
+
+	.swatch strong {
+		display: block;
+	}
+
+	.swatch code {
+		color: var(--muted);
+	}
+
+	.swatch span {
+		display: block;
+		color: var(--muted);
+		font-size: 0.8rem;
+		line-height: 1.35;
+		margin-top: 0.2rem;
+	}
+
+	.logos {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+		gap: 0.75rem;
+		margin: 1rem 0;
+	}
+
+	.logos figure {
+		margin: 0;
+		border: 1px solid var(--rule);
+		border-radius: 8px;
+		overflow: hidden;
+	}
+
+	.logos .stage {
+		height: 9rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 1.5rem;
+	}
+
+	.logos .stage img {
+		max-height: 100%;
+		max-width: 100%;
+	}
+
+	.logos figcaption {
+		font-family: var(--mono);
+		font-size: 0.8rem;
+		color: var(--muted);
+		padding: 0.5rem 0.75rem;
+		background: #fff;
+		border-top: 1px solid var(--rule);
+	}
+
+	.type-sample {
+		border: 1px solid var(--rule);
+		border-radius: 8px;
+		background: #fff;
+		padding: 1.25rem 1.5rem;
+		margin: 1rem 0;
+	}
+
+	.type-sample .display {
+		font-size: 2.6rem;
+		font-weight: 700;
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+	}
+
+	.type-sample .mono {
+		font-family: var(--mono);
+		font-size: 0.95rem;
+		color: var(--muted);
+	}
+
+	table {
+		border-collapse: collapse;
+		width: 100%;
+		font-size: 0.95rem;
+	}
+
+	th, td {
+		text-align: left;
+		padding: 0.55rem 0.75rem 0.55rem 0;
+		border-bottom: 1px solid var(--rule);
+		vertical-align: top;
+	}
+
+	.history td:first-child {
+		white-space: nowrap;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.table-wrap {
+		overflow-x: auto;
+	}
+
+	.texture {
+		height: 9rem;
+		border-radius: 8px;
+		margin: 1rem 0;
+	}
+</style>
+</head>
+<body>
+
+<header class="cover">
+	<div>
+		<img src="../logo/engifer-logo-on-dark.svg" alt="engifer">
+		<p>The engifer brand: logo, colours, type, and the palettes we've used along the way. This file lives in the website repository, next to the logo files in <code>logo/</code>.</p>
+	</div>
+</header>
+
+<main>
+
+<h2>Name</h2>
+<p><em>Engifer</em> is Icelandic for ginger. It's the new name for the framework that started out as ng-objects; the code and repositories still use the <code>ng</code> name while the rename is under way.</p>
+<p>The wordmark is always lowercase: <strong>engifer</strong>. In the logo and site header, the <code>ng</code> inside the name gets its own colour, so the old name stays visible in the new one. That colouring belongs to the wordmark only; don't repeat it in headings or running text.</p>
+
+<h2>Logo</h2>
+<p>The mark is a hand of ginger root with a green shoot. The wordmark is Atkinson Hyperlegible Bold, converted to outlines. Every file, including PNGs at common sizes and a link-sharing card, is in <code>logo/</code>, described in <code>logo/README.md</code>.</p>
+
+<div class="logos">
+	<figure><div class="stage" style="background:#f5f8f6"><img src="../logo/engifer-logo.svg" alt=""></div><figcaption>engifer-logo.svg</figcaption></figure>
+	<figure><div class="stage" style="background:#074b3c"><img src="../logo/engifer-logo-on-dark.svg" alt=""></div><figcaption>engifer-logo-on-dark.svg</figcaption></figure>
+	<figure><div class="stage" style="background:#fff"><img src="../logo/engifer-logo-mono-dark.svg" alt=""></div><figcaption>engifer-logo-mono-dark.svg</figcaption></figure>
+	<figure><div class="stage" style="background:#121a17"><img src="../logo/engifer-logo-mono-light.svg" alt=""></div><figcaption>engifer-logo-mono-light.svg</figcaption></figure>
+</div>
+
+<h3>Mark colours</h3>
+<p>These belong to the mark and stay the same whichever palette the surrounding page uses.</p>
+<div class="swatches">
+	<div class="swatch"><div class="chip" style="background:#8a5a1c"></div><div><strong>Ginger skin</strong><code>#8a5a1c</code><span>Outline</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#ecca7a"></div><div><strong>Ginger flesh</strong><code>#ecca7a</code><span>Fill</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#4f8a4f"></div><div><strong>Shoot</strong><code>#4f8a4f</code><span>Shoot</span></div></div>
+</div>
+
+<h2>Palettes</h2>
+<p>There are two palettes in use. <strong>Torch</strong> is the website's: bright and lively, for drawing people in. <strong>Ginger leaf</strong> is calmer and suits in-app surfaces such as error pages, exception pages and info messages, where things should feel steady rather than loud.</p>
+
+<h3>Torch <span class="status site">Website</span></h3>
+<p class="meta">After the torch ginger, which has red-pink flowers on green leaves: torch pink and turmeric on a vivid emerald. Introduced 2026-10-13.</p>
+<div class="swatches">
+	<div class="swatch"><div class="chip" style="background:#074b3c"></div><div><strong>Emerald</strong><code>#074b3c</code><span>Start page hero, and nothing else</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#ff5a82"></div><div><strong>Torch</strong><code>#ff5a82</code><span>Current-page marker and card edges. Not for text: only 3.4:1 on emerald</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#c41e4a"></div><div><strong>Torch deep</strong><code>#c41e4a</code><span>Links and labels on light backgrounds (5.8:1 on white)</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#ffb320"></div><div><strong>Turmeric</strong><code>#ffb320</code><span>Primary buttons, <code>ng</code> on dark, callouts. Text on emerald 5.6:1</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#fff8e6"></div><div><strong>Turmeric soft</strong><code>#fff8e6</code><span>Callout background (markdown asides)</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#3ee8a5"></div><div><strong>Mint glow</strong><code>#3ee8a5</code><span>Hero glow, top right (16%)</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f5f8f6"></div><div><strong>Paper</strong><code>#f5f8f6</code><span>Page background</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#121a17"></div><div><strong>Ink</strong><code>#121a17</code><span>Text</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#56635c"></div><div><strong>Muted</strong><code>#56635c</code><span>Secondary text</span></div></div>
+</div>
+
+<h3>Ginger leaf <span class="status app">In-app</span></h3>
+<p class="meta">Deep leaf green with ginger yellow. Briefly the website's palette during the engifer rebrand, now kept for in-app messages.</p>
+<div class="swatches">
+	<div class="swatch"><div class="chip" style="background:#1d3b2f"></div><div><strong>Leaf</strong><code>#1d3b2f</code><span>Dark surfaces</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f0c75e"></div><div><strong>Ginger</strong><code>#f0c75e</code><span>Accent on leaf (7.6:1)</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#e2b13f"></div><div><strong>Ginger underline</strong><code>#e2b13f</code><span>Link underlines on light</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#2f6f4a"></div><div><strong>Leaf green</strong><code>#2f6f4a</code><span>Labels, callout edges, <code>ng</code> on light</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#e6efe8"></div><div><strong>Leaf soft</strong><code>#e6efe8</code><span>Callout background</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f4f6f3"></div><div><strong>Paper</strong><code>#f4f6f3</code><span>Background</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#1c211d"></div><div><strong>Ink</strong><code>#1c211d</code><span>Text</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#a9bdb0"></div><div><strong>Leaf muted</strong><code>#a9bdb0</code><span>Secondary text on leaf</span></div></div>
+</div>
+
+<h3>Texture</h3>
+<p>The start page hero carries a faint blueprint grid (24px minor lines, 120px major lines, in a pale mint at 4% and 8% opacity) with one soft mint glow from the top right. It should be felt more than seen. It belongs to the hero only; the rest of the site stays plain.</p>
+<div class="texture" style="background-color:#074b3c;background-image:radial-gradient(ellipse 60% 140% at 100% 0%, rgba(62,232,165,0.16), transparent 65%),linear-gradient(rgba(168,230,200,0.08) 1px, transparent 1px),linear-gradient(90deg, rgba(168,230,200,0.08) 1px, transparent 1px),linear-gradient(rgba(168,230,200,0.04) 1px, transparent 1px),linear-gradient(90deg, rgba(168,230,200,0.04) 1px, transparent 1px);background-size:auto,120px 120px,120px 120px,24px 24px,24px 24px"></div>
+
+<h2>Type</h2>
+<p><strong>Inter</strong> for all text, in regular, medium and semibold, with <strong>JetBrains Mono</strong> for code. They're the same faces as whoacommunity.com, and both are self-hosted (latin and latin-ext subsets, so Icelandic works).</p>
+<p>The wordmark in the logo is drawn from <strong>Atkinson Hyperlegible</strong> Bold and stays that way: it's part of the logo, not running text. Atkinson was the site's typeface until 2026-10-13.</p>
+<div class="type-sample">
+	<div class="display">A Java web framework in the spirit of WebObjects</div>
+	<p>Components pair an HTML template with a Java class, and engifer apps deploy alongside your existing WO apps.</p>
+	<div class="mono">&lt;wo:str value="$message.subject" /&gt;</div>
+</div>
+
+<h2>Layout</h2>
+<p>The same structure as whoacommunity.com: a full-height sidebar on the left holding the logo and the contents tree, a thin top bar with breadcrumbs and search, and a wide content area (up to 1400px). Running text keeps a readable width of about 74 characters; code, tables and reference material use the full width. On small screens the logo stays at the top and the tree moves below the page.</p>
+
+<h2>History</h2>
+<p>Earlier palettes, kept so we can come back to them.</p>
+
+<h3>Torch violet <span class="status retired">Tried</span></h3>
+<p class="meta">The first version of Torch, on a deep violet band with a torch-pink and turmeric glow. Livelier than what came before, but the violet felt off-brand, so the same treatment moved to emerald.</p>
+<div class="swatches">
+	<div class="swatch"><div class="chip" style="background:#3a1659"></div><div><strong>Violet</strong><code>#3a1659</code><span>Band</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#c9b8e0"></div><div><strong>Violet muted</strong><code>#c9b8e0</code><span>Secondary text on violet, grid lines</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f7f6fb"></div><div><strong>Paper</strong><code>#f7f6fb</code><span>Background</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#16141f"></div><div><strong>Ink</strong><code>#16141f</code><span>Text</span></div></div>
+</div>
+
+<h3>Lupine <span class="status retired">Retired</span></h3>
+<p class="meta">The first redesign of the ng-objects site, replacing Bootstrap. Cold North Atlantic paper and deep-sea ink, with Icelandic lupine as the single accent.</p>
+<div class="swatches">
+	<div class="swatch"><div class="chip" style="background:#5b45a0"></div><div><strong>Lupine</strong><code>#5b45a0</code><span>Accent, links, buttons</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#ece8f6"></div><div><strong>Lupine soft</strong><code>#ece8f6</code><span>Callouts</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#15232c"></div><div><strong>Deep sea</strong><code>#15232c</code><span>Text</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#5a6a73"></div><div><strong>Basalt</strong><code>#5a6a73</code><span>Secondary text</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f5f7f8"></div><div><strong>Glacier</strong><code>#f5f7f8</code><span>Background</span></div></div>
+</div>
+
+<h3>Ginger earth <span class="status retired">Retired</span></h3>
+<p class="meta">The first engifer palette: neutral paper with a ginger-skin brown accent. Retired because the brown didn't sit well as a brand colour.</p>
+<div class="swatches">
+	<div class="swatch"><div class="chip" style="background:#8a5a1c"></div><div><strong>Ginger skin</strong><code>#8a5a1c</code><span>Accent, links, buttons</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f5edcc"></div><div><strong>Ginger flesh</strong><code>#f5edcc</code><span>Callouts</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#a33d50"></div><div><strong>Pickled ginger</strong><code>#a33d50</code><span>Strings in code</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#1c211d"></div><div><strong>Ink</strong><code>#1c211d</code><span>Text</span></div></div>
+	<div class="swatch"><div class="chip" style="background:#f5f6f4"></div><div><strong>Paper</strong><code>#f5f6f4</code><span>Background</span></div></div>
+</div>
+
+<h3>Timeline</h3>
+<div class="table-wrap">
+<table class="history">
+	<thead><tr><th>Date</th><th>Palette</th><th>Commit</th><th>Notes</th></tr></thead>
+	<tbody>
+		<tr><td>2026-09-22</td><td>Lupine</td><td><code>ff13ca9</code></td><td>Own stylesheet replaces Bootstrap. Site is still ng-objects on fermentedshark.com.</td></tr>
+		<tr><td>2026-10-13</td><td>Ginger earth</td><td>engifer rebrand</td><td>Rename to engifer begins on engifer.com. New ginger-root mark replaces the shark.</td></tr>
+		<tr><td>2026-10-13</td><td>Ginger leaf</td><td>engifer rebrand</td><td>Dark leaf-green band, content-led front page, then the navigation tree and logo files.</td></tr>
+		<tr><td>2026-10-13</td><td>Torch violet</td><td>engifer rebrand</td><td>Brighter palette with a blueprint texture on violet. Ginger leaf moves to in-app use.</td></tr>
+		<tr><td>2026-10-13</td><td>Torch</td><td>engifer rebrand</td><td>The same treatment on vivid emerald.</td></tr>
+		<tr><td>2026-10-13</td><td>Torch</td><td>engifer rebrand</td><td>Quieter: whoacommunity-style sidebar layout, Inter and JetBrains Mono, the emerald kept to the start page hero with a subtler grid, fewer colours.</td></tr>
+	</tbody>
+</table>
+</div>
+<p class="meta">The engifer rounds were worked out on a branch and squashed into a single "engifer rebrand" commit, so the swatches on this page are the record of each palette.</p>
+
+</main>
+</body>
+</html>

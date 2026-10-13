@@ -1,38 +1,56 @@
 <wo:WrapperComponent>
 	<h1>Dynamic elements</h1>
-	<p>Documentation for the standard dynamic elements that come with the framework.</p>
+	<p>The elements that come with the framework, and the bindings each one takes. This page is generated from <a href="https://github.com/ngobjects/ng-objects/blob/master/ng-appserver/src/main/java/ng/appserver/templating/NGDynamicElementDescription.java">NGDynamicElementDescription</a>.</p>
 
-	<aside>
-		<p>This page is generated from <a href="https://github.com/ngobjects/ng-objects/blob/master/ng-appserver/src/main/java/ng/appserver/elements/docs/NGDynamicElementDescription.java">NGDynamicElementDescription</a>.</p>
-		<p><strong>Elements</strong></p>
-		<ul>
-			<wo:repetition list="$all" item="$current">
-				<li><wo:link href="$currentAnchor"><wo:str value="$current.elementClass.getSimpleName" /></wo:link></li>
-			</wo:repetition>
-		</ul>
-	</aside>
+	<nav class="element-index" aria-label="Elements on this page">
+		<wo:repetition list="$all" item="$current">
+			<wo:link href="$currentAnchor" class="$currentIndexClass"><code><wo:str value="$currentTag" /></code></wo:link>
+		</wo:repetition>
+	</nav>
 
 	<wo:repetition list="$all" item="$current">
-		<section class="element-doc">
-			<h3>
-				<wo:repetition list="$current.aliases" item="$currentAlias">
-					<wo:container elementName="a" id="$current.elementClass.simpleName"><wo:str value="$currentAlias" /></wo:container>
-				</wo:repetition>
-				<wo:if condition="$current.isContainerElement"><span class="badge">Container</span></wo:if>
-			</h3>
-			<div class="classname"><code><wo:str value="$current.elementClass.getName" /></code></div>
-			<p><wo:str value="$current.text" /></p>
-			<wo:if condition="$currentHasBindings">
-				<h4>Bindings</h4>
-				<ul class="bindings">
-					<wo:repetition list="$current.bindings" item="$currentBinding">
-						<li>
-							<strong><wo:str value="$currentBinding.name" /></strong><br>
-							<wo:str value="$currentBinding.text" />
-						</li>
-					</wo:repetition>
-				</ul>
-			</wo:if>
-		</section>
+		<wo:if condition="$currentIsDocumented">
+			<wo:container elementName="section" class="element-doc" id="$currentAnchorID">
+				<header>
+					<h2>
+						<wo:repetition list="$current.aliases" item="$currentAlias">
+							<code><wo:str value="$currentAlias" /></code>
+						</wo:repetition>
+					</h2>
+					<wo:if condition="$current.isContainerElement"><span class="badge">Container</span></wo:if>
+					<div class="classname"><wo:str value="$current.elementClass.getName" /></div>
+				</header>
+				<p><wo:str value="$current.text" /></p>
+				<wo:if condition="$currentHasBindings">
+					<table class="bindings">
+						<thead>
+							<tr><th scope="col">Binding</th><th scope="col">Type</th><th scope="col">Description</th></tr>
+						</thead>
+						<tbody>
+							<wo:repetition list="$current.bindings" item="$currentBinding">
+								<tr>
+									<td><code><wo:str value="$currentBinding.name" /></code></td>
+									<td class="type"><wo:str value="$currentBindingType" /></td>
+									<td><wo:str value="$currentBinding.text" /></td>
+								</tr>
+							</wo:repetition>
+						</tbody>
+					</table>
+				</wo:if>
+			</wo:container>
+		</wo:if>
 	</wo:repetition>
+
+	<h2 class="undocumented-title">Not documented yet</h2>
+	<ul class="undocumented">
+		<wo:repetition list="$all" item="$current">
+			<wo:if condition="$currentIsDocumented" negate="$true">
+				<wo:container elementName="li" id="$currentAnchorID">
+					<code><wo:str value="$currentPrimaryAlias" /></code>
+					<wo:if condition="$current.isContainerElement"><span class="badge">Container</span></wo:if>
+					<span class="classname"><wo:str value="$current.elementClass.getName" /></span>
+				</wo:container>
+			</wo:if>
+		</wo:repetition>
+	</ul>
 </wo:WrapperComponent>

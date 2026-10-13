@@ -10,17 +10,25 @@ import ng.website.Page;
 public class StartPage extends NGComponent {
 
 	public Page currentPage;
-	public BlogEntry currentBlogEntry;
 
 	public StartPage( NGContext context ) {
 		super( context );
 	}
 
-	public List<Page> pages() {
-		return Page.allPages();
+	/**
+	 * @return Pages we want to draw attention to on the start page
+	 */
+	public List<Page> featuredPages() {
+		return List.of(
+				Page.byId( "getting-started" ),
+				Page.byId( "templating" ),
+				Page.byId( "wo-integration" ) );
 	}
 
-	public List<BlogEntry> blogEntries() {
-		return BlogEntry.allBlogEntries();
+	/**
+	 * @return The newest blog entry, featured on the page
+	 */
+	public BlogEntry latestBlogEntry() {
+		return BlogEntry.allBlogEntries().getFirst();
 	}
 }

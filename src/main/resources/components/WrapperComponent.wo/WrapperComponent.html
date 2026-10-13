@@ -4,45 +4,69 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="color-scheme" content="light dark">
-		<title>ng-objects</title>
-		<link rel="icon" type="image/png" href="/shark.png" />
+		<title>engifer</title>
+		<link rel="icon" type="image/svg+xml" href="/engifer.svg" />
+		<link rel="alternate icon" type="image/png" href="/engifer.png" />
 		<wo:stylesheet filename="prism.css" />
 		<wo:stylesheet filename="main.css" />
 	</head>
 	<body>
-		<div class="site">
-			<header class="site-header">
-				<a href="/" class="wordmark"><img src="/shark.png" alt="" width="28" height="28" />ng-objects</a>
-				<nav class="site-nav" aria-label="Site">
-					<a href="/page/getting-started">Documentation</a>
-					<a href="https://github.com/ngobjects/ng-objects">GitHub</a>
-					<form class="search" action="/search" role="search">
-						<input type="search" name="searchString" placeholder="Search" aria-label="Search the documentation" />
-					</form>
-				</nav>
-			</header>
-			<wo:if condition="$hideSidebar">
-				<main class="plain">
-					<wo:content />
-				</main>
-			</wo:if>
-			<wo:if condition="$hideSidebar" negate="$true">
-				<div class="docs">
-					<nav class="docs-nav" aria-label="Documentation">
+		<div class="shell">
+			<aside class="sidebar">
+				<a href="/" class="brand">
+					<picture>
+						<source srcset="/engifer-logo-on-dark.svg" media="(prefers-color-scheme: dark)" />
+						<img src="/engifer-logo.svg" alt="engifer" width="132" height="42" />
+					</picture>
+					<span class="badge">alpha</span>
+				</a>
+				<nav class="tree" id="contents" aria-label="Contents">
+					<wo:repetition list="$sections" item="$currentSection">
+						<h2><wo:str value="$currentSection.title" /></h2>
 						<ul>
-							<wo:repetition list="$pages" item="$currentPage">
-								<li><wo:link href="$currentPage.url" aria-current="$ariaCurrent"><wo:str value="$currentPage.name" /></wo:link></li>
+							<wo:repetition list="$currentSection.nodes" item="$currentNode">
+								<li>
+									<wo:if condition="$currentNode.isLink">
+										<wo:link href="$currentNode.url" aria-current="$nodeAriaCurrent"><wo:str value="$currentNode.name" /></wo:link>
+									</wo:if>
+									<wo:if condition="$currentNode.isLink" negate="$true">
+										<span class="group"><wo:str value="$currentNode.name" /></span>
+									</wo:if>
+									<wo:if condition="$currentNode.hasChildren">
+										<ul>
+											<wo:repetition list="$currentNode.children" item="$currentChild">
+												<li><wo:link href="$currentChild.url" aria-current="$childAriaCurrent"><wo:str value="$currentChild.name" /></wo:link></li>
+											</wo:repetition>
+										</ul>
+									</wo:if>
+								</li>
 							</wo:repetition>
 						</ul>
+					</wo:repetition>
+				</nav>
+			</aside>
+			<div class="main">
+				<header class="topbar">
+					<ol class="breadcrumbs" aria-label="You are here">
+						<wo:repetition list="$breadcrumbs" item="$currentCrumb">
+							<li><wo:str value="$currentCrumb" /></li>
+						</wo:repetition>
+					</ol>
+					<nav class="topbar-links" aria-label="Site">
+						<a href="#contents" class="contents-link">Contents</a>
+						<a href="https://github.com/ngobjects/ng-objects">GitHub</a>
+						<form class="search" action="/search" role="search">
+							<input type="search" name="searchString" placeholder="Search" aria-label="Search the site" />
+						</form>
 					</nav>
-					<main class="prose">
-						<wo:content />
-					</main>
-				</div>
-			</wo:if>
-			<footer class="site-footer">
-				This site runs on ng-objects. <a href="https://github.com/ngobjects/ng-website">View its source on GitHub</a>.
-			</footer>
+				</header>
+				<main class="content prose">
+					<wo:content />
+				</main>
+				<footer class="site-footer">
+					This site runs on engifer. <a href="https://github.com/ngobjects/ng-website">View its source on GitHub</a>.
+				</footer>
+			</div>
 		</div>
 		<wo:script filename="prism.js" />
 	</body>
