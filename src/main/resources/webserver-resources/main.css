@@ -983,6 +983,32 @@ pre code[class*="language-"] {
 	width: 1%;
 }
 
+.bindings td p {
+	margin: 0 0 0.4rem;
+}
+
+.bindings td p:last-child {
+	margin-bottom: 0;
+}
+
+.binding-flag {
+	display: block;
+	font-size: 0.72rem;
+	color: var(--muted);
+}
+
+.binding-direction {
+	display: block;
+	font-family: var(--font-body, inherit);
+	font-size: 0.72rem;
+}
+
+.binding-default,
+.binding-deprecated {
+	font-size: 0.85rem;
+	color: var(--muted);
+}
+
 .undocumented-title {
 	font-size: 1.1rem;
 	margin: 2.5rem 0 0.75rem;

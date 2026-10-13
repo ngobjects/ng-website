@@ -1,67 +1,129 @@
 package ng.website.components;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+
+import ng.appserver.NGApplication;
 import ng.appserver.NGContext;
 import ng.appserver.templating.NGComponent;
-import ng.appserver.templating.NGDynamicElementDescription;
-import ng.appserver.templating.NGDynamicElementDescription.NGBindingDescription;
+import ng.appserver.templating.definitions.NGElementAPI;
+import ng.appserver.templating.NGElementManager.DeclaredElement;
+
+/**
+ * The reference for the framework's own elements, read from ng itself: the elements its taglib declares
+ * (ng/ng/parsley.taglib), and each one's API from its .apiext file. Nothing here lists or describes an element by hand.
+ */
 
 public class DynamicElementsPage extends NGComponent {
 
 	/**
-	 * The text NGDynamicElementDescription uses for elements that have no documentation yet
+	 * The namespace whose elements the page documents: the framework's own
 	 */
-	private static final String UNDOCUMENTED_TEXT = "Documentation forthcoming";
+	private static final String FRAMEWORK_NAMESPACE = "ng";
 
-	public NGDynamicElementDescription current;
-	public NGBindingDescription currentBinding;
-	public String currentAlias;
+	/**
+	 * Renders the Markdown in element and binding docs. Shared: flexmark's parser and renderer are thread safe.
+	 */
+	private static final Parser MARKDOWN_PARSER;
+	private static final HtmlRenderer MARKDOWN_RENDERER;
+
+	static {
+		final MutableDataSet options = new MutableDataSet();
+		MARKDOWN_PARSER = Parser.builder( options ).build();
+		MARKDOWN_RENDERER = HtmlRenderer.builder( options ).build();
+	}
+
+	/**
+	 * A declared element and its API (null when it has no .apiext file)
+	 */
+	public record Entry( DeclaredElement element, NGElementAPI api ) {}
+
+	public Entry current;
+	public NGElementAPI.Binding currentBinding;
+	public String currentTag;
+
+	private List<Entry> _all;
 
 	public DynamicElementsPage( NGContext context ) {
 		super( context );
 	}
 
-	public List<NGDynamicElementDescription> all() {
-		return NGDynamicElementDescription.all();
-	}
-
-	public String currentAlias() {
-		return tagMarkup( currentAlias );
-	}
-
 	/**
-	 * @return The element's first alias as tag markup, for places where only one alias is shown
+	 * @return The framework's declared elements, by primary tag
 	 */
-	public String currentPrimaryAlias() {
-		return tagMarkup( current.aliases().getFirst() );
-	}
-
-	private String tagMarkup( final String alias ) {
-		if( current.isContainerElement() ) {
-			return "<wo:%s>".formatted( alias );
+	public List<Entry> all() {
+		if( _all == null ) {
+			_all = NGApplication.application()
+					.elementManager()
+					.declaredElements()
+					.stream()
+					.filter( e -> FRAMEWORK_NAMESPACE.equals( e.namespace() ) )
+					.map( e -> new Entry( e, NGApplication.application().elementManager().elementAPI( e ).orElse( null ) ) )
+					.sorted( Comparator.comparing( e -> primaryTag( e.element() ).toLowerCase() ) )
+					.toList();
 		}
 
-		return "<wo:%s />".formatted( alias );
+		return _all;
 	}
 
 	/**
-	 * @return The element's primary tag, used to name it in the page index
+	 * @return The tag an element is usually written with: its first tag, or its name when it has none
 	 */
-	public String currentTag() {
-		return "wo:" + current.aliases().getFirst();
+	private static String primaryTag( final DeclaredElement element ) {
+		return element.tags().isEmpty() ? element.name() : element.tags().getFirst();
+	}
+
+	/**
+	 * @return The element's tags, its name when it has none
+	 */
+	public List<String> currentTags() {
+		return current.element().tags().isEmpty() ? List.of( current.element().name() ) : current.element().tags();
+	}
+
+	/**
+	 * @return The tag being iterated as markup, open for a container, self-closing otherwise
+	 */
+	public String currentTagMarkup() {
+		return tagMarkup( currentTag );
+	}
+
+	/**
+	 * @return The element's primary tag as markup, for places where only one is shown
+	 */
+	public String currentPrimaryTagMarkup() {
+		return tagMarkup( primaryTag( current.element() ) );
+	}
+
+	private String tagMarkup( final String tag ) {
+		return currentIsContainer() ? "<wo:%s>".formatted( tag ) : "<wo:%s />".formatted( tag );
+	}
+
+	/**
+	 * @return The element's primary tag, naming it in the page index
+	 */
+	public String currentIndexTag() {
+		return "wo:" + primaryTag( current.element() );
 	}
 
 	public String currentAnchorID() {
-		return current.elementClass().getSimpleName();
+		return current.element().name();
 	}
 
 	public String currentAnchor() {
 		return "#" + currentAnchorID();
 	}
 
+	public boolean currentIsContainer() {
+		return current.api() != null && current.api().wrapsContent();
+	}
+
 	public boolean currentIsDocumented() {
-		return !UNDOCUMENTED_TEXT.equals( current.text() );
+		return current.api() != null && current.api().doc() != null;
 	}
 
 	/**
@@ -71,15 +133,59 @@ public class DynamicElementsPage extends NGComponent {
 		return currentIsDocumented() ? null : "undocumented";
 	}
 
+	/**
+	 * @return The element's implementation class, or null for a template-only component
+	 */
+	public String currentClassName() {
+		return current.element().elementClass() != null ? current.element().elementClass().getName() : null;
+	}
+
+	public String currentDocHTML() {
+		return markdown( current.api().doc() );
+	}
+
 	public boolean currentHasBindings() {
-		return !current.bindings().isEmpty();
+		return current.api() != null && !current.api().bindings().isEmpty();
 	}
 
 	/**
-	 * @return The simple name of the binding's type, or null if it isn't declared
+	 * @return The binding's types, simple names: what it reads, and (after an arrow) what it writes back
 	 */
-	public String currentBindingType() {
-		final Class<?> bindingClass = currentBinding.bindingClass();
-		return bindingClass != null ? bindingClass.getSimpleName() : null;
+	public String currentBindingTypes() {
+		final String pulled = simpleNames( currentBinding.pullTypes() );
+		final String pushed = simpleNames( currentBinding.pushTypes() );
+
+		if( pushed.isEmpty() ) {
+			return pulled;
+		}
+
+		return pulled.isEmpty() ? "→ " + pushed : pulled + " → " + pushed;
+	}
+
+	/**
+	 * @return What the element does with the binding: reads it, writes to it, or both
+	 */
+	public String currentBindingDirection() {
+		if( currentBinding.isPulled() && currentBinding.isPushed() ) {
+			return "read and written";
+		}
+
+		return currentBinding.isPushed() ? "written" : "read";
+	}
+
+	public String currentBindingDocHTML() {
+		return currentBinding.doc() != null ? markdown( currentBinding.doc() ) : null;
+	}
+
+	public String currentBindingDeprecatedHTML() {
+		return currentBinding.deprecated() != null && !currentBinding.deprecated().isEmpty() ? markdown( currentBinding.deprecated() ) : null;
+	}
+
+	private static String simpleNames( final List<String> classNames ) {
+		return classNames.stream().map( n -> n.substring( n.lastIndexOf( '.' ) + 1 ) ).collect( Collectors.joining( " | " ) );
+	}
+
+	private static String markdown( final String markdown ) {
+		return MARKDOWN_RENDERER.render( MARKDOWN_PARSER.parse( markdown ) );
 	}
 }
