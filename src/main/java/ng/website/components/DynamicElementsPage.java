@@ -38,11 +38,6 @@ public class DynamicElementsPage extends NGComponent {
 		MARKDOWN_RENDERER = HtmlRenderer.builder( options ).build();
 	}
 
-	/**
-	 * A declared element and its API (null when it has no .apiext file)
-	 */
-	public record Entry( DeclaredElement element, NGElementAPI api ) {}
-
 	public Entry current;
 	public NGElementAPI.Binding currentBinding;
 	public String currentTag;
@@ -188,4 +183,9 @@ public class DynamicElementsPage extends NGComponent {
 	private static String markdown( final String markdown ) {
 		return MARKDOWN_RENDERER.render( MARKDOWN_PARSER.parse( markdown ) );
 	}
+
+	/**
+	 * A declared element and its API (null when it has no .apiext file)
+	 */
+	public record Entry( DeclaredElement element, NGElementAPI api ) {}
 }
