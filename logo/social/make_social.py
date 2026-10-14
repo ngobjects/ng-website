@@ -1,0 +1,79 @@
+"""Social images: avatars (GitHub, Facebook profile) and the Facebook cover, from the articulated root (variant 5).
+
+Run with a Python that has fonttools and brotli installed: python make_social.py
+Renders with headless Chrome into png/.
+"""
+import importlib.util
+import os
+import subprocess
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.join(HERE, "../..")
+EXPLORATIONS = os.path.join(REPO, "src/main/resources/public/logo-explorations")
+FONTS = os.path.join(REPO, "src/main/resources/webserver-resources/fonts/inter")
+CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+OUT = os.path.join(HERE, "png")
+os.makedirs(OUT, exist_ok=True)
+
+spec = importlib.util.spec_from_file_location("roots", os.path.join(EXPLORATIONS, "roots.py"))
+roots = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(roots)
+g = roots.g
+
+# Variant 5, "All of it": knuckles, nubs, growth rings and the cut end
+N, (_, _, KW) = next((n, v) for n, v in enumerate(roots.VARIANTS) if v[0].startswith("5 "))
+
+EMERALD, MINT, TURMERIC, PAPER = "#074b3c", "#f0f7f3", "#ffb320", "#f5f8f6"
+
+# The site's hero band: a faint blueprint grid with one soft glow
+BAND = (f"background-color:{EMERALD};"
+        "background-image:radial-gradient(ellipse 60% 140% at 100% 0%, rgba(62,232,165,.16), transparent 65%),"
+        "linear-gradient(rgba(168,230,200,.08) 1px, transparent 1px),linear-gradient(90deg, rgba(168,230,200,.08) 1px, transparent 1px),"
+        "linear-gradient(rgba(168,230,200,.04) 1px, transparent 1px),linear-gradient(90deg, rgba(168,230,200,.04) 1px, transparent 1px);"
+        "background-size:auto,{major}px {major}px,{major}px {major}px,{minor}px {minor}px,{minor}px {minor}px;")
+
+FONT_FACE = ('<style>@font-face{font-family:Inter;font-weight:400;src:url("file://' + FONTS + '/inter-400-normal-latin.woff2")}'
+             '@font-face{font-family:Inter;font-weight:500;src:url("file://' + FONTS + '/inter-500-normal-latin.woff2")}</style>')
+
+
+def mark(svg_id):
+    """The mark, cropped close like the favicon so it can be sized by its visible extent"""
+    return roots.mark(N, svg_id, **KW).replace('viewBox="0 0 64 64"', 'viewBox="2 2 60 60"')
+
+
+def lockup(svg_id):
+    return roots.lockup(N, svg_id, MINT, TURMERIC, **KW)
+
+
+def render(body, width, height, name):
+    page = os.path.join(HERE, "_render.html")
+    with open(page, "w") as f:
+        f.write(f'<html><head>{FONT_FACE}</head><body style="margin:0">'
+                f'<div style="width:{width}px;height:{height}px;position:relative;overflow:hidden">{body}</div></body></html>')
+    shot = os.path.join(HERE, "_render.png")
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
+                    "--virtual-time-budget=2000", f"--window-size={width},{height}", f"--screenshot={shot}", "file://" + page],
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+    os.replace(shot, os.path.join(OUT, name))
+    os.remove(page)
+    print(name)
+
+
+def avatar(background, svg_id):
+    # Sized to sit well inside the circle Facebook and GitHub crop avatars to
+    return (f'<div style="{background}width:100%;height:100%;display:flex;align-items:center;justify-content:center">'
+            f'<div style="width:70%;height:70%">{mark(svg_id)}</div></div>')
+
+
+SVG_FILL = "<style>svg{display:block;width:100%;height:100%}</style>"
+
+render(SVG_FILL + avatar(BAND.format(major=128, minor=32), "av1"), 1024, 1024, "engifer-avatar-1024.png")
+render(SVG_FILL + avatar(f"background:{PAPER};", "av2"), 1024, 1024, "engifer-avatar-light-1024.png")
+
+# Facebook cover: 1640×856 upload. Desktop shows the middle 1640×624, phones a narrower centre, so everything sits in the middle
+cover = (f'<div style="{BAND.format(major=120, minor=24)}width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px">'
+         f'<div style="width:620px">{lockup("cv")}</div>'
+         f'<div style="font:400 34px/1.3 Inter,sans-serif;color:#a8d5c0;letter-spacing:-0.01em">A Java web framework</div>'
+         f'<div style="font:500 24px/1 Inter,sans-serif;color:{MINT};opacity:.75;letter-spacing:.02em">www.engifer.com</div>'
+         '</div>')
+render("<style>svg{display:block;width:100%;height:auto}</style>" + cover, 1640, 856, "facebook-cover-1640x856.png")
