@@ -1,53 +1,97 @@
 | ❤️ **Acknowledgements**\
-\
-The template parser in ng-objects is a total rip-off of the *Woognl* parser in [Project Wonder](https://github.com/wocommunity/wonder) (although without the "ognl"-part, which is [an entirely different thing](https://commons.apache.org/proper/commons-ognl/)).\
-\
-The parser was originally created by Mike Schrag and has since been iterated on by the good people of the WOCommunity. Without this parser, this project would have taken much, much more time.\
-\
-Huge thanks to Mike for the parser and to all the others that have contributed to it!
+The template parser is Project Wonder's *WOOgnl* parser, created by Mike Schrag and improved by the WOCommunity. Huge thanks to Mike and everyone who contributed.
 
 # Templating
 
-Templates in ng-objects usually consist of a plain HTML-file and an associated Java class (which must inherit from NGComponent). The template allows you to add ```dynamic tags``` with ```bindings``` that can link to values from the associated Java class.
-
-
-### Example
-
-#### HTML-file
+A component's template is HTML plus dynamic tags. Bindings on the tags connect to the component's Java class.
 
 ```html
-<body>
-	Hello <wo:str value="$someString" />
-</body>
+<p>Hello <wo:str value="$name" />!</p>
 ```
 
-
-#### Associated java class
-
 ```java
-public class MyComponent extends NGComponent {
+public class Hello extends NGComponent {
 
-	public String someString = "world";
+	public String name = "world";
 
-	public MyComponent( NGContext context ) {
+	public Hello( NGContext context ) {
 		super( context );
 	}
 }
 ```
 
+## Template files
+
+In `src/main/resources/components`, named after the class:
+
+* `Hello.html`, or
+* `Hello.wo/Hello.html` (plus an optional `Hello.wod`)
+
+No subfolders. A template without a class works too.
+
 ## Dynamic tags
 
-A dynamic tag always starts with ```<wo:``` followed by a ```tag identifier``` and then an optional list of ```bindings``` (the tag's attributes).\
-Dynamic tags must always be "closed", i.e. if they have no associated closing tag, you must end the "opening" tag with ```/>```
+```html
+<wo:tagName binding1="$someKey" binding2="Some constant" />
+```
 
- ```<wo:tagIdentifier binding1="$someVariable" binding2="SomeConstant" />```.
+* Always close the tag: `</wo:tagName>`, or `/>`.
+* The tag name is a short name (`str`), a simple class name (`NGString`, `Hello`) or a fully qualified one.
 
-* **tagIdentifier**\
-identifies what the element actually is (which is always either a component or a dynamic element). This can be a fully qualified class name ```(ng.appserver.elements.NGString)```, the simple class name ```(NGString)``` or a shortcut provided for the tag ```(str)```
+All built-in elements: [Dynamic elements](dynamic-elements).
 
-* **$someVariable**\
-Bindings whose value starts with a ```$``` are dynamic and resolved against the template's java class. The identifier is usually a field name or a method name on the java class, but for a full description of the mechanics of the resolution see [KeyValueCoding](key-value-coding).
+## Binding values
 
-* **SomeConstant**\
-Bindings whose value does not start with a ```$``` are constants. Constant values can be a ```String```, ```Integer``` or a ```Double```.\
-There is an exception from this rule though; if you want to pass a ```boolean``` constant, you use the values ```$true``` and  ```$false```.
+| Value | Meaning |
+| --- | --- |
+| `$name`, `$user.name` | Key or keypath, resolved with [KeyValueCoding](key-value-coding) |
+| `Some text` | Constant string. Escapes: `\n \r \t \\ \" \$` |
+| `$true`, `$false` | Boolean constants |
+| `$42`, `$1.5` | Integer and Double constants |
+| *(no value)* `<wo:link disabled>` | `true` |
+| `$^name` | The value the parent bound to this component's `name` binding |
+
+No WebObjects `@` operators, and no binding twice on one tag.
+
+## Embedding components
+
+```html
+<wo:Hello name="$user.firstName" />
+```
+
+A wrapper renders the content between its tags at `<wo:content />`:
+
+```html
+<!-- Page.html -->
+<body>
+	<header>My site</header>
+	<wo:content />
+</body>
+```
+
+```html
+<wo:Page>
+	<p>Inside the body, below the header.</p>
+</wo:Page>
+```
+
+## WOD files
+
+Supported, for templates coming from WebObjects:
+
+```html
+<webobject name="Greeting" />
+```
+
+```
+Greeting : NGString {
+	value = name;
+}
+```
+
+Quoted values are constants, unquoted ones keypaths. Use engifer's element names (`NGString` or `str`), not `WOString`.
+
+## Directives
+
+* `<p:raw>…</p:raw>`: output as is, no dynamic tags.
+* `<p:comment>…</p:comment>`: left out of the output.

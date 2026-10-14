@@ -41,15 +41,24 @@ public record Page( String name, String id, String description, Type type, Class
 	 */
 	public static List<Page> allPages() {
 		return List.of(
-				new Page( "Getting started", "getting-started", "Create an application and your first route in a few minutes." ),
-				new Page( "Templating", "templating", "How templates pair with Java classes, and how dynamic tags bind to values." ),
-				new Page( "Dynamic elements", "dynamic-elements", "Reference for the built-in elements and their bindings.", DynamicElementsPage.class ),
+				new Page( "Getting started", "getting-started", "From an empty folder to a running app with a page and a component action, in ten minutes." ),
+				new Page( "Setting up for development", "setting-up", "JDK, Maven, IDE and the project layout." ),
+				new Page( "Creating a component", "creating-a-component", "A class, a template, and bindings between them." ),
+				new Page( "Templating", "templating", "Components, dynamic tags and bindings: what you can write in a template." ),
 				new Page( "KeyValueCoding", "key-value-coding", "How a binding like $someName is resolved to a method or field." ),
-				new Page( "Routing", "routing", null ),
-				//				new Page( "Logging", "logging", null ),
-				new Page( "Component actions", "component-actions", "Stateful actions, kept in the session, the way WebObjects does them." ),
-				new Page( "For WebObjects developers", "wo-integration", "Deploying alongside WO apps, and what's the same and what's different." ),
-				new Page( "Glossary", "glossary", "The terms used throughout the framework and these docs." ) );
+				new Page( "Component actions", "component-actions", "Links and forms that call methods on the page itself, and the request–response loop behind them." ),
+				new Page( "Partial page updates", "partial-page-updates", "Re-render part of a page with the Ajax elements." ),
+				new Page( "Sessions", "sessions", "Per-user state, your own session class, and its lifetime." ),
+				new Page( "Resources", "resources", "Stylesheets, scripts, images and files your code reads." ),
+				new Page( "Routing", "routing", "Mapping URLs to pages and functions. Being redesigned, but usable today." ),
+				new Page( "Creating a dynamic element", "creating-a-dynamic-element", "Stateless building blocks for templates." ),
+				new Page( "Configuration", "configuration", "Properties files, program arguments and the framework's own settings." ),
+				new Page( "Development tools", "development-tools", "Development mode, the /ng/dev endpoints and logging." ),
+				new Page( "Deployment", "deployment", "Building a .woa and running it in production." ),
+				new Page( "For WebObjects developers", "wo-integration", "What's the same, what's different, and deploying alongside WO apps." ),
+				new Page( "Dynamic elements", "dynamic-elements", "Reference for the built-in elements and their bindings.", DynamicElementsPage.class ),
+				new Page( "Plugins", "plugins", "Packages of elements, routes and resources. Coming with tag libraries." ),
+				new Page( "Glossary", "glossary", "Every concept in the framework, explained in one place." ) );
 	}
 
 	/**

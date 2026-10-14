@@ -57,6 +57,8 @@ public class MarkdownPage extends NGComponent {
 	public String renderedMarkdownString() {
 		final MutableDataSet options = new MutableDataSet();
 		options.set( Parser.EXTENSIONS, List.of( TablesExtension.create(), AsideExtension.create() ) );
+		options.set( HtmlRenderer.GENERATE_HEADER_ID, true ); // Headings get ids, so pages can link to sections (glossary#binding)
+		options.set( HtmlRenderer.RENDER_HEADER_ID, true );
 
 		final Parser parser = Parser.builder( options ).build();
 		final HtmlRenderer renderer = HtmlRenderer.builder( options ).build();

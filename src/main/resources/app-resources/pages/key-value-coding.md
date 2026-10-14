@@ -1,43 +1,51 @@
 | 💡 **Fun fact**\
-As is probably obvious for those in the know, KeyValueCoding originates with Apple's NSFoundation library's ```NSKeyValueCoding``` which is heavily used by WebObjects.\
-\
- Our implementation, ```NGKeyValueCoding``` basically replicates the behaviour of Apple's implementation, so if you're familiar with that you're good to go. 
+KeyValueCoding comes from Apple's `NSKeyValueCoding`. `NGKeyValueCoding` behaves the same, so if you know that, you know this.
 
 # KeyValueCoding
 
-KeyValueCoding is the mechanism by which templates link values of ```dynamic bindings``` to their associated java class.\
-In most cases, what you will be linking to is a simple named field or method. But behind the scenes, more is going on. When you write out a dynamic binding in a template, say something like ```<wo:str value="$someName" />```, the template will attempt to dynamically resolve ```someName``` against the java class in the following order, using the first found implemented method:
+KVC resolves a binding like `$name` to a method or field on the component.
 
-## When reading a value
+## Reading
 
-1. If class implements ```NGKeyValueCodingAdditions``` invoke ```public Object valueForKeyPath( String )``` with "someName" as a parameter
-2. If class implements ```NGKeyValueCoding``` invoke ```public Object valueForKey( String )``` with "someName" as a parameter
-3. Check for method ```getSomeName()```
-4. Check for method  ```someName()```
-5. Check for method  ```isSomeName()```
-6. Check for method  ```_getSomeName()```
-7. Check for method  ```_someName()```
-8. Check for method  ```_isSomeName()```
-9. Check for field ```_someName```
-10. Check for field ```_isSomeName```
-11. Check for field ```someName```
-12. Check for field ```isSomeName```
-13. Finally, if none of these methods work out, an ```NGKeyValueCoding.UnknownKeyException``` is thrown.
+First match wins. Public members only.
 
-This lookup is done by ```NGKeyValueCodingAdditions.Utility::valueForKeyPath( Object object, String key )``` which is public API and you can use to perform a similar lookup.
+1. `getName()`
+2. `name()`
+3. `isName()`
+4. `_getName()`
+5. `_name()`
+6. `_isName()`
+7. field `name`
+8. field `_name`
+9. field `_isName`
+10. field `isName`
 
-## When setting a value
+No match throws `UnknownKeyException`, with a suggestion: *"Did you mean 'name'?"*. In a template, it shows as an error box in the page.
 
-👷TODO
+## Setting
 
-## KeyPaths
+Forms set bindings on submit.
 
-Dynamic bindings can have multiple components, like method chaining in Java. And like in Java, components are separated by a period. When a binding has multiple components, we refer to them as ```KeyPaths``` (while single component paths are usually referred to as ```keys```).
+1. `setName( value )`
+2. field `name`
 
-If you write ```<wo:str value="$company.manager.name" />``` the object graph will be traversed through that path and the lookups specified above will be performed on the value returned by each component of the path to get the final value.
+Strings are converted when the target is a number.
 
+## Keypaths
 
-### ```Nulls``` in keyPaths
+`$company.manager.name` resolves each key on the result of the previous one.
 
-If any component of the keyPath returns ```null```, say, if you write ```company.manager.name``` and ```manager``` returns null, the entire keyPath will resolve to null instead of throwing a ```NullPointerException``` like you might expect in Java.\
-It's like working in a language with a null safe navigation (elvis) operator and spell out the path as "company?.manager?.name", but in our case the operator is implicit.
+A `null` anywhere makes the whole keypath `null`, with no `NullPointerException`. Setting through a `null` fails.
+
+## Maps and custom lookups
+
+Maps aren't supported: `$map.key` doesn't read the map's entry ([#36](https://github.com/ngobjects/ng-objects/issues/36)). To customise lookups, implement `NGKeyValueCoding` (`valueForKey`, `takeValueForKey`).
+
+## From Java
+
+```java
+Object name = NGKeyValueCoding.Utility.valueForKey( user, "name" );
+NGKeyValueCoding.Utility.takeValueForKey( user, "Jane", "name" );
+```
+
+Lookups are cached per class and key in production, but not in development.

@@ -1,21 +1,61 @@
-## Component actions
+# Component actions
 
-Component actions are one of the most powerful aspects of the old ```WebObjects``` framework. They are inherently stateful actions that allow for an unmatched speed of development. But like all things stateful, they have cons. In essence, the user's state is stored in a session in memory, and if the application is restarted, that state gets lost, and that user gets kicked out.
+A link or form calls a method on the component instance that rendered it:
 
-For a very simple explanation of what a stateful action is.
+```html
+<wo:link action="$showDetails">Details</wo:link>
+```
 
-* A user initiates a request.
-* That request has a context.
-* That context keeps track of an instance of a "page" (```NGComponent```).
-* The context has an ID and is cached within the session under that id.
+```java
+public NGActionResults showDetails() {
+	final DetailPage page = pageWithName( DetailPage.class );
+	page.product = product;
+	return page;
+}
+```
 
-Usually when a page is rendered, it will invoke a single method.
+No URLs to design, nothing to parse, no state to save. The cost: actions need the user's [session](sessions) and the page kept in memory. For stable URLs, use [routes](routing).
 
-* ```appendToResponse()```
+## What an action returns
 
-In the case of component actions, two other methods are invoked before ```appendToResponse()```
+| Return | Shows |
+| --- | --- |
+| `null` | The same page again |
+| A component | That page, which becomes the current page |
+| Other `NGActionResults` (e.g. `NGResponses.ok( ... )`) | That response |
 
-* ```takeValuesFromRequest()```
-* ```invokeAction()```
+## Forms
 
-…TODO…
+```html
+<wo:form>
+	<wo:textfield value="$name" />
+	<wo:submit action="$save" value="Save" />
+</wo:form>
+```
+
+```java
+public String name;
+
+public NGActionResults save() {
+	// name holds what was typed
+	return null;
+}
+```
+
+## How it works
+
+The action URL (`/no/3.0.1.5`) names the page (`3`) and the clicked element (`0.1.5`). On click, the page is taken from the session's [page cache](glossary#page-cache) and run through the **request–response loop**:
+
+1. **takeValuesFromRequest**: form fields set their bindings (only when there are form values).
+2. **invokeAction**: the clicked element calls its action.
+3. **appendToResponse**: the resulting page renders.
+
+## The page cache
+
+* Holds a session's last 100 pages, so the back button works.
+* An evicted page's actions answer "page not found"; an expired session shows a timeout page. Sessions expire after 60 idle minutes.
+* One request at a time per page. Different pages run concurrently, so synchronize state shared between them yourself.
+
+*(TODO: cache size and session timeout aren't configurable yet.)*
+
+To update part of a page, see [Partial page updates](partial-page-updates).

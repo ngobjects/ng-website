@@ -1,6 +1,7 @@
 package ng.website;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * The site's navigation tree, shown on every page. Sections hold nodes, and a node can hold child nodes.
@@ -38,16 +39,18 @@ public class Navigation {
 	 */
 	public static List<Section> sections() {
 		return List.of(
-				new Section( "Guides", List.of(
-						Node.of( Page.byId( "getting-started" ) ),
-						Node.of( Page.byId( "templating" ) ),
-						Node.of( Page.byId( "key-value-coding" ) ),
-						Node.of( Page.byId( "component-actions" ) ),
-						Node.of( Page.byId( "routing" ) ),
-						Node.of( Page.byId( "wo-integration" ) ) ) ),
-				new Section( "Reference", List.of(
-						Node.of( Page.byId( "dynamic-elements" ) ),
-						Node.of( Page.byId( "glossary" ) ) ) ) );
+				new Section( "Start here", nodes( "getting-started", "setting-up" ) ),
+				new Section( "Guides", nodes( "creating-a-component", "templating", "key-value-coding", "component-actions", "partial-page-updates", "sessions", "resources", "routing", "creating-a-dynamic-element" ) ),
+				new Section( "Running your app", nodes( "configuration", "development-tools", "deployment" ) ),
+				new Section( "Coming from WebObjects", nodes( "wo-integration" ) ),
+				new Section( "Reference", nodes( "dynamic-elements", "plugins", "glossary" ) ) );
+	}
+
+	/**
+	 * @return Navigation nodes for the pages with the given ids, in order
+	 */
+	private static List<Node> nodes( final String... pageIds ) {
+		return Stream.of( pageIds ).map( Page::byId ).map( Node::of ).toList();
 	}
 
 	/**
