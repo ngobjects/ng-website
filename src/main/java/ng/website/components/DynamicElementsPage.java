@@ -15,8 +15,8 @@ import ng.appserver.templating.definitions.NGElementAPI;
 import ng.appserver.templating.NGElementManager.DeclaredElement;
 
 /**
- * The reference for the framework's own elements, read from ng itself: every element it publishes (an .apiext in
- * ng/ng/elements), each one's API from that file and its tags from the namespace's tag aliases. Nothing here lists or describes an element by hand.
+ * The reference for the framework's own elements, read from ng itself: every element it publishes (each .apiext in
+ * ng/ng/components), each one's API from that file and its tags from the namespace's tag aliases. Nothing here lists or describes an element by hand.
  */
 
 public class DynamicElementsPage extends NGComponent {
@@ -55,7 +55,7 @@ public class DynamicElementsPage extends NGComponent {
 		if( _all == null ) {
 			_all = NGApplication.application()
 					.elementManager()
-					.declaredElements()
+					.publishedElements()
 					.stream()
 					.filter( e -> FRAMEWORK_NAMESPACE.equals( e.namespace() ) )
 					.map( e -> new Entry( e, e.api(), NGApplication.application().elementManager().tagsFor( e.name() ) ) )
