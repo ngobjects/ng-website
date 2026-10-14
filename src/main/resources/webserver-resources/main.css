@@ -707,6 +707,79 @@ pre code[class*="language-"] {
 	}
 }
 
+/* ---------- Powered by engifer ---------- */
+
+/* A web badge in the classic 88×31 proportions of the "Powered by WebObjects" button every WO site once wore */
+.powered-slot {
+	margin-top: 1.75rem;
+	text-align: center;
+}
+
+.powered {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	width: 108px;
+	height: 36px;
+	padding: 0 9px 0 7px;
+	box-sizing: border-box;
+	border: 1px solid var(--rule);
+	border-radius: 4px;
+	background: var(--paper);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(18, 26, 23, 0.06);
+	text-decoration: none;
+	text-align: left;
+	line-height: 1;
+}
+
+.powered:hover {
+	border-color: var(--link-decoration);
+}
+
+.powered img {
+	flex: none;
+	width: 20px;
+	height: 20px;
+}
+
+.powered-text {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	min-width: 0;
+}
+
+.powered-text .k {
+	font-family: var(--font-code);
+	font-size: 7.5px;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+.powered-text .v {
+	font-size: 12.5px;
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	color: var(--ink);
+	white-space: nowrap;
+}
+
+/* The ng is coloured as in the logo: torch red on light, turmeric on dark */
+.powered-text .ng {
+	color: #c41e4a;
+}
+
+@media (prefers-color-scheme: dark) {
+	.powered {
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 1px 0 rgba(0, 0, 0, 0.25);
+	}
+
+	.powered-text .ng {
+		color: var(--highlight);
+	}
+}
+
 /* ---------- Badges ---------- */
 
 .badge {
@@ -1231,9 +1304,16 @@ pre code[class*="language-"] {
 
 	.tree {
 		order: 3;
-		padding: 2rem 1.25rem 3rem;
+		padding: 2rem 1.25rem 1.5rem;
 		background: var(--surface);
 		border-top: 1px solid var(--rule);
+	}
+
+	.powered-slot {
+		order: 4;
+		margin: 0;
+		padding: 0 1.25rem 3rem;
+		background: var(--surface);
 	}
 
 	.contents-link {
