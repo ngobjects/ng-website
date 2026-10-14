@@ -142,6 +142,28 @@ svg { display: block; width: 100%; height: 100%; }
 <p class="intro">Articulation borrowed from a real hand of ginger, added one step at a time: knuckles, nubs, growth rings, the cut end, and a layout taken from the photo. Marks at 128, 32 and 16 pixels; wordmark in Atkinson Hyperlegible Next Bold.</p>
 """ + "".join(rows) + "</main></body></html>\n"
 
+# The hero's logo: the shoot sways in a light breeze, and the leaf trails it a little.
+# Each part turns about its own base: translated there, rotated, translated back. Still for reduced motion.
+BREEZE_STYLE = """<style>
+.sway, .flutter { animation: sway 7s ease-in-out infinite; }
+.flutter { animation-name: flutter; animation-delay: -0.35s; }
+@keyframes sway { 0%, 100% { transform: rotate(0deg); } 18% { transform: rotate(4deg); } 32% { transform: rotate(1deg); } 46% { transform: rotate(5.5deg); } 70% { transform: rotate(-1.5deg); } 85% { transform: rotate(1.5deg); } }
+@keyframes flutter { 0%, 100% { transform: rotate(0deg); } 20% { transform: rotate(7deg); } 34% { transform: rotate(-1deg); } 48% { transform: rotate(10deg); } 72% { transform: rotate(-4deg); } 87% { transform: rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) { .sway, .flutter { animation: none; } }
+</style>"""
+
+
+def breezy(svg, shoot):
+    stem, leaf = shoot.split("/>", 1)
+    stem += "/>"
+    def about(x, y, cls, inner):
+        return f'<g transform="translate({x} {y})"><g class="{cls}"><g transform="translate({-x} {-y})">{inner}</g></g></g>'
+    moving = about(40.5, 21, "sway", stem + about(43.5, 11, "flutter", leaf))
+    assert shoot in svg
+    svg = svg.replace(shoot, moving, 1)
+    return svg.replace(">", ">" + BREEZE_STYLE, 1)
+
+
 def write_site(number):
     """Writes variant 'number' (as in the sheet, "5" for "5 · All of it") into the site's public/ folder."""
     n, (name, _, kw) = next((n, v) for n, v in enumerate(VARIANTS) if v[0].startswith(number + " "))
@@ -149,6 +171,8 @@ def write_site(number):
     for file, text, ng in (("engifer-logo.svg", g.INK, g.TORCH), ("engifer-logo-on-dark.svg", g.MINT, g.TURMERIC)):
         svg = lockup(n, "site", text, ng, **kw)
         open(public + file, "w").write(svg + "\n")
+        if file == "engifer-logo-on-dark.svg":
+            open(public + "engifer-logo-hero.svg", "w").write(breezy(svg, kw["shoot"]) + "\n")
     # The favicon is cropped close, so the root fills the little space it gets
     open(public + "engifer.svg", "w").write(mark(n, "fav", **kw).replace('viewBox="0 0 64 64"', 'viewBox="2 2 60 60"') + "\n")
     width, height = (float(v) for v in svg.split('viewBox="0 0 ')[1].split('"')[0].split())
