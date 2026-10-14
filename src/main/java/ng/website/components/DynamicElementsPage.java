@@ -15,8 +15,8 @@ import ng.appserver.templating.definitions.NGElementAPI;
 import ng.appserver.templating.NGElementManager.DeclaredElement;
 
 /**
- * The reference for the framework's own elements, read from ng itself: the elements its taglib publishes
- * (ng/ng/parsley.taglib), each one's API from its .apiext file and its tags from the namespace's tag aliases. Nothing here lists or describes an element by hand.
+ * The reference for the framework's own elements, read from ng itself: every element it publishes (an .apiext in
+ * ng/ng/elements), each one's API from that file and its tags from the namespace's tag aliases. Nothing here lists or describes an element by hand.
  */
 
 public class DynamicElementsPage extends NGComponent {
