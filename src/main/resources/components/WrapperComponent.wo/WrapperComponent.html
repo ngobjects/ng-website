@@ -4,9 +4,28 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="color-scheme" content="light dark">
-		<title>engifer</title>
+		<title><wo:str value="$meta.title" /></title>
+		<wo:element elementName="meta" name="description" content="$meta.description" />
+		<wo:if condition="$robotsContent"><wo:element elementName="meta" name="robots" content="$robotsContent" /></wo:if>
+		<wo:element elementName="link" rel="canonical" href="$canonicalURL" />
+		<meta property="og:site_name" content="engifer" />
+		<meta property="og:locale" content="en_US" />
+		<wo:element elementName="meta" property="og:type" content="$meta.type" />
+		<wo:element elementName="meta" property="og:title" content="$meta.title" />
+		<wo:element elementName="meta" property="og:description" content="$meta.description" />
+		<wo:element elementName="meta" property="og:url" content="$canonicalURL" />
+		<wo:element elementName="meta" property="og:image" content="$shareImageURL" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="engifer: a Java web framework" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<wo:if condition="$structuredData"><script type="application/ld+json"><wo:str value="$structuredData" escapeHTML="$false" /></script></wo:if>
+		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
 		<link rel="icon" type="image/svg+xml" href="/engifer.svg" />
-		<link rel="alternate icon" type="image/png" href="/engifer.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content="#f5f8f6" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0e1513" media="(prefers-color-scheme: dark)" />
 		<wo:stylesheet filename="prism.css" />
 		<wo:stylesheet filename="main.css" />
 	</head>

@@ -1,10 +1,13 @@
-"""Social images: avatars (GitHub, Facebook profile) and the Facebook cover, from the articulated root (variant 5).
+"""Social and web images from the articulated root (variant 5): avatars (GitHub, Facebook), the Facebook cover,
+the link-sharing image, and the site's icons (favicon.ico, touch and app icons).
 
 Run with a Python that has fonttools and brotli installed: python make_social.py
-Renders with headless Chrome into png/.
+Renders with headless Chrome into png/, and copies the site's images into its public/ folder.
 """
 import importlib.util
 import os
+import shutil
+import struct
 import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +16,7 @@ EXPLORATIONS = os.path.join(REPO, "src/main/resources/public/logo-explorations")
 FONTS = os.path.join(REPO, "src/main/resources/webserver-resources/fonts/inter")
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 OUT = os.path.join(HERE, "png")
+PUBLIC = os.path.join(REPO, "src/main/resources/public")
 os.makedirs(OUT, exist_ok=True)
 
 spec = importlib.util.spec_from_file_location("roots", os.path.join(EXPLORATIONS, "roots.py"))
@@ -45,14 +49,15 @@ def lockup(svg_id):
     return roots.lockup(N, svg_id, MINT, TURMERIC, **KW)
 
 
-def render(body, width, height, name):
+def render(body, width, height, name, transparent=False):
     page = os.path.join(HERE, "_render.html")
     with open(page, "w") as f:
         f.write(f'<html><head>{FONT_FACE}</head><body style="margin:0">'
                 f'<div style="width:{width}px;height:{height}px;position:relative;overflow:hidden">{body}</div></body></html>')
     shot = os.path.join(HERE, "_render.png")
     subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--force-device-scale-factor=1",
-                    "--virtual-time-budget=2000", f"--window-size={width},{height}", f"--screenshot={shot}", "file://" + page],
+                    "--virtual-time-budget=2000", f"--window-size={width},{height}", f"--screenshot={shot}", "file://" + page]
+                   + (["--default-background-color=00000000"] if transparent else []),
                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
     os.replace(shot, os.path.join(OUT, name))
     os.remove(page)
@@ -77,3 +82,38 @@ cover = (f'<div style="{BAND.format(major=120, minor=24)}width:100%;height:100%;
          f'<div style="font:500 24px/1 Inter,sans-serif;color:{MINT};opacity:.75;letter-spacing:.02em">www.engifer.com</div>'
          '</div>')
 render("<style>svg{display:block;width:100%;height:auto}</style>" + cover, 1640, 856, "facebook-cover-1640x856.png")
+
+
+# ---------- Link sharing: Open Graph image, 1200×630 ----------
+og = cover.replace("gap:34px", "gap:30px").replace('<div style="width:620px">', '<div style="width:560px">').replace("font:400 34px", "font:400 32px")
+render("<style>svg{display:block;width:100%;height:auto}</style>" + og, 1200, 630, "engifer-og-1200x630.png")
+
+# ---------- Icons ----------
+# Touch and app icons: full-bleed emerald squares (iOS and Android round the corners themselves)
+for size, name in ((180, "apple-touch-icon.png"), (192, "icon-192.png"), (512, "icon-512.png")):
+	render(SVG_FILL + avatar(BAND.format(major=size // 8, minor=size // 32), f"ic{size}"), size, size, name)
+
+# Favicon: the transparent mark, packed into one .ico with 16, 32 and 48 pixel PNGs (48 is what search results use)
+favicon_sizes = (16, 32, 48)
+for size in favicon_sizes:
+	render(SVG_FILL + f'<div style="width:{size}px;height:{size}px">{mark(f"fav{size}")}</div>', size, size, f"favicon-{size}.png", transparent=True)
+
+
+def write_ico(path, pngs):
+	"""An .ico holding PNG images: header, one directory entry per image, then the PNG data"""
+	data = [open(png, "rb").read() for _, png in pngs]
+	offset = 6 + 16 * len(pngs)
+	out = struct.pack("<HHH", 0, 1, len(pngs))
+	for (size, _), blob in zip(pngs, data):
+		out += struct.pack("<BBBBHHII", size % 256, size % 256, 0, 0, 1, 32, len(blob), offset)
+		offset += len(blob)
+	with open(path, "wb") as f:
+		f.write(out + b"".join(data))
+	print(os.path.basename(path))
+
+
+write_ico(os.path.join(OUT, "favicon.ico"), [(size, os.path.join(OUT, f"favicon-{size}.png")) for size in favicon_sizes])
+
+# The site serves these from its public folder
+for name in ("favicon.ico", "apple-touch-icon.png", "icon-192.png", "icon-512.png", "engifer-og-1200x630.png"):
+	shutil.copy(os.path.join(OUT, name), os.path.join(PUBLIC, name))

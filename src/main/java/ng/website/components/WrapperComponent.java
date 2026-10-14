@@ -5,6 +5,7 @@ import java.util.List;
 import ng.appserver.NGContext;
 import ng.appserver.templating.NGComponent;
 import ng.website.Navigation;
+import ng.website.Seo;
 import ng.website.Navigation.Node;
 import ng.website.Navigation.Section;
 
@@ -26,6 +27,35 @@ public class WrapperComponent extends NGComponent {
 	@Override
 	public boolean synchronizesVariablesWithBindings() {
 		return false;
+	}
+
+	/**
+	 * @return Title, description and indexability of the page being viewed, for the head's meta tags
+	 */
+	public Seo.Meta meta() {
+		return Seo.meta( context().request().uri() );
+	}
+
+	public String canonicalURL() {
+		return Seo.canonicalURL( context().request().uri() );
+	}
+
+	public String shareImageURL() {
+		return Seo.BASE_URL + "/engifer-og-1200x630.png";
+	}
+
+	/**
+	 * @return null for pages search engines may index, so the robots meta tag is left out
+	 */
+	public String robotsContent() {
+		return meta().indexable() ? null : "noindex";
+	}
+
+	/**
+	 * @return JSON-LD structured data for the page, or null
+	 */
+	public String structuredData() {
+		return Seo.structuredData( context().request().uri() );
 	}
 
 	public List<Section> sections() {
