@@ -1,7 +1,14 @@
 package ng.website.components;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UncheckedIOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -12,11 +19,11 @@ import ng.appserver.NGApplication;
 import ng.appserver.NGContext;
 import ng.appserver.templating.NGComponent;
 import ng.appserver.templating.definitions.NGElementAPI;
-import ng.appserver.templating.NGElementManager.DeclaredElement;
 
 /**
- * The reference for the framework's own elements, read from ng itself: every element it publishes (each .apiext in
- * ng/ng/components), each one's API from that file and its tags from the namespace's tag aliases. Nothing here lists or describes an element by hand.
+ * The reference for the framework's own elements, read from ng-appserver's files: its elements and their tags from its
+ * tag aliases (ng-tag-aliases.properties), and each element's API from its .apiext (ng/ng/components/<Name>.apiext).
+ * Nothing here lists or describes an element by hand.
  */
 
 public class DynamicElementsPage extends NGComponent {
@@ -53,12 +60,7 @@ public class DynamicElementsPage extends NGComponent {
 	 */
 	public List<Entry> all() {
 		if( _all == null ) {
-			_all = NGApplication.application()
-					.elementManager()
-					.publishedElements()
-					.stream()
-					.filter( e -> FRAMEWORK_NAMESPACE.equals( e.namespace() ) )
-					.map( e -> new Entry( e, e.api(), NGApplication.application().elementManager().tagsFor( e.name() ) ) )
+			_all = readEntries().stream()
 					.sorted( Comparator.comparing( e -> primaryTag( e ).toLowerCase() ) )
 					.toList();
 		}
@@ -67,17 +69,62 @@ public class DynamicElementsPage extends NGComponent {
 	}
 
 	/**
+	 * @return ng-appserver's elements: every element its tag aliases name, with its tags and its API (null without an .apiext)
+	 */
+	private static List<Entry> readEntries() {
+		final Properties aliases = new Properties();
+
+		try( InputStream in = NGApplication.class.getResourceAsStream( "/ng-tag-aliases.properties" )) {
+			if( in != null ) {
+				aliases.load( in );
+			}
+		}
+		catch( IOException e ) {
+			throw new UncheckedIOException( e );
+		}
+
+		final Map<String, List<String>> tagsByElement = new TreeMap<>();
+
+		for( final String tag : aliases.stringPropertyNames() ) {
+			tagsByElement.computeIfAbsent( aliases.getProperty( tag ).strip(), _unused -> new ArrayList<>() ).add( tag.strip() );
+		}
+
+		final List<Entry> entries = new ArrayList<>();
+
+		tagsByElement.forEach( ( name, tags ) -> {
+			final NGElementAPI api = api( name );
+			entries.add( new Entry( name, api != null ? api.className() : null, api, tags.stream().sorted().toList() ) );
+		} );
+
+		return entries;
+	}
+
+	/**
+	 * @return The element's API from ng-appserver's ng/ng/components/<Name>.apiext, or null if it has none
+	 */
+	private static NGElementAPI api( final String name ) {
+		final String path = "/ng/ng/components/" + name + ".apiext";
+
+		try( InputStream in = NGApplication.class.getResourceAsStream( path )) {
+			return in != null ? NGElementAPI.parse( in, path ) : null;
+		}
+		catch( IOException e ) {
+			throw new UncheckedIOException( e );
+		}
+	}
+
+	/**
 	 * @return The tag an element is usually written with: its first tag, or its name when it has none
 	 */
 	private static String primaryTag( final Entry entry ) {
-		return entry.tags().isEmpty() ? entry.element().name() : entry.tags().getFirst();
+		return entry.tags().isEmpty() ? entry.name() : entry.tags().getFirst();
 	}
 
 	/**
 	 * @return The element's tags, its name when it has none
 	 */
 	public List<String> currentTags() {
-		return current.tags().isEmpty() ? List.of( current.element().name() ) : current.tags();
+		return current.tags().isEmpty() ? List.of( current.name() ) : current.tags();
 	}
 
 	/**
@@ -106,7 +153,7 @@ public class DynamicElementsPage extends NGComponent {
 	}
 
 	public String currentAnchorID() {
-		return current.element().name();
+		return current.name();
 	}
 
 	public String currentAnchor() {
@@ -132,7 +179,7 @@ public class DynamicElementsPage extends NGComponent {
 	 * @return The element's implementation class, or null for a template-only component
 	 */
 	public String currentClassName() {
-		return current.element().elementClass() != null ? current.element().elementClass().getName() : null;
+		return current.className();
 	}
 
 	public String currentDocHTML() {
@@ -187,5 +234,5 @@ public class DynamicElementsPage extends NGComponent {
 	/**
 	 * A declared element and its API (null when it has no .apiext file)
 	 */
-	public record Entry( DeclaredElement element, NGElementAPI api, List<String> tags ) {}
+	public record Entry( String name, String className, NGElementAPI api, List<String> tags ) {}
 }
