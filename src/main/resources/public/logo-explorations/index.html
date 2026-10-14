@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>engifer logo explorations</title>
 <style>
-	@font-face { font-family: Inter; font-weight: 400; src: url("../../src/main/resources/webserver-resources/fonts/inter/inter-400-normal-latin.woff2") format("woff2"); }
-	@font-face { font-family: Inter; font-weight: 600; src: url("../../src/main/resources/webserver-resources/fonts/inter/inter-600-normal-latin.woff2") format("woff2"); }
+	@font-face { font-family: Inter; font-weight: 400; src: url("/nr/app/fonts/inter/inter-400-normal-latin.woff2") format("woff2"); }
+	@font-face { font-family: Inter; font-weight: 600; src: url("/nr/app/fonts/inter/inter-600-normal-latin.woff2") format("woff2"); }
 	:root { --paper: #f5f8f6; --ink: #121a17; --muted: #56635c; --rule: #dde6e1; --band: #074b3c; }
 	* { box-sizing: border-box; }
 	body { margin: 0; padding: 2.5rem 1rem 4rem; background: var(--paper); color: var(--ink); font: 400 15px/1.55 Inter, system-ui, sans-serif; }
@@ -30,18 +30,20 @@
 	.ng img { height: 40px; }
 	.ng p { color: var(--muted); font-size: .85rem; margin: .75rem 0 0; }
 	@media (max-width: 52rem) { .variant, .ng { grid-template-columns: 1fr; } }
+	.sheets { display: flex; gap: 1.25rem; margin: 0 0 1.25rem; font-size: .9rem; } .sheets a { color: #0b7a5c; }
 </style>
 </head>
 <body>
 <main>
 	<h1>engifer logo explorations</h1>
-	<p class="intro">Directions to consider, not decisions. Every wordmark is Inter SemiBold (the site's typeface) set slightly tight, so the word reads quieter than the current Atkinson Bold. Marks are shown at 64, 32 and 16 pixels on light and on the hero's emerald.</p>
+	<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a></nav>
+	<p class="intro">Directions to consider, not decisions. Every wordmark is Inter SemiBold (the site's typeface) set slightly tight, so the word reads quieter than the original Atkinson Bold. Marks are shown at 64, 32 and 16 pixels on light and on the hero's emerald.</p>
 
 	<section class="variant">
-		<div class="about"><h2>Current</h2><p>For reference. Heavy outline, a bold wordmark and a large mark make it read cartoonish next to the site's type.</p>
-			<div class="sizes"><img src="../engifer-mark.svg" width="64"><img src="../engifer-mark.svg" width="32"><img src="../engifer-mark.svg" width="16"></div></div>
-		<div class="lockup"><img src="../engifer-logo.svg" alt="Current logo"></div>
-		<div class="lockup dark"><img src="../engifer-logo-on-dark.svg" alt="Current logo on dark"></div>
+		<div class="about"><h2>Original</h2><p>The logo we started from, for reference. Heavy outline, a bold wordmark and a large mark make it read cartoonish next to the site's type.</p>
+			<div class="sizes"><img src="original-mark.svg" width="64"><img src="original-mark.svg" width="32"><img src="original-mark.svg" width="16"></div></div>
+		<div class="lockup"><img src="original-logo.svg" alt="Original logo"></div>
+		<div class="lockup dark"><img src="original-logo-on-dark.svg" alt="Original logo on dark"></div>
 	</section>
 
 	<div id="variants"></div>

@@ -13,10 +13,13 @@ spec = importlib.util.spec_from_file_location("g", os.path.join(HERE, "generate.
 g = importlib.util.module_from_spec(spec); spec.loader.exec_module(g)
 
 FONTS = os.path.join(HERE, "fonts")
-SITE_FONTS = os.path.join(HERE, "../../src/main/resources/webserver-resources/fonts")
+SITE_FONTS = os.path.join(HERE, "../../webserver-resources/fonts")
 INTER = f"{SITE_FONTS}/inter/inter-600-normal-latin.woff2"
 
 # (label, file, variable axis settings, tracking in em)
+NAV = '<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a></nav>'
+NAV_CSS = ".sheets { display: flex; gap: 1.25rem; margin: 0 0 1.25rem; font-size: .9rem; } .sheets a { color: #0b7a5c; }"
+
 FACES = [
     ("Atkinson Hyperlegible Bold (the original logo)", f"{SITE_FONTS}/Atkinson-Hyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2", None, -0.02),
     ("Atkinson Hyperlegible Next Bold (on the site)", f"{FONTS}/AtkinsonHyperlegibleNext.ttf", {"wght": 700}, -0.02),
@@ -63,4 +66,17 @@ for label, path, axes, tracking in FACES:
     rows.append(f'<div style="display:flex;align-items:stretch;border-bottom:1px solid #dde6e1"><div style="width:230px;padding:18px;font:14px system-ui">{label}</div>{"".join(cells)}</div>')
 
 if __name__ == "__main__":
-    open(os.path.join(HERE, "typefaces.html"), "w").write('<body style="margin:0;background:#f5f8f6">' + "".join(rows) + "</body>")
+    page = ("""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>engifer typefaces</title><style>
+body { margin: 0; padding: 2rem 1rem 4rem; background: #f5f8f6; color: #121a17; font: 15px/1.5 system-ui, sans-serif; }
+main { max-width: 1300px; margin: 0 auto; }
+h1 { font-size: 1.5rem; margin: 0 0 .25rem; }
+.intro { color: #56635c; margin: 0 0 2rem; max-width: 70ch; }
+.rows { border: 1px solid #dde6e1; border-radius: 10px; overflow: hidden; background: #fff; }
+""" + NAV_CSS + """
+</style></head><body><main>
+<h1>engifer typefaces</h1>
+""" + NAV + """
+<p class="intro">Wordmark typefaces side by side with the A3 mark, the ng coloured as in the logo. The site uses Atkinson Hyperlegible Next Bold.</p>
+<div class="rows">""" + "".join(rows) + "</div></main></body></html>\n")
+    open(os.path.join(HERE, "typefaces.html"), "w").write(page)

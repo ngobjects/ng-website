@@ -7,7 +7,7 @@ from fontTools.pens.boundsPen import BoundsPen
 from fontTools.varLib.instancer import instantiateVariableFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-FONTS = os.path.join(HERE, "../../src/main/resources/webserver-resources/fonts/inter")
+FONTS = os.path.join(HERE, "../../webserver-resources/fonts/inter")
 OUT = HERE  # Run with a Python that has fonttools and brotli installed
 
 

@@ -90,7 +90,7 @@ SPRAWL_SHOOT = ('<path d="M45 21.5 C44.8 17.5 46.3 14.5 49 12.5" fill="none" str
                 + g.leaf(48.5, 13, 11, 6.5, 50, SHOOT))
 
 VARIANTS = [
-    ("A3, as on the site", "Even strokes, for reference.", dict(lobes=A3_EVEN, shoot=A3_SHOOT)),
+    ("A3 · Flat root", "Where we started from: even strokes, for reference.", dict(lobes=A3_EVEN, shoot=A3_SHOOT)),
     ("1 · Knuckles", "Fingers pinch at the joints and swell at the ends.", dict(lobes=A3_KNUCKLES, shoot=A3_SHOOT)),
     ("2 · Knuckles and nubs", "Small bumps on the outline make the silhouette knobbly, without any inner detail.", dict(lobes=A3_KNUCKLES, nubs=A3_NUBS, shoot=A3_SHOOT)),
     ("3 · Knuckles and rings", "Short growth rings in a darker ginger.", dict(lobes=A3_KNUCKLES, rings=A3_RINGS, shoot=A3_SHOOT)),
@@ -135,10 +135,29 @@ section > div { background: #fff; padding: 1.25rem; }
 .lockup svg { height: 60px; width: auto; }
 .dark { background: #074b3c !important; }
 svg { display: block; width: 100%; height: 100%; }
+.sheets { display: flex; gap: 1.25rem; margin: 0 0 1.25rem; font-size: .9rem; } .sheets a { color: #0b7a5c; }
 </style></head><body><main>
 <h1>engifer roots</h1>
+<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a></nav>
 <p class="intro">Articulation borrowed from a real hand of ginger, added one step at a time: knuckles, nubs, growth rings, the cut end, and a layout taken from the photo. Marks at 128, 32 and 16 pixels; wordmark in Atkinson Hyperlegible Next Bold.</p>
 """ + "".join(rows) + "</main></body></html>\n"
 
+def write_site(number):
+    """Writes variant 'number' (as in the sheet, "5" for "5 · All of it") into the site's public/ folder."""
+    n, (name, _, kw) = next((n, v) for n, v in enumerate(VARIANTS) if v[0].startswith(number + " "))
+    public = os.path.join(HERE, "../")
+    for file, text, ng in (("engifer-logo.svg", g.INK, g.TORCH), ("engifer-logo-on-dark.svg", g.MINT, g.TURMERIC)):
+        svg = lockup(n, "site", text, ng, **kw)
+        open(public + file, "w").write(svg + "\n")
+    # The favicon is cropped close, so the root fills the little space it gets
+    open(public + "engifer.svg", "w").write(mark(n, "fav", **kw).replace('viewBox="0 0 64 64"', 'viewBox="2 2 60 60"') + "\n")
+    width, height = (float(v) for v in svg.split('viewBox="0 0 ')[1].split('"')[0].split())
+    print(f"{name}: sidebar 132x{round(132 * height / width)}, hero 320x{round(320 * height / width)}")
+
+
 if __name__ == "__main__":
-    open(os.path.join(HERE, "roots.html"), "w").write(page)
+    import sys
+    if len(sys.argv) == 3 and sys.argv[1] == "site":
+        write_site(sys.argv[2])  # python roots.py site 5
+    else:
+        open(os.path.join(HERE, "roots.html"), "w").write(page)

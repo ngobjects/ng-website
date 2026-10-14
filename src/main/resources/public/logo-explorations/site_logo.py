@@ -10,7 +10,7 @@ f = importlib.util.module_from_spec(spec); spec.loader.exec_module(f)
 g = f.g
 label = sys.argv[1]
 _, path, axes, tracking = next(face for face in f.FACES if face[0].startswith(label))
-PUB = os.path.join(HERE, "../../src/main/resources/public/")
+PUB = os.path.join(HERE, "../")
 for name, text, ng in (("engifer-logo.svg", g.INK, g.TORCH), ("engifer-logo-on-dark.svg", g.MINT, g.TURMERIC)):
     size, end, words = f.wordmark_svg(path, axes, tracking, text, ng)
     open(PUB + name, "w").write(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {end + 20:.0f} {size:.0f}">'
