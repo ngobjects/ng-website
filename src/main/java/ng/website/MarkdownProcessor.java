@@ -21,7 +21,7 @@ public class MarkdownProcessor {
 		v.put( "ng.groupId", "is.rebbi.ng" );
 		v.put( "ng.release", "0.1.5" );
 		v.put( "vermilingua.release", "1.1.11" );
-		v.put( "java.release", "21" );
+		v.put( "java.release", "25" );
 		return v;
 	}
 

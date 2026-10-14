@@ -17,7 +17,7 @@ engifer is built on WO's ideas, not a clone of it.
 
 * **Java collections and `java.time`**, not Foundation (`NSArray`, `NSTimestamp`, …).
 * **No EOF.** Move to [Cayenne](https://cayenne.apache.org/) or another ORM first.
-* **Java 21+**, a standard Maven project, the classpath instead of `NSBundle`.
+* **Java ${java.release}+**, a standard Maven project, the classpath instead of `NSBundle`.
 * **Few annotations.** APIs are plain typed Java.
 * **`NGRequest` and `NGResponse` are interfaces.** Make responses with `NGResponses`.
 * **Sessions come from the context**: `session()` in a component, `context.session()` elsewhere.
