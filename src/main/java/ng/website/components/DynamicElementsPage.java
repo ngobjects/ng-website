@@ -15,8 +15,8 @@ import ng.appserver.templating.definitions.NGElementAPI;
 import ng.appserver.templating.NGElementManager.DeclaredElement;
 
 /**
- * The reference for the framework's own elements, read from ng itself: the elements its taglib declares
- * (ng/ng/parsley.taglib), and each one's API from its .apiext file. Nothing here lists or describes an element by hand.
+ * The reference for the framework's own elements, read from ng itself: the elements its taglib publishes
+ * (ng/ng/parsley.taglib), each one's API from its .apiext file and its tags from the namespace's tag aliases. Nothing here lists or describes an element by hand.
  */
 
 public class DynamicElementsPage extends NGComponent {
@@ -58,8 +58,8 @@ public class DynamicElementsPage extends NGComponent {
 					.declaredElements()
 					.stream()
 					.filter( e -> FRAMEWORK_NAMESPACE.equals( e.namespace() ) )
-					.map( e -> new Entry( e, NGApplication.application().elementManager().elementAPI( e ).orElse( null ) ) )
-					.sorted( Comparator.comparing( e -> primaryTag( e.element() ).toLowerCase() ) )
+					.map( e -> new Entry( e, e.api(), NGApplication.application().elementManager().tagsFor( e.name() ) ) )
+					.sorted( Comparator.comparing( e -> primaryTag( e ).toLowerCase() ) )
 					.toList();
 		}
 
@@ -69,15 +69,15 @@ public class DynamicElementsPage extends NGComponent {
 	/**
 	 * @return The tag an element is usually written with: its first tag, or its name when it has none
 	 */
-	private static String primaryTag( final DeclaredElement element ) {
-		return element.tags().isEmpty() ? element.name() : element.tags().getFirst();
+	private static String primaryTag( final Entry entry ) {
+		return entry.tags().isEmpty() ? entry.element().name() : entry.tags().getFirst();
 	}
 
 	/**
 	 * @return The element's tags, its name when it has none
 	 */
 	public List<String> currentTags() {
-		return current.element().tags().isEmpty() ? List.of( current.element().name() ) : current.element().tags();
+		return current.tags().isEmpty() ? List.of( current.element().name() ) : current.tags();
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class DynamicElementsPage extends NGComponent {
 	 * @return The element's primary tag as markup, for places where only one is shown
 	 */
 	public String currentPrimaryTagMarkup() {
-		return tagMarkup( primaryTag( current.element() ) );
+		return tagMarkup( primaryTag( current ) );
 	}
 
 	private String tagMarkup( final String tag ) {
@@ -102,7 +102,7 @@ public class DynamicElementsPage extends NGComponent {
 	 * @return The element's primary tag, naming it in the page index
 	 */
 	public String currentIndexTag() {
-		return "wo:" + primaryTag( current.element() );
+		return "wo:" + primaryTag( current );
 	}
 
 	public String currentAnchorID() {
@@ -187,5 +187,5 @@ public class DynamicElementsPage extends NGComponent {
 	/**
 	 * A declared element and its API (null when it has no .apiext file)
 	 */
-	public record Entry( DeclaredElement element, NGElementAPI api ) {}
+	public record Entry( DeclaredElement element, NGElementAPI api, List<String> tags ) {}
 }
