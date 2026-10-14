@@ -12,7 +12,9 @@
 			</div>
 			<figure class="hero-code">
 				<figcaption>Inbox.html</figcaption>
-				<pre class="language-html"><code class="language-html">&lt;h2&gt;Hello &lt;wo:str value="$user.name" /&gt;&lt;/h2&gt;
+				<div class="hero-code-body">
+					<div class="hero-line" aria-hidden="true"></div>
+					<pre class="language-html"><code class="language-html">&lt;h2&gt;Hello &lt;wo:str value="$user.name" /&gt;&lt;/h2&gt;
 
 &lt;wo:if condition="$hasMessages"&gt;
 	&lt;ul&gt;
@@ -25,6 +27,21 @@
 		&lt;/wo:repetition&gt;
 	&lt;/ul&gt;
 &lt;/wo:if&gt;</code></pre>
+				</div>
+				<div class="hero-output" aria-hidden="true">
+					<div class="hero-output-bar"><span class="hero-output-dots"><i></i><i></i><i></i></span><span class="hero-output-url">localhost:1200/inbox</span></div>
+					<div class="hero-output-body">
+						<div class="hero-output-page" data-page="inbox">
+							<h2>Hello <span class="hero-output-name"></span></h2>
+							<ul></ul>
+						</div>
+						<div class="hero-output-page" data-page="message" hidden>
+							<p class="hero-output-back">‹ Inbox</p>
+							<h2 class="hero-output-subject"></h2>
+							<p class="hero-output-text"></p>
+						</div>
+					</div>
+				</div>
 			</figure>
 		</section>
 
@@ -58,4 +75,5 @@
 			</aside>
 		</div>
 	</div>
+	<wo:script filename="hero.js" />
 </wo:WrapperComponent>

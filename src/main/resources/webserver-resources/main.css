@@ -926,6 +926,152 @@ pre code[class*="language-"] {
 	-moz-tab-size: 3;
 }
 
+/* The hero's little show (hero.js): the line being evaluated lights up, and the template renders below */
+
+.hero-code-body {
+	position: relative;
+}
+
+.hero-line {
+	position: absolute;
+	left: 0;
+	right: 0;
+	background: rgba(255, 179, 32, 0.13);
+	box-shadow: inset 3px 0 0 var(--highlight);
+	opacity: 0;
+	transition: top 0.25s ease, opacity 0.25s ease;
+	pointer-events: none;
+}
+
+.hero-line.on {
+	opacity: 1;
+}
+
+.hero-output {
+	margin: 0 0.85rem 0.85rem;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #fbfdfc;
+	color: #121a17;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero-output-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.4rem 0.7rem;
+	background: #e6eeea;
+	font-family: var(--font-code);
+	font-size: 0.7rem;
+	color: #56635c;
+}
+
+.hero-output-dots {
+	display: flex;
+	gap: 0.3rem;
+}
+
+.hero-output-dots i {
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background: #c3d0c9;
+}
+
+.hero-output-url {
+	flex: 1;
+	padding: 0.1rem 0.6rem;
+	border-radius: 4px;
+	background: #fbfdfc;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.hero-output-body {
+	height: 8.25rem;
+	padding: 0.85rem 1.1rem;
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+.hero-output-page[hidden] {
+	display: none;
+}
+
+.hero-output-page:not([hidden]) {
+	animation: hero-page-in 0.3s ease;
+}
+
+.hero-output h2 {
+	font-size: 1.05rem;
+	font-weight: 600;
+	letter-spacing: -0.01em;
+	margin: 0 0 0.45rem;
+	min-height: 1.3em;
+	color: #121a17;
+}
+
+.hero-output ul {
+	margin: 0;
+	padding-left: 1.1rem;
+}
+
+.hero-output li {
+	animation: hero-item-in 0.35s ease;
+}
+
+.hero-output ul.empty::before {
+	content: "No messages. Nothing to repeat.";
+	display: block;
+	margin-left: -1.1rem;
+	color: #7d8a83;
+	font-style: italic;
+	animation: hero-page-in 0.3s ease;
+}
+
+.hero-output-link {
+	color: #c41e4a;
+	text-decoration: underline;
+	text-decoration-color: #ff9ab3;
+	text-underline-offset: 0.15em;
+	border-radius: 3px;
+	transition: background 0.15s ease;
+}
+
+.hero-output-link.pressed {
+	background: rgba(255, 90, 130, 0.18);
+}
+
+.hero-output-back {
+	margin: 0 0 0.35rem;
+	font-size: 0.75rem;
+	color: #c41e4a;
+}
+
+.hero-output-text {
+	margin: 0;
+	color: #56635c;
+}
+
+@keyframes hero-item-in {
+	from { opacity: 0; transform: translateY(-0.25rem); }
+}
+
+@keyframes hero-page-in {
+	from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.hero-line,
+	.hero-output-page,
+	.hero-output li {
+		transition: none;
+		animation: none;
+	}
+}
+
 /* ---------- Start page: content ---------- */
 
 .front-grid {
