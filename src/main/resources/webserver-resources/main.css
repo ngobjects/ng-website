@@ -498,8 +498,56 @@ pre code[class*="language-"] {
 	font-size: 0.875rem;
 }
 
+.site-footer {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.75rem 2rem;
+}
+
+.site-footer p {
+	margin: 0;
+}
+
 .site-footer a {
 	color: inherit;
+}
+
+/* The Góður kóði credit: the company's knot, navy on light, its reversed light loop on dark */
+.site-footer .maker {
+	display: inline-flex;
+	margin-left: auto;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.maker strong {
+	color: var(--ink);
+	font-weight: 600;
+	letter-spacing: -0.01em;
+}
+
+.maker-mark {
+	display: block;
+}
+
+.maker-loop {
+	fill: #1e3a5f;
+}
+
+.maker:hover strong {
+	text-decoration: underline;
+	text-decoration-color: var(--link-decoration);
+	text-underline-offset: 0.2em;
+}
+
+@media (prefers-color-scheme: dark) {
+	.maker-loop {
+		fill: #e3e9f2;
+	}
 }
 
 /* ---------- Contents tree ---------- */
