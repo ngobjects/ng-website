@@ -138,7 +138,7 @@ svg { display: block; width: 100%; height: 100%; }
 .sheets { display: flex; gap: 1.25rem; margin: 0 0 1.25rem; font-size: .9rem; } .sheets a { color: #0b7a5c; }
 </style></head><body><main>
 <h1>engifer roots</h1>
-<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a></nav>
+<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a> <a href="errors.html">4 · Errors</a></nav>
 <p class="intro">Articulation borrowed from a real hand of ginger, added one step at a time: knuckles, nubs, growth rings, the cut end, and a layout taken from the photo. Marks at 128, 32 and 16 pixels; wordmark in Atkinson Hyperlegible Next Bold.</p>
 """ + "".join(rows) + "</main></body></html>\n"
 
