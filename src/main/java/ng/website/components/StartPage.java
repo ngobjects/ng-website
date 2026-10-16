@@ -11,6 +11,8 @@ public class StartPage extends NGComponent {
 
 	public Page currentPage;
 
+	public BlogEntry currentBlogEntry;
+
 	public StartPage( NGContext context ) {
 		super( context );
 	}
@@ -26,9 +28,9 @@ public class StartPage extends NGComponent {
 	}
 
 	/**
-	 * @return The newest blog entry, featured on the page
+	 * @return All blog entries, newest first, listed beside the page's main content
 	 */
-	public BlogEntry latestBlogEntry() {
-		return BlogEntry.allBlogEntries().getFirst();
+	public List<BlogEntry> blogEntries() {
+		return BlogEntry.allBlogEntries();
 	}
 }

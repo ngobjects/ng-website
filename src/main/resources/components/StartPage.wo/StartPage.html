@@ -47,12 +47,35 @@
 
 		<div class="front-grid">
 			<div class="front-main">
-				<section class="featured" aria-labelledby="featured-title">
-					<p class="section-label">Latest from the blog</p>
-					<time><wo:str value="$latestBlogEntry.date" /></time>
-					<h2 id="featured-title"><wo:link href="$latestBlogEntry.url"><wo:str value="$latestBlogEntry.title" /></wo:link></h2>
-					<p class="excerpt"><wo:str value="$latestBlogEntry.excerpt" /></p>
-					<p><wo:link href="$latestBlogEntry.url" class="read-more">Read the post</wo:link></p>
+				<section class="pitch" aria-labelledby="pitch-title">
+					<p class="section-label" id="pitch-title">Why engifer</p>
+					<p class="pitch-lead">Most web frameworks make you translate: state into URLs, clicks into routes, pages into JSON and back. In engifer you write the page, and the framework keeps track of the rest.</p>
+					<ul>
+						<li>
+							<h3>A click is a method call</h3>
+							<p>Bind a link to a Java method. engifer remembers the page it was on, so the method runs with all its state in place. No route, no form parsing, no IDs in hidden fields.</p>
+						</li>
+						<li>
+							<h3>Templates are HTML</h3>
+							<p>Plus a few dynamic tags: <code>&lt;wo:str&gt;</code>, <code>&lt;wo:if&gt;</code>, <code>&lt;wo:repetition&gt;</code>. Bindings like <code>$user.name</code> resolve against your component's plain getters and fields.</p>
+						</li>
+						<li>
+							<h3>Components all the way down</h3>
+							<p>A page is a component. So is a menu, a table or a form row. Each is a template and a class; they nest, and take bindings like HTML tags take attributes.</p>
+						</li>
+						<li>
+							<h3>Update part of a page</h3>
+							<p>Wrap something in an update container and re-render only that, from the same component action. No front-end build.</p>
+						</li>
+						<li>
+							<h3>Mistakes show up where they happen</h3>
+							<p>Misspell a key and the error renders in place, in the page, with a suggestion: "Did you mean 'title'?" Templates reload on every request.</p>
+						</li>
+						<li>
+							<h3>Plain Java</h3>
+							<p>Java 25 and a standard Maven project, with few annotations. Apps deploy beside existing WebObjects apps, under wotaskd and JavaMonitor.</p>
+						</li>
+					</ul>
 				</section>
 
 				<section class="highlights" aria-labelledby="highlights-title">
@@ -68,11 +91,22 @@
 				</section>
 			</div>
 
-			<aside class="status">
-				<h2>Status</h2>
-				<p>engifer is under active development, and it's already running production sites. Interim releases (the 0.1.x series) are on Maven Central, and Java 25 or later is required.</p>
-				<p>We're in the "make the API nice" phase: the framework works, and what we learn from using it shapes how it ends up. So expect APIs to change between releases until 1.0, and these docs to grow. Ideas and feedback are very welcome.</p>
-			</aside>
+			<div class="front-side">
+				<aside class="status">
+					<h2>Status</h2>
+					<p>engifer is under active development, and it's already running production sites. Interim releases (the 0.1.x series) are on Maven Central, and Java 25 or later is required.</p>
+					<p>We're in the "make the API nice" phase: the framework works, and what we learn from using it shapes how it ends up. So expect APIs to change between releases until 1.0, and these docs to grow. Ideas and feedback are very welcome.</p>
+				</aside>
+
+				<section class="blog-list" aria-labelledby="blog-title">
+					<h2 id="blog-title">From the blog</h2>
+					<ul>
+						<wo:repetition list="$blogEntries" item="$currentBlogEntry">
+							<li><time><wo:str value="$currentBlogEntry.date" /></time> <wo:link href="$currentBlogEntry.url"><wo:str value="$currentBlogEntry.title" /></wo:link></li>
+						</wo:repetition>
+					</ul>
+				</section>
+			</div>
 		</div>
 	</div>
 	<wo:script filename="hero.js" />

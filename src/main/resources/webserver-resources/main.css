@@ -1129,46 +1129,53 @@ pre code[class*="language-"] {
 	padding-top: 3rem;
 }
 
+/* Labels, not links: muted like the contents tree's section headings, so they don't look clickable */
 .section-label {
 	font-size: 0.9rem;
 	font-weight: 600;
-	color: var(--accent);
+	color: var(--muted);
 	margin: 0 0 0.9rem;
 }
 
-.featured {
+/* Why engifer: a short lead, then the ideas in two columns */
+.pitch {
+	max-width: calc(var(--measure) + 8rem);
+}
+
+.pitch-lead {
+	font-size: 1.2rem;
+	line-height: 1.6;
+	letter-spacing: -0.01em;
+	color: var(--ink);
 	max-width: var(--measure);
+	margin: 0 0 1.75rem;
 }
 
-.featured time {
-	display: block;
-	font-size: 0.875rem;
-	color: var(--muted);
+.pitch ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+	gap: 1.6rem 2.5rem;
 }
 
-.featured h2 {
-	font-size: clamp(1.6rem, 2.4vw, 2.1rem);
-	letter-spacing: -0.03em;
-	margin: 0.2rem 0 0.8rem;
-}
-
-.featured h2 a {
-	color: inherit;
-	text-decoration: none;
-}
-
-.featured h2 a:hover {
-	text-decoration: underline;
-	text-decoration-color: var(--link-decoration);
-}
-
-.featured .excerpt {
-	font-size: 1.1rem;
-	line-height: 1.65;
-}
-
-.read-more {
+.pitch h3 {
+	font-size: 1.02rem;
 	font-weight: 600;
+	letter-spacing: -0.01em;
+	margin: 0 0 0.35rem;
+}
+
+.pitch li p {
+	margin: 0;
+	color: var(--muted);
+	font-size: 0.95rem;
+	line-height: 1.6;
+}
+
+.pitch code {
+	font-size: 0.85em;
 }
 
 .highlights {
@@ -1198,6 +1205,41 @@ pre code[class*="language-"] {
 	margin: 0.3rem 0 0;
 	color: var(--muted);
 	font-size: 0.95rem;
+}
+
+/* The side column: status, then every blog post */
+.front-side {
+	display: flex;
+	flex-direction: column;
+	gap: 2.25rem;
+	align-self: start;
+}
+
+.blog-list h2 {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--muted);
+	margin: 0 0 0.6rem;
+	padding-left: 1.4rem;
+}
+
+.blog-list ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 1.4rem;
+	font-size: 0.93rem;
+}
+
+.blog-list li {
+	padding-block: 0.55rem;
+	border-top: 1px solid var(--rule);
+}
+
+.blog-list time {
+	display: block;
+	font-size: 0.8rem;
+	color: var(--muted);
+	font-variant-numeric: tabular-nums;
 }
 
 /* A plain panel, not a callout: status is information, not a warning */
