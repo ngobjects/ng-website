@@ -1,5 +1,5 @@
 | 💡 **Fun fact**\
-KeyValueCoding comes from Apple's `NSKeyValueCoding`. `NGKeyValueCoding` behaves the same, so if you know that, you know this.
+KeyValueCoding comes from Apple's `NSKeyValueCoding`. `NGKeyValueCoding` behaves almost the same, so if you know that, you know this. The differences: there's no `KeyValueCodingProtectedAccessor`, so only public members are read, and fields are tried in a different order (below).
 
 # KeyValueCoding
 
@@ -16,9 +16,11 @@ First match wins. Public members only.
 5. `_name()`
 6. `_isName()`
 7. field `name`
-8. field `_name`
-9. field `_isName`
-10. field `isName`
+8. field `isName`
+9. field `_name`
+10. field `_isName`
+
+Fields follow the same pattern as methods: the plain name before the underscored one, and `name` before `isName`. WebObjects tries the underscored fields first (`_name`, `_isName`, `name`, `isName`), so the order only differs for a class with more than one public field for the same key.
 
 No match throws `UnknownKeyException`, with a suggestion: *"Did you mean 'name'?"*. In a template, it shows as an error box in the page.
 
