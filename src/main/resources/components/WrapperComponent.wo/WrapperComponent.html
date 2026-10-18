@@ -21,7 +21,7 @@
 		<meta name="twitter:card" content="summary_large_image" />
 		<wo:if condition="$structuredData"><script type="application/ld+json"><wo:str value="$structuredData" escapeHTML="$false" /></script></wo:if>
 		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
-		<link rel="icon" type="image/svg+xml" href="/engifer.svg" />
+		<link rel="icon" type="image/svg+xml" href="<wo:resourceURL filename="engifer.svg" />" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="theme-color" content="#f5f8f6" media="(prefers-color-scheme: light)" />
@@ -37,8 +37,8 @@
 			<aside class="sidebar">
 				<a href="/" class="brand">
 					<picture>
-						<source srcset="/engifer-logo-on-dark.svg" media="(prefers-color-scheme: dark)" />
-						<img src="/engifer-logo.svg" alt="engifer" width="132" height="36" />
+						<source srcset="<wo:resourceURL filename="engifer-logo-on-dark.svg" />" media="(prefers-color-scheme: dark)" />
+						<wo:img filename="engifer-logo.svg" alt="engifer" width="132" height="36" />
 					</picture>
 					<span class="badge">alpha</span>
 				</a>
@@ -68,7 +68,7 @@
 				</nav>
 				<div class="powered-slot">
 					<a href="https://www.engifer.com/" class="powered" title="Powered by engifer, an homage to the 88×31 badges of the WebObjects era">
-						<img src="/engifer.svg" alt="" width="20" height="20" />
+						<wo:img filename="engifer.svg" alt="" width="20" height="20" />
 						<span class="powered-text"><span class="k">Powered by</span><span class="v">e<span class="ng">ng</span>ifer</span></span>
 					</a>
 				</div>

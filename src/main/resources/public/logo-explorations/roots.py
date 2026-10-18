@@ -165,9 +165,9 @@ def breezy(svg, shoot):
 
 
 def write_site(number):
-    """Writes variant 'number' (as in the sheet, "5" for "5 · All of it") into the site's public/ folder."""
+    """Writes variant 'number' (as in the sheet, "5" for "5 · All of it") into the site's webserver-resources/ folder."""
     n, (name, _, kw) = next((n, v) for n, v in enumerate(VARIANTS) if v[0].startswith(number + " "))
-    public = os.path.join(HERE, "../")
+    public = os.path.join(HERE, "../../webserver-resources/")
     for file, text, ng in (("engifer-logo.svg", g.INK, g.TORCH), ("engifer-logo-on-dark.svg", g.MINT, g.TURMERIC)):
         svg = lockup(n, "site", text, ng, **kw)
         open(public + file, "w").write(svg + "\n")

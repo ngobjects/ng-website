@@ -172,6 +172,12 @@ The name after `wo:`: a short name like `str`, or a class name like `ProductList
 
 A component's HTML, with dynamic tags: `components/Foo.html` or `components/Foo.wo/Foo.html`.
 
+### Truthy, falsy
+
+How a binding tested as a condition is read, as in `<wo:if condition="$items">`. Falsy: `null`, `false` and numbers equal to zero. Everything else is truthy, including empty strings, empty collections and the strings `"false"`, `"no"` and `"0"`. `0.5` and `NaN` are truthy. `NGAssociationUtils.isTruthy()`.
+
+Coming from WebObjects: WO also treats empty strings and collections as true. But it reads the strings `"no"`, `"false"`, `"nil"`, `"null"` and `"0"` as false, and truncates numbers, so `0.5` is false. Such conditions behave differently after porting.
+
 ### WOA
 
 A built app bundle (`MyApp.woa`) with a launch script, in WebObjects' format. Built by vermilingua.
