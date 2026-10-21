@@ -10,7 +10,6 @@ import ng.appserver.http.NGRequest;
 import ng.appserver.http.NGResponse;
 import ng.appserver.http.NGResponses;
 import ng.appserver.privates.NGParsedURI;
-import ng.appserver.resources.StandardNamespace;
 import ng.plugins.Routes;
 import ng.website.components.MarkdownPage;
 import ng.website.components.PetsPage;
@@ -34,19 +33,8 @@ public class Application extends NGApplication {
 				.map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) )
 				.map( "/robots.txt", () -> withContentType( NGResponses.ok( Seo.robots() ), "text/plain; charset=utf-8" ) )
 				.map( "/sitemap.xml", () -> withContentType( NGResponses.ok( Seo.sitemap() ), "application/xml; charset=utf-8" ) )
-				.map( "/site.webmanifest", () -> withContentType( NGResponses.ok( Seo.webManifest() ), "application/manifest+json" ) )
-				.map( "/favicon.ico", this::favicon );
+				.map( "/site.webmanifest", () -> withContentType( NGResponses.ok( Seo.webManifest() ), "application/manifest+json" ) );
 		//				.map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
-	}
-
-	/**
-	 * The favicon from public/. Served by a route because the framework can't yet tell an .ico file's content type
-	 */
-	private NGActionResults favicon() {
-		return resourceManager()
-				.obtainPublicResource( StandardNamespace.App.identifier(), "favicon.ico" )
-				.map( resource -> withContentType( NGResponses.ok( resource.bytes() ), "image/x-icon" ) )
-				.orElseGet( () -> NGResponses.of( 404, "Not found" ) );
 	}
 
 	private static NGResponse withContentType( final NGResponse response, final String contentType ) {
