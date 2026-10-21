@@ -17,7 +17,7 @@ SITE_FONTS = os.path.join(HERE, "../../webserver-resources/fonts")
 INTER = f"{SITE_FONTS}/inter/inter-600-normal-latin.woff2"
 
 # (label, file, variable axis settings, tracking in em)
-NAV = '<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a> <a href="errors.html">4 · Errors</a></nav>'
+NAV = '<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a> <a href="errors.html">4 · Errors</a> <a href="wonder-slim.html">5 · wonder-slim</a> <a href="lemongrass.html">6 · Lemongrass</a></nav>'
 NAV_CSS = ".sheets { display: flex; gap: 1.25rem; margin: 0 0 1.25rem; font-size: .9rem; } .sheets a { color: #0b7a5c; }"
 
 FACES = [

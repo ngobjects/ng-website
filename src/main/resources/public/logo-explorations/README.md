@@ -1,6 +1,6 @@
 # Logo explorations
 
-Work towards a calmer engifer logo. It lives in the site's public folder so it can be shared: the site serves it at `/logo-explorations/index.html`. The logo the site uses is one level up, in `public/`, and the published logo set is in `logo/` at the root of the repository.
+Work towards a calmer engifer logo. It lives in the site's public folder so it can be shared: the site serves it at `/logo-explorations/index.html`. The logo the site uses is in `webserver-resources/`, and the published logo set is in `logo/` at the root of the repository.
 
 | File | What it is |
 | --- | --- |
@@ -10,7 +10,10 @@ Work towards a calmer engifer logo. It lives in the site's public folder so it c
 | `generate.py` | Draws the marks and writes the SVGs that `index.html` shows. |
 | `typefaces.py` | Writes `typefaces.html`. |
 | `roots.py` | Writes `roots.html`. `python roots.py site 5` writes variant 5 into the site's logo files. |
-| `site_logo.py` | Writes the A3 mark with one of the typefaces into the site's `public/` folder. Prints the image heights for the sidebar and hero templates. |
+| `errors.html` | Ginger in trouble: snapped, wilted, curled and shrivelled roots, and inline error messages built on them. Written by `errors.py`. |
+| `wonder-slim.html` | First logo ideas for wonder-slim: marks about the word "slim". Written by `wonder_slim.py`. |
+| `lemongrass.html` | wonder-slim as lemongrass, ginger's partner in the pot, with states for errors and the error box, warnings and expired page built on them. Written by `wonder_slim.py`, which needs nothing beyond Python. |
+| `site_logo.py` | Writes the A3 mark with one of the typefaces into the site's `webserver-resources/` folder. Prints the image heights for the sidebar and hero templates. |
 | `fonts/` | The typefaces compared in `typefaces.html`, each with its SIL Open Font License. The original Atkinson Hyperlegible and Inter are taken from the site's own fonts. |
 
 The direction we're taking is the articulated root from `roots.html` (variant 4 or 5), with an Atkinson Hyperlegible Next Bold wordmark and the "ng" coloured. To put a variant on the site, then refresh the project in Eclipse:

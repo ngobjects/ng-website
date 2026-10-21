@@ -168,7 +168,7 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 @media (max-width: 40rem) {{ .expired {{ grid-template-columns: 1fr; }} }}
 </style></head><body><main>
 <h1>engifer errors</h1>
-<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a> <a href="errors.html">4 · Errors</a></nav>
+<nav class="sheets"><a href="index.html">1 · Directions</a> <a href="typefaces.html">2 · Typefaces</a> <a href="roots.html">3 · Roots</a> <a href="errors.html">4 · Errors</a> <a href="wonder-slim.html">5 · wonder-slim</a> <a href="lemongrass.html">6 · Lemongrass</a></nav>
 <p class="intro">What does erroneous ginger look like? Four ways a root can be unwell, each matched to a kind of problem, then inline messages built on them, to replace the dog face that ng shows today. A concept only: nothing here is in the framework.</p>
 
 <h2>Ginger in trouble</h2>
