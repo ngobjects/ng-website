@@ -13,7 +13,6 @@ import ng.appserver.NGActionResults;
 import ng.appserver.NGContext;
 import ng.appserver.http.NGMultipartRequest;
 import ng.appserver.http.NGResponses;
-import ng.appserver.http.NGUploadedFile;
 import ng.appserver.templating.NGComponent;
 
 public class UploadTest extends NGComponent {
@@ -48,7 +47,7 @@ public class UploadTest extends NGComponent {
 
 		files.add( new OurUploadedFile( filename, "image/jpeg", data, data.length ) );
 
-		for( NGUploadedFile file : uploaded() ) {
+		for( NGMultipartRequest.Part file : uploaded() ) {
 			System.out.println( file.filename() );
 		}
 
@@ -60,7 +59,7 @@ public class UploadTest extends NGComponent {
 	/**
 	 * @return Every file uploaded with the current request, whatever field it came with
 	 */
-	public List<NGUploadedFile> uploaded() {
+	public List<NGMultipartRequest.Part> uploaded() {
 		if( context().request() instanceof NGMultipartRequest request ) {
 			return request.uploadedFiles().values().stream().flatMap( List::stream ).toList();
 		}
@@ -84,7 +83,7 @@ public class UploadTest extends NGComponent {
 		System.out.println( "- Total number of files: " + files.size() );
 		System.out.println( "- In request: " + uploaded().size() );
 
-		for( NGUploadedFile uf : uploaded() ) {
+		for( NGMultipartRequest.Part uf : uploaded() ) {
 			try {
 				files.add( new OurUploadedFile( uf.filename(), uf.contentType(), uf.stream().readAllBytes(), uf.length() ) );
 				System.out.println( "Added: " + uf.filename() );
