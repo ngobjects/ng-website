@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -12,8 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import ng.appserver.NGActionResults;
 import ng.appserver.NGContext;
+import ng.appserver.http.NGMultipartRequest;
 import ng.appserver.http.NGResponses;
-import ng.appserver.http.NGStandardRequest.UploadedFile;
+import ng.appserver.http.NGUploadedFile;
 import ng.appserver.templating.NGComponent;
 
 public class UploadTest extends NGComponent {
@@ -48,8 +48,8 @@ public class UploadTest extends NGComponent {
 
 		files.add( new OurUploadedFile( filename, "image/jpeg", data, data.length ) );
 
-		for( Entry<String, UploadedFile> entry : context().request()._uploadedFiles().entrySet() ) {
-			System.out.println( entry.getValue().name() );
+		for( NGUploadedFile file : uploaded() ) {
+			System.out.println( file.filename() );
 		}
 
 		System.out.println( "=====================================" );
@@ -57,8 +57,15 @@ public class UploadTest extends NGComponent {
 		return null;
 	}
 
-	public List<UploadedFile> uploaded() {
-		return new ArrayList<>( context().request()._uploadedFiles().values() );
+	/**
+	 * @return Every file uploaded with the current request, whatever field it came with
+	 */
+	public List<NGUploadedFile> uploaded() {
+		if( context().request() instanceof NGMultipartRequest request ) {
+			return request.uploadedFiles().values().stream().flatMap( List::stream ).toList();
+		}
+
+		return List.of();
 	}
 
 	private AtomicInteger i = new AtomicInteger();
@@ -75,13 +82,12 @@ public class UploadTest extends NGComponent {
 
 		System.out.println( "- Invocation: " + i.incrementAndGet() );
 		System.out.println( "- Total number of files: " + files.size() );
-		System.out.println( "- In request: " + context().request()._uploadedFiles().size() );
+		System.out.println( "- In request: " + uploaded().size() );
 
-		for( Entry<String, UploadedFile> entry : context().request()._uploadedFiles().entrySet() ) {
-			final UploadedFile uf = entry.getValue();
+		for( NGUploadedFile uf : uploaded() ) {
 			try {
-				files.add( new OurUploadedFile( uf.name(), uf.contentType(), uf.stream().readAllBytes(), uf.length() ) );
-				System.out.println( "Added: " + uf.name() );
+				files.add( new OurUploadedFile( uf.filename(), uf.contentType(), uf.stream().readAllBytes(), uf.length() ) );
+				System.out.println( "Added: " + uf.filename() );
 			}
 			catch( IOException e ) {
 				e.printStackTrace();
