@@ -34,7 +34,6 @@ public class Application extends NGApplication {
 				.map( "/robots.txt", () -> withContentType( NGResponses.ok( Seo.robots() ), "text/plain; charset=utf-8" ) )
 				.map( "/sitemap.xml", () -> withContentType( NGResponses.ok( Seo.sitemap() ), "application/xml; charset=utf-8" ) )
 				.map( "/site.webmanifest", () -> withContentType( NGResponses.ok( Seo.webManifest() ), "application/manifest+json" ) );
-		//				.map( "/upload", request -> pageWithName( UploadTest.class, request.context() ) );
 	}
 
 	private static NGResponse withContentType( final NGResponse response, final String contentType ) {
