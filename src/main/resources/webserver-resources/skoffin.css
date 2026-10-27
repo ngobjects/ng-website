@@ -1,0 +1,122 @@
+/*
+ * The Skoffín look, layered over main.css: the cat-fox of Icelandic folklore. Dark fur with a fox's rust in it,
+ * eyes that glow, and an Icelandic night with northern lights for the start page hero. Glow marks the primary
+ * action, fox rust marks links and the current place. Loaded only when a visitor picks Skoffín (see Theme).
+ */
+
+:root {
+	--paper: #fbf8f2;
+	--surface: #ffffff;
+	--ink: #1d1b22;
+	--muted: #5f5a63;
+	--rule: #e8dfd0;
+	--code-bg: #f3ece0;
+
+	--band: #1d1b22;
+	--band-ink: #f6ead8;
+	--band-muted: #cbbba6;
+	--band-rule: rgba(246, 234, 216, 0.16);
+	--band-surface: #141218;
+
+	--torch: #c8552b;
+	--highlight: #ffbe3b;
+	--accent: #b5441f;
+	--link: #b5441f;
+	--link-decoration: #e9a27f;
+	--callout: #fbf0dc;
+	--callout-border: #ffbe3b;
+
+	--tok-tag: #b5441f;
+	--tok-attr: #7a4bb0;
+	--tok-string: #4f7a3a;
+	--tok-keyword: #2b5bb8;
+	--tok-comment: #8a8178;
+	--tok-punct: #6b6470;
+
+	--font-text: "Figtree", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+	--font-display: "Fraunces", Georgia, serif;
+	--font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+	--card-shadow: 0 1px 2px rgba(29, 27, 34, 0.06), 0 4px 16px rgba(29, 27, 34, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--paper: #141218;
+		--surface: #1c1920;
+		--ink: #f1e7da;
+		--muted: #b3a89a;
+		--rule: #2d2833;
+		--code-bg: #221e27;
+
+		--band-surface: #0f0d12;
+
+		--accent: #ff9a6b;
+		--link: #ff9a6b;
+		--link-decoration: rgba(255, 154, 107, 0.5);
+		--callout: #2a2114;
+
+		--tok-tag: #ff9a6b;
+		--tok-attr: #c9a8ff;
+		--tok-string: #a8d58a;
+		--tok-keyword: #8cb8ff;
+		--tok-comment: #8a8178;
+		--tok-punct: #b3a89a;
+	}
+}
+
+/* Fraunces with its soft corners turned all the way up: a storybook serif */
+h1, h2, h3, h4, h5, h6,
+.brand-word,
+.hero-brand .wordmark,
+.powered-text .v {
+	font-variation-settings: "SOFT" 100, "opsz" 144;
+	letter-spacing: -0.01em;
+}
+
+.brand-word,
+.hero-brand .wordmark {
+	letter-spacing: -0.02em;
+}
+
+.band {
+	/* An Icelandic winter night, with the northern lights */
+	background-image:
+		radial-gradient(ellipse 70% 60% at 75% 0%, rgba(95, 211, 160, 0.22), transparent 70%),
+		radial-gradient(ellipse 45% 50% at 100% 25%, rgba(150, 110, 220, 0.2), transparent 70%),
+		linear-gradient(#17151c, #1d1b22 60%, #241f27);
+
+	--tok-tag: #ff9a6b;
+	--tok-attr: #ffbe3b;
+	--tok-string: #b8e09c;
+	--tok-keyword: #9fd0ff;
+	--tok-comment: #9a8f84;
+	--tok-punct: #cbbba6;
+}
+
+/* The glowing eyes, a little bigger */
+.hero-brand img {
+	width: 7.5rem;
+	filter: drop-shadow(0 0 18px rgba(255, 190, 59, 0.18));
+}
+
+.button {
+	color: #1d1b22;
+}
+
+.hero-line {
+	background: rgba(255, 190, 59, 0.13);
+}
+
+.hero-output-link,
+.hero-output-back {
+	color: #b5441f;
+}
+
+.hero-output-link {
+	text-decoration-color: #e9a27f;
+}
+
+.hero-output-link.pressed {
+	background: rgba(200, 85, 43, 0.18);
+}

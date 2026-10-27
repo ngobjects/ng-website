@@ -1604,3 +1604,7 @@ pre code[class*="language-"] {
 	font-size: 0.85rem;
 	color: var(--muted);
 }
+
+.theme-switch span + span::before {
+	content: " · ";
+}

@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skoffín</title>
+<meta name="description" content="Skoffín: a brand concept for a component-based Java web framework, after the Icelandic cat-fox of folklore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,0..100&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root {
+	--night: #1d1b22;
+	--fox: #c8552b;
+	--ember: #8f3517;
+	--cream: #f6ead8;
+	--amber: #ffbe3b;
+	--moss: #5a7550;
+	--silver: #aab3bd;
+	--snow: #fbf8f2;
+	--line: #e8dfd0;
+	--muted: #5f5a63;
+	--stare: #c23a22;
+	--warn: #946000;
+}
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0;
+	padding: 2rem 1rem 4rem;
+	background: var(--snow);
+	color: var(--night);
+	font: 16px/1.55 "Figtree", system-ui, sans-serif;
+}
+
+main { max-width: 1100px; margin: 0 auto; }
+
+h1, h2, h3, .word { font-family: "Fraunces", Georgia, serif; font-variation-settings: "SOFT" 100, "opsz" 144; font-weight: 650; }
+h2 { font-size: 1.5rem; margin: 3rem 0 .25rem; letter-spacing: -.01em; }
+h3 { font-size: 1.1rem; margin: 0; }
+
+.intro, .note { color: var(--muted); max-width: 68ch; margin: 0 0 1.25rem; }
+.sheets { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 0 0 1.5rem; font-size: .9rem; }
+a { color: var(--ember); }
+
+svg.mark { display: block; width: 100%; height: 100%; overflow: visible; }
+code { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
+
+/* The hero: an Icelandic winter night, with the northern lights */
+
+.hero {
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	gap: clamp(1.5rem, 4vw, 3.5rem);
+	padding: clamp(2rem, 5vw, 4rem);
+	border-radius: 18px;
+	background:
+		radial-gradient(ellipse 70% 55% at 70% 0%, rgba(95, 211, 160, .28), transparent 70%),
+		radial-gradient(ellipse 50% 45% at 100% 20%, rgba(150, 110, 220, .25), transparent 70%),
+		linear-gradient(#17151c, #1d1b22 60%, #241f27);
+	color: var(--cream);
+}
+
+.hero .stars { position: absolute; inset: 0; pointer-events: none; }
+.hero .stars i { position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: .55; }
+.hero-head { flex: none; width: clamp(160px, 26vw, 300px); position: relative; }
+.hero-head::after { content: ""; position: absolute; inset: 22% 18% 30%; background: radial-gradient(closest-side, rgba(242, 179, 61, .22), transparent); z-index: -1; }
+.hero-text { position: relative; display: flex; flex-direction: column; gap: .9rem; }
+.hero .word { margin: 0; font-size: clamp(64px, 11vw, 136px); line-height: .9; letter-spacing: -.02em; color: var(--cream); }
+.hero .tagline { margin: 0; font-size: clamp(18px, 2vw, 24px); color: #e3d6c4; max-width: 28ch; text-wrap: balance; }
+.hero .lore { margin: 0; font-size: 14px; color: #b9ab98; font-style: italic; }
+@media (max-width: 700px) { .hero { flex-direction: column; text-align: center; } .hero-text { align-items: center; } }
+
+/* The acute on the í sits a little close to the f's in Fraunces; nudge it */
+.ki { margin-left: .01em; }
+
+.story { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.story div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.story p { margin: .3rem 0 0; color: var(--muted); font-size: .95rem; }
+
+/* Tiles */
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.tile { background: #fff; padding: 1.25rem; }
+.tile .big { width: 128px; height: 128px; margin: 0 auto .75rem; }
+.tile .small { display: flex; gap: .75rem; align-items: end; justify-content: center; margin-bottom: .9rem; }
+.tile p { color: var(--muted); font-size: .88rem; margin: .25rem 0 0; }
+.dark .tile { background: var(--night); color: var(--cream); }
+.dark .tile p { color: #b9ab98; }
+.dark .tile .big { width: 72px; height: 72px; }
+
+/* Lockups */
+
+.lockups { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+.lockup { display: flex; align-items: center; gap: .8rem; padding: 1.4rem 1.5rem; border-radius: 12px; background: #fff; border: 1px solid var(--line); }
+.lockup .m { flex: none; width: 64px; height: 64px; }
+.lockup .word { font-size: 50px; line-height: 1; letter-spacing: -.02em; }
+.lockup.on-dark { background: var(--night); border-color: var(--night); color: var(--cream); }
+.lockup.fox { background: var(--fox); border-color: var(--fox); color: var(--snow); }
+
+.tailword { display: inline-flex; align-items: baseline; }
+.tailword svg { width: .86em; height: .86em; margin-right: -.1em; transform: translateY(.1em); }
+
+.badge { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 10px 0 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--snow); text-decoration: none; color: var(--night); line-height: 1; }
+.badge .bm { width: 24px; height: 24px; }
+.badge .k { display: block; font: 7.5px/1 "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.badge .v { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100; font-weight: 650; font-size: 13px; }
+
+/* Demos */
+
+.demo { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+.demo .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .75rem; }
+.fake h2 { margin: 0 0 .5rem; font-size: 1.4rem; }
+
+/* The inline message. In a real app it lands in pages with unknown CSS, so it would carry its styles inline and reset what it inherits */
+.ngerr { display: inline-flex; align-items: flex-start; gap: .65rem; max-width: 36rem; vertical-align: middle; margin: .2rem 0;
+	padding: .55rem .8rem .6rem .6rem; border-radius: 8px; background: var(--tint); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+	box-shadow: inset 3px 0 0 var(--accent); font: 400 13px/1.45 "Figtree", system-ui, sans-serif; color: var(--night); text-align: left; letter-spacing: 0; }
+.ngerr-mark { flex: none; width: 34px; height: 34px; }
+.ngerr-kind { font-weight: 700; color: var(--accent); }
+.ngerr-el { font-size: 12px; font-weight: 600; }
+.ngerr-msg { display: block; color: #3b3640; }
+.ngerr-msg b { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 12px; }
+
+.ngchip { display: inline-flex; align-items: center; gap: .3rem; padding: .05rem .5rem .05rem .2rem; border-radius: 999px; vertical-align: middle;
+	background: var(--tint); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); font: 600 11px/1.6 "Figtree", sans-serif; color: var(--accent); }
+.ngchip-mark { width: 18px; height: 18px; }
+.ngchip code { font-size: 11px; }
+
+.error { --accent: var(--stare); --tint: #fdece7; }
+.warning { --accent: var(--warn); --tint: #fff5e0; }
+.fine { --accent: #3f5a37; --tint: #edf3e9; }
+
+.expired { display: grid; grid-template-columns: 170px 1fr; gap: 2rem; align-items: center; background: #eef0f4; border-color: #d6dbe4; }
+.expired .big { width: 170px; height: 170px; }
+.expired h3 { font-size: 1.5rem; margin: 0 0 .4rem; }
+.expired p { color: #4d5566; margin: 0 0 1rem; max-width: 46ch; }
+@media (max-width: 40rem) { .expired { grid-template-columns: 1fr; } }
+
+.silver-button { display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1.2rem; border-radius: 999px; border: 1px solid #8d97a3;
+	background: linear-gradient(#e9edf1, #b9c1ca); color: var(--night); font-weight: 700; text-decoration: none; box-shadow: inset 0 1px 0 #fff, 0 1px 2px rgba(0, 0, 0, .15); }
+
+/* Colour and type */
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: .75rem; }
+.swatch div { height: 64px; border-radius: 10px; border: 1px solid rgba(29, 27, 34, .08); }
+.swatch strong { display: block; font-size: .85rem; margin-top: .4rem; }
+.swatch code { font-size: .78rem; color: var(--muted); }
+
+.type { display: grid; gap: .6rem; }
+.type div { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; }
+.type span:last-child { font-size: .85rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true"><defs><symbol id="h-content" viewBox="0 0 64 64"><g transform="rotate(0 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C16 7 24 13 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.2 13.5 12.6 9.5 C17 12.4 21 15.4 24.4 18.6 Z" fill="#8f3517" /></g><g transform="translate(64 0) scale(-1 1)"><g transform="rotate(0 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C10.5 4.6 13 6.3 15 7.9 L14.2 11.6 L18.6 10.6 C22.6 13.4 26.6 16.2 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.4 15 13.2 13 L16.4 12.4 C19 14.2 21.8 16.4 24.4 18.6 Z" fill="#8f3517" /></g></g><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M12.2 30 L5 31 L10 35.5 L3.5 40.5 L11 42.5 C12.6 47.4 15.6 51.4 19.6 54.4 C18.4 46 16 37.6 12.2 30 Z" fill="#c8552b" /><path d="M51.8 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51.4 47.4 48.4 51.4 44.4 54.4 C45.6 46 48 37.6 51.8 30 Z" fill="#c8552b" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="none" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M26 18 L28.5 11 L31 16.4 L34 9.5 L36 16.6 L38.5 12.5 L39 18.4 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M23.5 44 C26 41 38 41 40.5 44 C39.6 50.4 35.4 53.6 32 53.6 C28.6 53.6 24.4 50.4 23.5 44 Z" fill="#463c4a" /><g fill="none" stroke="#c8552b" stroke-width="2.4" stroke-linecap="round"><path d="M16.5 29.5 L27.5 33" /><path d="M47.5 29.5 L36.5 33" /></g><circle cx="24" cy="38.2" r="6" fill="#ffbe3b" fill-opacity="0.18" /><path d="M18.4 34.4 L29 36.4 C28.6 40 25.8 41.4 23.4 41.2 C20.4 40.9 18.5 38.2 18.4 34.4 Z" fill="#ffbe3b" /><ellipse cx="24" cy="38.400000000000006" rx="0.9" ry="2.5" fill="#120d14" /><circle cx="40" cy="38.2" r="6" fill="#ffbe3b" fill-opacity="0.18" /><path d="M45.6 34.4 L35 36.4 C35.4 40 38.2 41.4 40.6 41.2 C43.6 40.9 45.5 38.2 45.6 34.4 Z" fill="#ffbe3b" /><ellipse cx="40" cy="38.400000000000006" rx="0.9" ry="2.5" fill="#120d14" /><path d="M30.2 42.4 C31.2 42 32.8 42 33.8 42.4 C33.4 43.6 32.7 44.4 32 44.8 C31.3 44.4 30.6 43.6 30.2 42.4 Z" fill="#120d14" /><path d="M23.5 46 C27 49.6 37 49.6 40.5 46" fill="none" stroke="#120d14" stroke-width="1.2" stroke-linecap="round" /><path d="M27.299999999999997 48.2 L28.4 51.0 L29.5 48.2 Z" fill="#f6ead8" /><path d="M34.5 48.2 L35.6 51.0 L36.7 48.2 Z" fill="#f6ead8" /><g fill="none" stroke="#f6ead8" stroke-width=".7" stroke-linecap="round" stroke-opacity=".55"><path d="M24 45.5 C18 44.4 11 45 3 48.6" /><path d="M24.4 47.6 C19 48.4 13 50.6 7 55" /><path d="M40 45.5 C46 44.4 53 45 61 48.6" /><path d="M39.6 47.6 C45 48.4 51 50.6 57 55" /></g></symbol><symbol id="h-delighted" viewBox="0 0 64 64"><g transform="rotate(-4 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C16 7 24 13 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.2 13.5 12.6 9.5 C17 12.4 21 15.4 24.4 18.6 Z" fill="#8f3517" /></g><g transform="translate(64 0) scale(-1 1)"><g transform="rotate(-4 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C10.5 4.6 13 6.3 15 7.9 L14.2 11.6 L18.6 10.6 C22.6 13.4 26.6 16.2 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.4 15 13.2 13 L16.4 12.4 C19 14.2 21.8 16.4 24.4 18.6 Z" fill="#8f3517" /></g></g><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M12.2 30 L5 31 L10 35.5 L3.5 40.5 L11 42.5 C12.6 47.4 15.6 51.4 19.6 54.4 C18.4 46 16 37.6 12.2 30 Z" fill="#c8552b" /><path d="M51.8 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51.4 47.4 48.4 51.4 44.4 54.4 C45.6 46 48 37.6 51.8 30 Z" fill="#c8552b" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="none" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M26 18 L28.5 11 L31 16.4 L34 9.5 L36 16.6 L38.5 12.5 L39 18.4 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M23.5 44 C26 41 38 41 40.5 44 C39.6 50.4 35.4 53.6 32 53.6 C28.6 53.6 24.4 50.4 23.5 44 Z" fill="#463c4a" /><g fill="none" stroke="#c8552b" stroke-width="2.4" stroke-linecap="round"><path d="M17 31.5 L27 28.6" /><path d="M47 31.5 L37 28.6" /></g><path d="M19.4 39.800000000000004 L24 35.800000000000004 L28.6 39.800000000000004" fill="none" stroke="#ffbe3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M35.4 39.800000000000004 L40 35.800000000000004 L44.6 39.800000000000004" fill="none" stroke="#ffbe3b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /><path d="M30.2 42.4 C31.2 42 32.8 42 33.8 42.4 C33.4 43.6 32.7 44.4 32 44.8 C31.3 44.4 30.6 43.6 30.2 42.4 Z" fill="#120d14" /><path d="M23 45.6 C27 53.4 37 53.4 41 45.6 C37 47.8 27 47.8 23 45.6 Z" fill="#5e1620" stroke="#120d14" stroke-width=".8" /><path d="M24.6 46.4 L25.6 48.4 L27.200000000000003 47.2 L28.8 48.4 L30.400000000000002 47.2 L32.0 48.4 L33.6 47.2 L35.2 48.4 L36.800000000000004 47.2 L38.400000000000006 48.4 C35 47.6 29 47.6 24.6 46.4 Z" fill="#f6ead8" /><path d="M26.9 47 L28 50.4 L29.1 47 Z" fill="#f6ead8" /><path d="M34.9 47 L36 50.4 L37.1 47 Z" fill="#f6ead8" /><g fill="none" stroke="#f6ead8" stroke-width=".7" stroke-linecap="round" stroke-opacity=".55"><path d="M24 45.5 C18 44.4 11 45 3 48.6" /><path d="M24.4 47.6 C19 48.4 13 50.6 7 55" /><path d="M40 45.5 C46 44.4 53 45 61 48.6" /><path d="M39.6 47.6 C45 48.4 51 50.6 57 55" /></g></symbol><symbol id="h-wary" viewBox="0 0 64 64"><g transform="rotate(-18 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C16 7 24 13 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.2 13.5 12.6 9.5 C17 12.4 21 15.4 24.4 18.6 Z" fill="#8f3517" /></g><g transform="translate(64 0) scale(-1 1)"><g transform="rotate(-18 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C10.5 4.6 13 6.3 15 7.9 L14.2 11.6 L18.6 10.6 C22.6 13.4 26.6 16.2 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.4 15 13.2 13 L16.4 12.4 C19 14.2 21.8 16.4 24.4 18.6 Z" fill="#8f3517" /></g></g><path d="M22 20 L23 8 L28 16 L31 5 L34.5 15.5 L39.5 7 L41.5 19.5 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M12.2 30 L5 31 L10 35.5 L3.5 40.5 L11 42.5 C12.6 47.4 15.6 51.4 19.6 54.4 C18.4 46 16 37.6 12.2 30 Z" fill="#c8552b" /><path d="M51.8 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51.4 47.4 48.4 51.4 44.4 54.4 C45.6 46 48 37.6 51.8 30 Z" fill="#c8552b" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="none" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M23.5 44 C26 41 38 41 40.5 44 C39.6 50.4 35.4 53.6 32 53.6 C28.6 53.6 24.4 50.4 23.5 44 Z" fill="#463c4a" /><g fill="none" stroke="#c8552b" stroke-width="2.4" stroke-linecap="round"><path d="M17 31.5 L27 28.6" /><path d="M47 31.5 L37 28.6" /></g><circle cx="24" cy="38.2" r="6" fill="#ffbe3b" fill-opacity="0.18" /><ellipse cx="24" cy="37.800000000000004" rx="5.2" ry="4.6" fill="#ffbe3b" /><circle cx="24" cy="38.0" r="2.5" fill="#120d14" /><circle cx="25" cy="37.0" r=".8" fill="#fff" /><circle cx="40" cy="38.2" r="6" fill="#ffbe3b" fill-opacity="0.18" /><ellipse cx="40" cy="37.800000000000004" rx="5.2" ry="4.6" fill="#ffbe3b" /><circle cx="40" cy="38.0" r="2.5" fill="#120d14" /><circle cx="41" cy="37.0" r=".8" fill="#fff" /><path d="M30.2 42.4 C31.2 42 32.8 42 33.8 42.4 C33.4 43.6 32.7 44.4 32 44.8 C31.3 44.4 30.6 43.6 30.2 42.4 Z" fill="#120d14" /><path d="M26 48.4 C29 46.8 35 46.8 38 48.4" fill="none" stroke="#120d14" stroke-width="1.2" stroke-linecap="round" /><path d="M28.5 47.6 L29.6 50.0 L30.700000000000003 47.6 Z" fill="#f6ead8" /><g fill="none" stroke="#f6ead8" stroke-width=".7" stroke-linecap="round" stroke-opacity=".55"><path d="M24 45.5 C18 44.4 11 45 3 48.6" /><path d="M24.4 47.6 C19 48.4 13 50.6 7 55" /><path d="M40 45.5 C46 44.4 53 45 61 48.6" /><path d="M39.6 47.6 C45 48.4 51 50.6 57 55" /></g></symbol><symbol id="h-stare" viewBox="0 0 64 64"><g transform="rotate(-32 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C16 7 24 13 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.2 13.5 12.6 9.5 C17 12.4 21 15.4 24.4 18.6 Z" fill="#8f3517" /></g><g transform="translate(64 0) scale(-1 1)"><g transform="rotate(-32 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C10.5 4.6 13 6.3 15 7.9 L14.2 11.6 L18.6 10.6 C22.6 13.4 26.6 16.2 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.4 15 13.2 13 L16.4 12.4 C19 14.2 21.8 16.4 24.4 18.6 Z" fill="#8f3517" /></g></g><path d="M22 20 L23 8 L28 16 L31 5 L34.5 15.5 L39.5 7 L41.5 19.5 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M12.2 30 L5 31 L10 35.5 L3.5 40.5 L11 42.5 C12.6 47.4 15.6 51.4 19.6 54.4 C18.4 46 16 37.6 12.2 30 Z" fill="#c8552b" /><path d="M51.8 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51.4 47.4 48.4 51.4 44.4 54.4 C45.6 46 48 37.6 51.8 30 Z" fill="#c8552b" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="none" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M23.5 44 C26 41 38 41 40.5 44 C39.6 50.4 35.4 53.6 32 53.6 C28.6 53.6 24.4 50.4 23.5 44 Z" fill="#463c4a" /><g fill="none" stroke="#c8552b" stroke-width="2.4" stroke-linecap="round"><path d="M16 28 L28 33.6" /><path d="M48 28 L36 33.6" /></g><circle cx="24" cy="38.2" r="8.5" fill="#ff5a2e" fill-opacity="0.38" /><path d="M18.4 34.4 L29 36.4 C28.6 40 25.8 41.4 23.4 41.2 C20.4 40.9 18.5 38.2 18.4 34.4 Z" fill="#ff5a2e" /><ellipse cx="24" cy="38.400000000000006" rx="0.5" ry="2.5" fill="#120d14" /><circle cx="40" cy="38.2" r="8.5" fill="#ff5a2e" fill-opacity="0.38" /><path d="M45.6 34.4 L35 36.4 C35.4 40 38.2 41.4 40.6 41.2 C43.6 40.9 45.5 38.2 45.6 34.4 Z" fill="#ff5a2e" /><ellipse cx="40" cy="38.400000000000006" rx="0.5" ry="2.5" fill="#120d14" /><path d="M30.2 42.4 C31.2 42 32.8 42 33.8 42.4 C33.4 43.6 32.7 44.4 32 44.8 C31.3 44.4 30.6 43.6 30.2 42.4 Z" fill="#120d14" /><path d="M23 45.6 C27 51.4 37 51.4 41 45.6 C37 47.8 27 47.8 23 45.6 Z" fill="#5e1620" stroke="#120d14" stroke-width=".8" /><path d="M24.6 46.4 L25.6 48.4 L27.200000000000003 47.2 L28.8 48.4 L30.400000000000002 47.2 L32.0 48.4 L33.6 47.2 L35.2 48.4 L36.800000000000004 47.2 L38.400000000000006 48.4 C35 47.6 29 47.6 24.6 46.4 Z" fill="#f6ead8" /><path d="M26.9 47 L28 50.4 L29.1 47 Z" fill="#f6ead8" /><path d="M34.9 47 L36 50.4 L37.1 47 Z" fill="#f6ead8" /><g fill="none" stroke="#f6ead8" stroke-width=".7" stroke-linecap="round" stroke-opacity=".55"><path d="M24 45.5 C18 44.4 11 45 3 48.6" /><path d="M24.4 47.6 C19 48.4 13 50.6 7 55" /><path d="M40 45.5 C46 44.4 53 45 61 48.6" /><path d="M39.6 47.6 C45 48.4 51 50.6 57 55" /></g><g fill="none" stroke="#ff5a2e" stroke-width="1.4" stroke-linecap="round"><path d="M10 26 L3.5 22" /><path d="M13 21 L9 15.5" /><path d="M54 26 L60.5 22" /><path d="M51 21 L55 15.5" /></g></symbol><symbol id="h-asleep" viewBox="0 0 64 64"><g transform="rotate(8 32 40)"><g transform="rotate(-16 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C16 7 24 13 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.2 13.5 12.6 9.5 C17 12.4 21 15.4 24.4 18.6 Z" fill="#8f3517" /></g><g transform="translate(64 0) scale(-1 1)"><g transform="rotate(-16 20 25)"><path d="M12 31 C10.5 22 9.5 12 8 3 C10.5 4.6 13 6.3 15 7.9 L14.2 11.6 L18.6 10.6 C22.6 13.4 26.6 16.2 30 19 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M14.6 25 C13.8 19 13.4 15 13.2 13 L16.4 12.4 C19 14.2 21.8 16.4 24.4 18.6 Z" fill="#8f3517" /></g></g><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M12.2 30 L5 31 L10 35.5 L3.5 40.5 L11 42.5 C12.6 47.4 15.6 51.4 19.6 54.4 C18.4 46 16 37.6 12.2 30 Z" fill="#c8552b" /><path d="M51.8 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51.4 47.4 48.4 51.4 44.4 54.4 C45.6 46 48 37.6 51.8 30 Z" fill="#c8552b" /><path d="M32 16 C42 16 50 22 52 30 L59 31 L54 35.5 L60.5 40.5 L53 42.5 C51 50 44 55.5 37 57 L32 62 L27 57 C20 55.5 13 50 11 42.5 L3.5 40.5 L10 35.5 L5 31 L12 30 C14 22 22 16 32 16 Z" fill="none" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M26 18 L28.5 11 L31 16.4 L34 9.5 L36 16.6 L38.5 12.5 L39 18.4 Z" fill="#2b2530" stroke="#c8552b" stroke-width="1.3" stroke-linejoin="round" /><path d="M23.5 44 C26 41 38 41 40.5 44 C39.6 50.4 35.4 53.6 32 53.6 C28.6 53.6 24.4 50.4 23.5 44 Z" fill="#463c4a" /><path d="M19.4 38.2 C21.4 40.800000000000004 26.6 40.800000000000004 28.6 38.2" fill="none" stroke="#f6ead8" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".8" /><path d="M35.4 38.2 C37.4 40.800000000000004 42.6 40.800000000000004 44.6 38.2" fill="none" stroke="#f6ead8" stroke-width="1.5" stroke-linecap="round" stroke-opacity=".8" /><path d="M30.2 42.4 C31.2 42 32.8 42 33.8 42.4 C33.4 43.6 32.7 44.4 32 44.8 C31.3 44.4 30.6 43.6 30.2 42.4 Z" fill="#120d14" /><path d="M27 47.6 C30 49 34 49 37 47.6" fill="none" stroke="#120d14" stroke-width="1.2" stroke-linecap="round" /><path d="M33.5 48.4 L34.6 51.0 L35.7 48.4 Z" fill="#f6ead8" /><g fill="none" stroke="#f6ead8" stroke-width=".7" stroke-linecap="round" stroke-opacity=".55"><path d="M24 45.5 C18 44.4 11 45 3 48.6" /><path d="M24.4 47.6 C19 48.4 13 50.6 7 55" /><path d="M40 45.5 C46 44.4 53 45 61 48.6" /><path d="M39.6 47.6 C45 48.4 51 50.6 57 55" /></g></g><g fill="none" stroke="#7d8aa0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 h5 l-5 5 h5" /><path d="M57 2 h3.4 l-3.4 3.4 h3.4" /></g></symbol><symbol id="tail" viewBox="0 0 64 64"><path d="M45 11 C31 3 13 13 23 25 C31 34 47 33 43 47" fill="none" stroke="#c8552b" stroke-width="12.6" stroke-linecap="round" /><path d="M45 11 C31 3 13 13 23 25 C31 34 47 33 43 47" fill="none" stroke="#2b2530" stroke-width="10" stroke-linecap="round" /><path d="M45 11 C31 3 13 13 23 25 C31 34 47 33 43 47" fill="none" stroke="#c8552b" stroke-width="10" stroke-dasharray="2.2 7.8" stroke-dashoffset="-6" /><path d="M43 47 C40 57.5 25 58 19 52" fill="none" stroke="#c8552b" stroke-width="12.6" stroke-linecap="round" /><path d="M43 47 C40 57.5 25 58 19 52" fill="none" stroke="#f6ead8" stroke-width="10" stroke-linecap="round" /></symbol><symbol id="tail-on-fox" viewBox="0 0 64 64"><path d="M45 11 C31 3 13 13 23 25 C31 34 47 33 43 47" fill="none" stroke="#f6ead8" stroke-width="12.6" stroke-linecap="round" /><path d="M45 11 C31 3 13 13 23 25 C31 34 47 33 43 47" fill="none" stroke="#2b2530" stroke-width="10" stroke-linecap="round" /><path d="M45 11 C31 3 13 13 23 25 C31 34 47 33 43 47" fill="none" stroke="#f6ead8" stroke-width="10" stroke-dasharray="2.2 7.8" stroke-dashoffset="-6" /><path d="M43 47 C40 57.5 25 58 19 52" fill="none" stroke="#f6ead8" stroke-width="12.6" stroke-linecap="round" /><path d="M43 47 C40 57.5 25 58 19 52" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" /></symbol></defs></svg>
+
+<main>
+<nav class="sheets"><a href="../glytta/usages.html">glytta usages</a> <a href="../logo-explorations/errors.html">engifer errors</a></nav>
+
+<section class="hero">
+	<div class="stars" aria-hidden="true"><i style="left: 6%; top: 12%"></i><i style="left: 14%; top: 70%"></i><i style="left: 22%; top: 30%"></i><i style="left: 35%; top: 8%"></i><i style="left: 48%; top: 82%"></i><i style="left: 57%; top: 18%"></i><i style="left: 64%; top: 60%"></i><i style="left: 76%; top: 10%"></i><i style="left: 83%; top: 44%"></i><i style="left: 91%; top: 76%"></i><i style="left: 96%; top: 22%"></i><i style="left: 42%; top: 46%"></i></div>
+	<div class="hero-head"><svg class="mark" role="img" aria-label="Skoffín: a dark cat-fox with glowing eyes and a fanged grin"><use href="#h-content" /></svg></div>
+	<div class="hero-text">
+		<h1 class="word">Skoff<span class="ki">í</span>n</h1>
+		<p class="tagline">A component-based Java web framework.</p>
+		<p class="lore">Born of a cat and a fox, in Icelandic folklore.</p>
+	</div>
+</section>
+
+<h2>The creature</h2>
+<p class="intro">A skoffín is what you get when a fox fathers kittens on a cat: a creature of the dark, half one thing, half another, and more than either. That suits a framework that pairs an HTML template with a Java class. Monstrous, but the kind you'd still let in. A concept only: nothing here is in the framework.</p>
+<div class="story">
+	<div><h3>Cat mother</h3><p>The face, the slit-pupilled eyes that glow in the dark, the whiskers, the fangs.</p></div>
+	<div><h3>Fox father</h3><p>The tall ears (one of them bitten), the rust ruff and brows, the brush of a tail with its pale tip.</p></div>
+	<div><h3>The glare</h3><p>In the stories, a skoffín's stare kills whatever it falls on. That's the error state.</p></div>
+	<div><h3>Silver</h3><p>Only a gun loaded with silver can stop one. Silver is the colour of the fix: the button that gets you out.</p></div>
+</div>
+
+<h2>Marks</h2>
+<p class="note">The head for the logo and the favicon, the tail for the S. At 128, 32 and 16 pixels.</p>
+<div class="tiles">
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div><div style="width: 16px; height: 16px"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div></div><h3>The head</h3><p>A cat's face under a fox's ears, in the dark. The rust rim keeps it readable on night backgrounds; at 16 it's two eyes and two ears.</p></div>
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#tail" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#tail" /></svg></div><div style="width: 16px; height: 16px"><svg class="mark" aria-hidden="true"><use href="#tail" /></svg></div></div><h3>The tail</h3><p>A fox's brush, dark with rust stripes, curled into an S. For the wordmark, and for spots where a face is too much.</p></div>
+</div>
+
+<h2>Lockups</h2>
+<p class="note">The wordmark is Fraunces with its soft corners turned all the way up: a storybook serif, a little wonky.</p>
+<div class="lockups">
+	<div class="lockup"><svg class="mark m" aria-hidden="true"><use href="#h-content" /></svg><span class="word">Skoff<span class="ki">í</span>n</span></div>
+	<div class="lockup on-dark"><span class="word"><span class="tailword"><svg class="mark" aria-hidden="true"><use href="#tail" /></svg><span>koff<span class="ki">í</span>n</span></span></span></div>
+	<div class="lockup fox"><span class="word"><span class="tailword"><svg class="mark" aria-hidden="true"><use href="#tail-on-fox" /></svg><span>koff<span class="ki">í</span>n</span></span></span></div>
+	<div class="lockup"><a class="badge" href="#"><span class="bm"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></span><span><span class="k">Powered by</span><span class="v">Skoff<span class="ki">í</span>n</span></span></a><span class="note" style="margin: 0">The 88×31 badge.</span></div>
+</div>
+
+<h2>Moods</h2>
+<p class="note">Five moods, each matched to a kind of problem. At 128, 32 and 20 pixels. The inline messages use them at about 34.</p>
+<div class="tiles">
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div></div><h3>Content</h3><p>The mark. A sly grin: it knows something you don't.</p></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-delighted" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#h-delighted" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#h-delighted" /></svg></div></div><h3>Delighted</h3><p>Success, all clear, a new release. All teeth.</p></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-wary" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#h-wary" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#h-wary" /></svg></div></div><h3>Wary</h3><p>A warning. Hackles up, eyes wide: something's off, but it still works.</p></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></div></div><h3>The stare</h3><p>An error. In the stories its glare kills; here it only kills the render.</p></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-asleep" /></svg></div><div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#h-asleep" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#h-asleep" /></svg></div></div><h3>Asleep</h3><p>Expired. It dozed off waiting for you, one fang showing.</p></div>
+</div>
+<div class="tiles dark" style="margin-top: 1rem">
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-content" /></svg></div><h3>Content</h3></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-delighted" /></svg></div><h3>Delighted</h3></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-wary" /></svg></div><h3>Wary</h3></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></div><h3>The stare</h3></div><div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-asleep" /></svg></div><h3>Asleep</h3></div>
+</div>
+
+<h2>Inline, where the error happened</h2>
+<p class="note">The message renders in place of the element that failed, so you see it where you'd see the content. What went wrong, which element, the message.</p>
+<div class="demo"><p class="label">Inbox, with <code>$user.nmae</code></p>
+<div class="fake"><h2>Hello <span class="ngerr error"><span class="ngerr-mark"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></span><span class="ngerr-text"><span class="ngerr-kind">Unknown key</span> <code class="ngerr-el">&lt;wo:str&gt;</code><span class="ngerr-msg">While resolving keypath 'user.nmae': Unable to resolve key 'nmae' against class 'app.User'. Did you mean '<b>name</b>'?</span></span></span></h2></div></div>
+<div class="demo"><p class="label">A repetition missing its list</p>
+<div class="fake"><p>Your messages:</p><span class="ngerr error"><span class="ngerr-mark"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></span><span class="ngerr-text"><span class="ngerr-kind">Binding configuration error</span> <code class="ngerr-el">&lt;wo:repetition&gt;</code><span class="ngerr-msg">You must bind either [list] or [count]</span></span></span></div></div>
+<div class="demo"><p class="label">A warning (made up: there are no warnings yet). The page still renders</p>
+<div class="fake"><p><span class="ngerr warning"><span class="ngerr-mark"><svg class="mark" aria-hidden="true"><use href="#h-wary" /></svg></span><span class="ngerr-text"><span class="ngerr-kind">Deprecated binding</span> <code class="ngerr-el">&lt;wo:link&gt;</code><span class="ngerr-msg">[string] is deprecated. Put the link text between the tags instead.</span></span></span></p><p><a href="#">Lunch on Friday?</a></p></div></div>
+
+<h2>Compact, for tight spots</h2>
+<p class="note">Inside a table cell, a button or a line of text, a full message breaks the layout. A chip says where; hovering it, or <code>/ng/dev/problems</code>, says what.</p>
+<div class="demo"><div class="fake">
+<p>Signed in as <span class="ngchip error"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></span><code>user.nmae</code></span> · <a href="#">Sign out</a></p>
+<table style="border-collapse: collapse; font-size: 14px">
+	<tr><th style="text-align: left; padding: .3rem 1.5rem .3rem 0">Subject</th><th style="text-align: left">Received</th></tr>
+	<tr><td style="padding: .3rem 1.5rem .3rem 0">Lunch on Friday?</td><td><span class="ngchip error"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#h-stare" /></svg></span><code>&lt;wo:str&gt;</code></span></td></tr>
+	<tr><td style="padding: .3rem 1.5rem .3rem 0">Build #412 passed</td><td><span class="ngchip warning"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#h-wary" /></svg></span><code>&lt;wo:str&gt;</code></span></td></tr>
+</table>
+<p style="margin: 1rem 0 0"><span class="ngchip fine"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#h-delighted" /></svg></span>All clear: no problems on this page</span></p>
+</div></div>
+
+<h2>Expired</h2>
+<p class="note">Not a programming error, so not dev-only: the page a visitor gets when the page cache or session has let go of what they clicked. The way out is the silver button.</p>
+<div class="demo expired"><div class="big"><svg class="mark" aria-hidden="true"><use href="#h-asleep" /></svg></div><div>
+<h3>This page fell asleep</h3><p>It waited a long time for you to come back, then curled up and dozed off. Start again from the front page.</p><a class="silver-button" href="#">Wake it up</a></div></div>
+
+<h2>Colour</h2>
+<p class="note">Dark fur with a fox's rust in it, eyes that glow, and an Icelandic night around them.</p>
+<div class="swatches">
+	<div class="swatch"><div style="background: #1d1b22"></div><strong>Night</strong><code>#1d1b22</code></div><div class="swatch"><div style="background: #2b2530"></div><strong>Fur</strong><code>#2b2530</code></div><div class="swatch"><div style="background: #c8552b"></div><strong>Fox</strong><code>#c8552b</code></div><div class="swatch"><div style="background: #8f3517"></div><strong>Ember</strong><code>#8f3517</code></div><div class="swatch"><div style="background: #f6ead8"></div><strong>Cream</strong><code>#f6ead8</code></div><div class="swatch"><div style="background: #ffbe3b"></div><strong>Glow</strong><code>#ffbe3b</code></div><div class="swatch"><div style="background: #aab3bd"></div><strong>Silver</strong><code>#aab3bd</code></div><div class="swatch"><div style="background: #fbf8f2"></div><strong>Snow</strong><code>#fbf8f2</code></div><div class="swatch"><div style="background: #ff5a2e"></div><strong>The stare, errors</strong><code>#ff5a2e</code></div><div class="swatch"><div style="background: #7d8aa0"></div><strong>Dusk, expired</strong><code>#7d8aa0</code></div>
+</div>
+
+<h2>Type</h2>
+<div class="demo type">
+	<div><span class="word" style="font-size: 34px">Fraunces, soft</span><span>wordmark and headings</span></div>
+	<div><span style="font-size: 22px">Figtree</span><span>body text</span></div>
+	<div><span style="font-family: 'JetBrains Mono', monospace; font-size: 19px">JetBrains Mono</span><span>code and templates</span></div>
+</div>
+</main>
+
+</body>
+</html>

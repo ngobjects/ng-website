@@ -36,7 +36,7 @@ public class WrapperComponent extends NGComponent {
 	 * @return Title, description and indexability of the page being viewed, for the head's meta tags
 	 */
 	public Seo.Meta meta() {
-		return Seo.meta( context().request().uri() ).withSiteName( theme().name() );
+		return Seo.meta( context().request().uri() ).withSiteName( theme().displayName() );
 	}
 
 	public String canonicalURL() {
@@ -51,14 +51,23 @@ public class WrapperComponent extends NGComponent {
 	}
 
 	/**
-	 * @return Links that switch the look and come back to this page
+	 * The look being listed in the footer's switch
 	 */
-	public String engiferThemeURL() {
-		return themeURL( Theme.engifer );
+	public Theme listedTheme;
+
+	public List<Theme> themes() {
+		return List.of( Theme.values() );
 	}
 
-	public String glyttaThemeURL() {
-		return themeURL( Theme.glytta );
+	public boolean listedThemeIsCurrent() {
+		return listedTheme == theme();
+	}
+
+	/**
+	 * @return A link that switches to listedTheme and comes back to this page
+	 */
+	public String listedThemeURL() {
+		return themeURL( listedTheme );
 	}
 
 	private String themeURL( final Theme theme ) {

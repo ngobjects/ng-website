@@ -8,7 +8,7 @@
 		<wo:element elementName="meta" name="description" content="$meta.description" />
 		<wo:if condition="$robotsContent"><wo:element elementName="meta" name="robots" content="$robotsContent" /></wo:if>
 		<wo:element elementName="link" rel="canonical" href="$canonicalURL" />
-		<wo:element elementName="meta" property="og:site_name" content="$theme.name" />
+		<wo:element elementName="meta" property="og:site_name" content="$theme.displayName" />
 		<meta property="og:locale" content="en_US" />
 		<wo:element elementName="meta" property="og:type" content="$meta.type" />
 		<wo:element elementName="meta" property="og:title" content="$meta.title" />
@@ -23,6 +23,7 @@
 		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
 		<wo:if condition="$theme.isGlytta"><link rel="icon" type="image/svg+xml" href="<wo:resourceURL filename="glytta.svg" />" /></wo:if>
 		<wo:if condition="$theme.isEngifer"><link rel="icon" type="image/svg+xml" href="<wo:resourceURL filename="engifer.svg" />" /></wo:if>
+		<wo:if condition="$theme.isSkoffin"><link rel="icon" type="image/svg+xml" href="<wo:resourceURL filename="skoffin.svg" />" /></wo:if>
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
 		<wo:if condition="$theme.isGlytta">
@@ -36,9 +37,17 @@
 			<meta name="theme-color" content="#f5f8f6" media="(prefers-color-scheme: light)" />
 			<meta name="theme-color" content="#0e1513" media="(prefers-color-scheme: dark)" />
 		</wo:if>
+		<wo:if condition="$theme.isSkoffin">
+			<meta name="theme-color" content="#fbf8f2" media="(prefers-color-scheme: light)" />
+			<meta name="theme-color" content="#141218" media="(prefers-color-scheme: dark)" />
+			<link rel="preconnect" href="https://fonts.googleapis.com" />
+			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,0..100&amp;family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" />
+		</wo:if>
 		<wo:stylesheet filename="prism.css" />
 		<wo:stylesheet filename="main.css" />
 		<wo:if condition="$theme.isEngifer"><wo:stylesheet filename="engifer.css" /></wo:if>
+		<wo:if condition="$theme.isSkoffin"><wo:stylesheet filename="skoffin.css" /></wo:if>
 		
 		<!-- Plausible (stats.rebbi.is), proxied through our own domain by ng-plausible; renders nothing in development -->
 		<wo:NGPlausibleScript />
@@ -56,6 +65,10 @@
 							<source srcset="<wo:resourceURL filename="engifer-logo-on-dark.svg" />" media="(prefers-color-scheme: dark)" />
 							<wo:img filename="engifer-logo.svg" alt="engifer" width="132" height="36" />
 						</picture>
+					</wo:if>
+					<wo:if condition="$theme.isSkoffin">
+						<wo:img filename="skoffin.svg" alt="" width="36" height="36" />
+						<span class="brand-word">Skoffín</span>
 					</wo:if>
 					<span class="badge">alpha</span>
 				</a>
@@ -84,7 +97,7 @@
 					</wo:repetition>
 				</nav>
 				<div class="powered-slot">
-					<a href="https://www.engifer.com/" class="powered" title="Powered by <wo:str value="$theme.name" />, an homage to the 88×31 badges of the WebObjects era">
+					<a href="https://www.engifer.com/" class="powered" title="Powered by <wo:str value="$theme.displayName" />, an homage to the 88×31 badges of the WebObjects era">
 						<wo:if condition="$theme.isGlytta">
 							<wo:img filename="glytta.svg" alt="" width="20" height="20" />
 							<span class="powered-text"><span class="k">Powered by</span><span class="v wordmark">gly<span class="kt1">t</span><span class="kt2">t</span><span class="ka">a</span></span></span>
@@ -92,6 +105,10 @@
 						<wo:if condition="$theme.isEngifer">
 							<wo:img filename="engifer.svg" alt="" width="20" height="20" />
 							<span class="powered-text"><span class="k">Powered by</span><span class="v">e<span class="ng">ng</span>ifer</span></span>
+						</wo:if>
+						<wo:if condition="$theme.isSkoffin">
+							<wo:img filename="skoffin.svg" alt="" width="20" height="20" />
+							<span class="powered-text"><span class="k">Powered by</span><span class="v">Skoffín</span></span>
 						</wo:if>
 					</a>
 				</div>
@@ -115,8 +132,8 @@
 					<wo:content />
 				</main>
 				<footer class="site-footer">
-					<p>This site runs on <wo:str value="$theme.name" />. <a href="https://github.com/ngobjects/ng-website">View its source on GitHub</a>.</p>
-					<p class="theme-switch">Look: <wo:if condition="$theme.isGlytta"><wo:link href="$engiferThemeURL">engifer</wo:link> · <strong>glytta</strong></wo:if><wo:if condition="$theme.isEngifer"><strong>engifer</strong> · <wo:link href="$glyttaThemeURL">glytta</wo:link></wo:if></p>
+					<p>This site runs on <wo:str value="$theme.displayName" />. <a href="https://github.com/ngobjects/ng-website">View its source on GitHub</a>.</p>
+					<p class="theme-switch">Look: <wo:repetition list="$themes" item="$listedTheme"><span><wo:if condition="$listedThemeIsCurrent"><strong><wo:str value="$listedTheme.displayName" /></strong></wo:if><wo:if condition="$listedThemeIsCurrent" negate="$true"><wo:link href="$listedThemeURL"><wo:str value="$listedTheme.displayName" /></wo:link></wo:if></span></wo:repetition></p>
 					<a class="maker" href="https://godurkodi.is/en/" hreflang="en">
 						<span>Made by</span>
 						<svg class="maker-mark" viewBox="-571.54 -324.06 1143.09 648.11" width="30" height="17" aria-hidden="true">
