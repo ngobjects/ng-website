@@ -894,7 +894,12 @@ pre code[class*="language-"] {
 	height: auto;
 }
 
-.hero-brand span {
+/* The wordmark, kerned by hand: tight tracking sets y and t close and runs the two t's together, while the t's foot keeps t-a open. Open the first two to match */
+.wordmark .kt1 { margin-left: 0.03em; }
+.wordmark .kt2 { margin-left: 0.025em; }
+.wordmark .ka { margin-left: 0.01em; }
+
+.hero-brand .wordmark {
 	font-family: var(--font-display);
 	font-size: clamp(3.5rem, 6vw, 5rem);
 	font-weight: 650;
