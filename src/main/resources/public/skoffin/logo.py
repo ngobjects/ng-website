@@ -15,7 +15,7 @@ MOODS = [
 
 symbols = "".join(f'<symbol id="h-{k}" viewBox="0 0 64 64">{m.head(k)}</symbol>' for k, _, _ in MOODS)
 symbols += f'<symbol id="tail" viewBox="0 0 64 64">{m.tail()}</symbol>'
-symbols += f'<symbol id="tail-on-fox" viewBox="0 0 64 64">{m.tail(m.FUR, m.CREAM, "#fff", m.CREAM)}</symbol>'
+symbols += f'<symbol id="tail-on-fox" viewBox="0 0 64 64">{m.tail(m.FUR, m.BONE, "#fff", m.BONE)}</symbol>'
 
 
 def use(ref, cls="mark", label=None):
@@ -51,8 +51,8 @@ def chip(cls, ref, text):
     return f'<span class="ngchip {cls}"><span class="ngchip-mark">{use(ref)}</span>{text}</span>'
 
 
-SWATCHES = [("Night", "#1d1b22"), ("Fur", "#2b2530"), ("Fox", "#c8552b"), ("Ember", "#8f3517"), ("Cream", "#f6ead8"),
-            ("Glow", "#ffbe3b"), ("Silver", "#aab3bd"), ("Snow", "#fbf8f2"), ("The stare, errors", "#ff5a2e"), ("Dusk, expired", "#7d8aa0")]
+SWATCHES = [("Night", "#0e0b12"), ("Fur", "#1a1422"), ("Bruise", "#33283f"), ("Blood", "#c81e3a"), ("Clot", "#5e0f22"),
+            ("Venom", "#b8f53c"), ("Bone", "#ece6d6"), ("Ash", "#efedf2"), ("Silver", "#aab3bd"), ("The stare, errors", "#ff2a3c")]
 
 page = f"""<!doctype html>
 <html lang="en">
@@ -66,18 +66,18 @@ page = f"""<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..800,0..100&family=Figtree:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 :root {{
-	--night: #1d1b22;
-	--fox: #c8552b;
-	--ember: #8f3517;
-	--cream: #f6ead8;
-	--amber: #ffbe3b;
-	--moss: #5a7550;
+	--night: #0e0b12;
+	--fur: #1a1422;
+	--blood: #c81e3a;
+	--clot: #5e0f22;
+	--bone: #ece6d6;
+	--venom: #b8f53c;
 	--silver: #aab3bd;
-	--snow: #fbf8f2;
-	--line: #e8dfd0;
-	--muted: #5f5a63;
-	--stare: #c23a22;
-	--warn: #946000;
+	--ash: #efedf2;
+	--line: #ddd8e3;
+	--muted: #5c5666;
+	--stare: #c8102e;
+	--warn: #6f6a00;
 }}
 
 * {{ box-sizing: border-box; }}
@@ -85,7 +85,7 @@ page = f"""<!doctype html>
 body {{
 	margin: 0;
 	padding: 2rem 1rem 4rem;
-	background: var(--snow);
+	background: var(--ash);
 	color: var(--night);
 	font: 16px/1.55 "Figtree", system-ui, sans-serif;
 }}
@@ -98,7 +98,7 @@ h3 {{ font-size: 1.1rem; margin: 0; }}
 
 .intro, .note {{ color: var(--muted); max-width: 68ch; margin: 0 0 1.25rem; }}
 .sheets {{ display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 0 0 1.5rem; font-size: .9rem; }}
-a {{ color: var(--ember); }}
+a {{ color: #a3162b; }}
 
 svg.mark {{ display: block; width: 100%; height: 100%; overflow: visible; }}
 code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
@@ -114,20 +114,20 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 	padding: clamp(2rem, 5vw, 4rem);
 	border-radius: 18px;
 	background:
-		radial-gradient(ellipse 70% 55% at 70% 0%, rgba(95, 211, 160, .28), transparent 70%),
-		radial-gradient(ellipse 50% 45% at 100% 20%, rgba(150, 110, 220, .25), transparent 70%),
-		linear-gradient(#17151c, #1d1b22 60%, #241f27);
-	color: var(--cream);
+		radial-gradient(ellipse 70% 55% at 70% 0%, rgba(184, 245, 60, .16), transparent 70%),
+		radial-gradient(ellipse 50% 55% at 100% 30%, rgba(200, 30, 58, .22), transparent 70%),
+		linear-gradient(#08060b, #0e0b12 60%, #160f1b);
+	color: var(--bone);
 }}
 
 .hero .stars {{ position: absolute; inset: 0; pointer-events: none; }}
 .hero .stars i {{ position: absolute; width: 2px; height: 2px; border-radius: 50%; background: #fff; opacity: .55; }}
 .hero-head {{ flex: none; width: clamp(160px, 26vw, 300px); position: relative; }}
-.hero-head::after {{ content: ""; position: absolute; inset: 22% 18% 30%; background: radial-gradient(closest-side, rgba(242, 179, 61, .22), transparent); z-index: -1; }}
+.hero-head::after {{ content: ""; position: absolute; inset: 22% 18% 30%; background: radial-gradient(closest-side, rgba(184, 245, 60, .2), transparent); z-index: -1; }}
 .hero-text {{ position: relative; display: flex; flex-direction: column; gap: .9rem; }}
-.hero .word {{ margin: 0; font-size: clamp(64px, 11vw, 136px); line-height: .9; letter-spacing: -.02em; color: var(--cream); }}
-.hero .tagline {{ margin: 0; font-size: clamp(18px, 2vw, 24px); color: #e3d6c4; max-width: 28ch; text-wrap: balance; }}
-.hero .lore {{ margin: 0; font-size: 14px; color: #b9ab98; font-style: italic; }}
+.hero .word {{ margin: 0; font-size: clamp(64px, 11vw, 136px); line-height: .9; letter-spacing: -.02em; color: var(--bone); }}
+.hero .tagline {{ margin: 0; font-size: clamp(18px, 2vw, 24px); color: #ddd5e3; max-width: 28ch; text-wrap: balance; }}
+.hero .lore {{ margin: 0; font-size: 14px; color: #a99fb5; font-style: italic; }}
 @media (max-width: 700px) {{ .hero {{ flex-direction: column; text-align: center; }} .hero-text {{ align-items: center; }} }}
 
 /* The acute on the í sits a little close to the f's in Fraunces; nudge it */
@@ -144,8 +144,8 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 .tile .big {{ width: 128px; height: 128px; margin: 0 auto .75rem; }}
 .tile .small {{ display: flex; gap: .75rem; align-items: end; justify-content: center; margin-bottom: .9rem; }}
 .tile p {{ color: var(--muted); font-size: .88rem; margin: .25rem 0 0; }}
-.dark .tile {{ background: var(--night); color: var(--cream); }}
-.dark .tile p {{ color: #b9ab98; }}
+.dark .tile {{ background: var(--night); color: var(--bone); }}
+.dark .tile p {{ color: #a99fb5; }}
 .dark .tile .big {{ width: 72px; height: 72px; }}
 
 /* Lockups */
@@ -154,13 +154,13 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 .lockup {{ display: flex; align-items: center; gap: .8rem; padding: 1.4rem 1.5rem; border-radius: 12px; background: #fff; border: 1px solid var(--line); }}
 .lockup .m {{ flex: none; width: 64px; height: 64px; }}
 .lockup .word {{ font-size: 50px; line-height: 1; letter-spacing: -.02em; }}
-.lockup.on-dark {{ background: var(--night); border-color: var(--night); color: var(--cream); }}
-.lockup.fox {{ background: var(--fox); border-color: var(--fox); color: var(--snow); }}
+.lockup.on-dark {{ background: var(--night); border-color: var(--night); color: var(--bone); }}
+.lockup.blood {{ background: var(--blood); border-color: var(--blood); color: #fff; }}
 
 .tailword {{ display: inline-flex; align-items: baseline; }}
 .tailword svg {{ width: .86em; height: .86em; margin-right: -.1em; transform: translateY(.1em); }}
 
-.badge {{ display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 10px 0 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--snow); text-decoration: none; color: var(--night); line-height: 1; }}
+.badge {{ display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 10px 0 6px; border: 1px solid var(--line); border-radius: 4px; background: var(--ash); text-decoration: none; color: var(--night); line-height: 1; }}
 .badge .bm {{ width: 24px; height: 24px; }}
 .badge .k {{ display: block; font: 7.5px/1 "JetBrains Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }}
 .badge .v {{ font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100; font-weight: 650; font-size: 13px; }}
@@ -186,14 +186,14 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 .ngchip-mark {{ width: 18px; height: 18px; }}
 .ngchip code {{ font-size: 11px; }}
 
-.error {{ --accent: var(--stare); --tint: #fdece7; }}
-.warning {{ --accent: var(--warn); --tint: #fff5e0; }}
-.fine {{ --accent: #3f5a37; --tint: #edf3e9; }}
+.error {{ --accent: var(--stare); --tint: #fde8eb; }}
+.warning {{ --accent: var(--warn); --tint: #f6f7dc; }}
+.fine {{ --accent: #3d6a0c; --tint: #eef8dc; }}
 
-.expired {{ display: grid; grid-template-columns: 170px 1fr; gap: 2rem; align-items: center; background: #eef0f4; border-color: #d6dbe4; }}
+.expired {{ display: grid; grid-template-columns: 170px 1fr; gap: 2rem; align-items: center; background: #e6e3ec; border-color: #d2ccdc; }}
 .expired .big {{ width: 170px; height: 170px; }}
 .expired h3 {{ font-size: 1.5rem; margin: 0 0 .4rem; }}
-.expired p {{ color: #4d5566; margin: 0 0 1rem; max-width: 46ch; }}
+.expired p {{ color: #4f4859; margin: 0 0 1rem; max-width: 46ch; }}
 @media (max-width: 40rem) {{ .expired {{ grid-template-columns: 1fr; }} }}
 
 .silver-button {{ display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1.2rem; border-radius: 999px; border: 1px solid #8d97a3;
@@ -232,7 +232,7 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 <p class="intro">A skoffín is what you get when a fox fathers kittens on a cat: a creature of the dark, half one thing, half another, and more than either. That suits a framework that pairs an HTML template with a Java class. Monstrous, but the kind you'd still let in. A concept only: nothing here is in the framework.</p>
 <div class="story">
 	<div><h3>Cat mother</h3><p>The face, the slit-pupilled eyes that glow in the dark, the whiskers, the fangs.</p></div>
-	<div><h3>Fox father</h3><p>The tall ears (one of them bitten), the rust ruff and brows, the brush of a tail with its pale tip.</p></div>
+	<div><h3>Fox father</h3><p>The tall ears (one of them bitten), the ruff and brows, blood red where a fox is rust, the brush of a tail with its pale tip.</p></div>
 	<div><h3>The glare</h3><p>In the stories, a skoffín's stare kills whatever it falls on. That's the error state.</p></div>
 	<div><h3>Silver</h3><p>Only a gun loaded with silver can stop one. Silver is the colour of the fix: the button that gets you out.</p></div>
 </div>
@@ -240,8 +240,8 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 <h2>Marks</h2>
 <p class="note">The head for the logo and the favicon, the tail for the S. At 128, 32 and 16 pixels.</p>
 <div class="tiles">
-	{tile("h-content", "The head", "A cat's face under a fox's ears, in the dark. The rust rim keeps it readable on night backgrounds; at 16 it's two eyes and two ears.", (32, 16))}
-	{tile("tail", "The tail", "A fox's brush, dark with rust stripes, curled into an S. For the wordmark, and for spots where a face is too much.", (32, 16))}
+	{tile("h-content", "The head", "A cat's face under a fox's ears, in the dark. The blood-red rim keeps it readable on night backgrounds; at 16 it's two eyes and two ears.", (32, 16))}
+	{tile("tail", "The tail", "A fox's brush, dark with blood-red stripes, curled into an S. For the wordmark, and for spots where a face is too much.", (32, 16))}
 </div>
 
 <h2>Lockups</h2>
@@ -249,7 +249,7 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 <div class="lockups">
 	<div class="lockup">{use("h-content", "mark m")}<span class="word">{WORD}</span></div>
 	<div class="lockup on-dark"><span class="word">{TAILWORD}</span></div>
-	<div class="lockup fox"><span class="word">{tailword("tail-on-fox")}</span></div>
+	<div class="lockup blood"><span class="word">{tailword("tail-on-fox")}</span></div>
 	<div class="lockup"><a class="badge" href="#"><span class="bm">{use("h-content")}</span><span><span class="k">Powered by</span><span class="v">{WORD}</span></span></a><span class="note" style="margin: 0">The 88×31 badge.</span></div>
 </div>
 
@@ -289,7 +289,7 @@ code {{ font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }}
 <h3>This page fell asleep</h3><p>It waited a long time for you to come back, then curled up and dozed off. Start again from the front page.</p><a class="silver-button" href="#">Wake it up</a></div></div>
 
 <h2>Colour</h2>
-<p class="note">Dark fur with a fox's rust in it, eyes that glow, and an Icelandic night around them.</p>
+<p class="note">Venom and blood: near-black fur, blood red where a fox is rust, venom-green eyes that turn red when it stares, and a cold, ashen paper around it.</p>
 <div class="swatches">
 	{"".join(f'<div class="swatch"><div style="background: {c}"></div><strong>{n}</strong><code>{c}</code></div>' for n, c in SWATCHES)}
 </div>

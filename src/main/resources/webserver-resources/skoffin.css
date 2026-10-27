@@ -1,67 +1,68 @@
 /*
- * The Skoffín look, layered over main.css: the cat-fox of Icelandic folklore. Dark fur with a fox's rust in it,
- * eyes that glow, and an Icelandic night with northern lights for the start page hero. Glow marks the primary
- * action, fox rust marks links and the current place. Loaded only when a visitor picks Skoffín (see Theme).
+ * The Skoffín look, layered over main.css: the cat-fox of Icelandic folklore, in "venom and blood". Near-black violet
+ * fur, blood red where a fox is rust, venom-green eyes, on cold ashen paper. The start page hero is a night lit by
+ * venom-green northern lights and a blood-red glow. Venom marks the primary action, blood marks links and the
+ * current place. Loaded only when a visitor picks Skoffín (see Theme).
  */
 
 :root {
-	--paper: #fbf8f2;
+	--paper: #efedf2;
 	--surface: #ffffff;
-	--ink: #1d1b22;
-	--muted: #5f5a63;
-	--rule: #e8dfd0;
-	--code-bg: #f3ece0;
+	--ink: #16121c;
+	--muted: #5c5666;
+	--rule: #ddd8e3;
+	--code-bg: #e8e5ee;
 
-	--band: #1d1b22;
-	--band-ink: #f6ead8;
-	--band-muted: #cbbba6;
-	--band-rule: rgba(246, 234, 216, 0.16);
-	--band-surface: #141218;
+	--band: #0e0b12;
+	--band-ink: #ece6d6;
+	--band-muted: #b9b0c4;
+	--band-rule: rgba(236, 230, 214, 0.14);
+	--band-surface: #08060b;
 
-	--torch: #c8552b;
-	--highlight: #ffbe3b;
-	--accent: #b5441f;
-	--link: #b5441f;
-	--link-decoration: #e9a27f;
-	--callout: #fbf0dc;
-	--callout-border: #ffbe3b;
+	--torch: #c81e3a;
+	--highlight: #b8f53c;
+	--accent: #a3162b;
+	--link: #a3162b;
+	--link-decoration: #e8909c;
+	--callout: #f3f8e4;
+	--callout-border: #b8f53c;
 
-	--tok-tag: #b5441f;
-	--tok-attr: #7a4bb0;
-	--tok-string: #4f7a3a;
+	--tok-tag: #a3162b;
+	--tok-attr: #6b3fb5;
+	--tok-string: #3f7a1f;
 	--tok-keyword: #2b5bb8;
-	--tok-comment: #8a8178;
-	--tok-punct: #6b6470;
+	--tok-comment: #857e8f;
+	--tok-punct: #6b6476;
 
 	--font-text: "Figtree", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 	--font-display: "Fraunces", Georgia, serif;
 	--font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-	--card-shadow: 0 1px 2px rgba(29, 27, 34, 0.06), 0 4px 16px rgba(29, 27, 34, 0.05);
+	--card-shadow: 0 1px 2px rgba(22, 18, 28, 0.06), 0 4px 16px rgba(22, 18, 28, 0.05);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--paper: #141218;
-		--surface: #1c1920;
-		--ink: #f1e7da;
-		--muted: #b3a89a;
-		--rule: #2d2833;
-		--code-bg: #221e27;
+		--paper: #0e0b12;
+		--surface: #16111c;
+		--ink: #ece6f0;
+		--muted: #a9a0b5;
+		--rule: #2a2233;
+		--code-bg: #1c1624;
 
-		--band-surface: #0f0d12;
+		--band-surface: #050407;
 
-		--accent: #ff9a6b;
-		--link: #ff9a6b;
-		--link-decoration: rgba(255, 154, 107, 0.5);
-		--callout: #2a2114;
+		--accent: #ff5a6e;
+		--link: #ff5a6e;
+		--link-decoration: rgba(255, 90, 110, 0.5);
+		--callout: #1b2210;
 
-		--tok-tag: #ff9a6b;
+		--tok-tag: #ff5a6e;
 		--tok-attr: #c9a8ff;
-		--tok-string: #a8d58a;
+		--tok-string: #b8f53c;
 		--tok-keyword: #8cb8ff;
-		--tok-comment: #8a8178;
-		--tok-punct: #b3a89a;
+		--tok-comment: #7f768a;
+		--tok-punct: #a9a0b5;
 	}
 }
 
@@ -80,43 +81,43 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .band {
-	/* An Icelandic winter night, with the northern lights */
+	/* A winter night, lit by venom-green northern lights and a blood-red glow */
 	background-image:
-		radial-gradient(ellipse 70% 60% at 75% 0%, rgba(95, 211, 160, 0.22), transparent 70%),
-		radial-gradient(ellipse 45% 50% at 100% 25%, rgba(150, 110, 220, 0.2), transparent 70%),
-		linear-gradient(#17151c, #1d1b22 60%, #241f27);
+		radial-gradient(ellipse 70% 60% at 75% 0%, rgba(184, 245, 60, 0.13), transparent 70%),
+		radial-gradient(ellipse 45% 60% at 100% 40%, rgba(200, 30, 58, 0.22), transparent 70%),
+		linear-gradient(#08060b, #0e0b12 60%, #160f1b);
 
-	--tok-tag: #ff9a6b;
-	--tok-attr: #ffbe3b;
-	--tok-string: #b8e09c;
+	--tok-tag: #ff5a6e;
+	--tok-attr: #c9a8ff;
+	--tok-string: #b8f53c;
 	--tok-keyword: #9fd0ff;
-	--tok-comment: #9a8f84;
-	--tok-punct: #cbbba6;
+	--tok-comment: #8a8096;
+	--tok-punct: #b9b0c4;
 }
 
 /* The glowing eyes, a little bigger */
 .hero-brand img {
 	width: 7.5rem;
-	filter: drop-shadow(0 0 18px rgba(255, 190, 59, 0.18));
+	filter: drop-shadow(0 0 18px rgba(184, 245, 60, 0.16));
 }
 
 .button {
-	color: #1d1b22;
+	color: #0e0b12;
 }
 
 .hero-line {
-	background: rgba(255, 190, 59, 0.13);
+	background: rgba(184, 245, 60, 0.1);
 }
 
 .hero-output-link,
 .hero-output-back {
-	color: #b5441f;
+	color: #a3162b;
 }
 
 .hero-output-link {
-	text-decoration-color: #e9a27f;
+	text-decoration-color: #e8909c;
 }
 
 .hero-output-link.pressed {
-	background: rgba(200, 85, 43, 0.18);
+	background: rgba(200, 30, 58, 0.16);
 }
