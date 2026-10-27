@@ -31,6 +31,7 @@ public class Application extends NGApplication {
 				.map( "/blog/*", this::serveBlogEntry )
 				.map( "/search", request -> pageWithName( SearchResultsPage.class, request.context() ) )
 				.map( "/pets", request -> pageWithName( PetsPage.class, request.context() ) )
+				.map( "/theme/*", request -> Theme.switchTo( request, NGParsedURI.of( request.uri() ).getString( 1 ) ) )
 				.map( "/robots.txt", () -> withContentType( NGResponses.ok( Seo.robots() ), "text/plain; charset=utf-8" ) )
 				.map( "/sitemap.xml", () -> withContentType( NGResponses.ok( Seo.sitemap() ), "application/xml; charset=utf-8" ) )
 				.map( "/site.webmanifest", () -> withContentType( NGResponses.ok( Seo.webManifest() ), "application/manifest+json" ) );

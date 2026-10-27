@@ -6,6 +6,7 @@ import ng.appserver.NGContext;
 import ng.appserver.templating.NGComponent;
 import ng.website.BlogEntry;
 import ng.website.Page;
+import ng.website.Theme;
 
 public class StartPage extends NGComponent {
 
@@ -15,6 +16,13 @@ public class StartPage extends NGComponent {
 
 	public StartPage( NGContext context ) {
 		super( context );
+	}
+
+	/**
+	 * @return The look the visitor picked, engifer or glytta
+	 */
+	public Theme theme() {
+		return Theme.of( context() );
 	}
 
 	/**

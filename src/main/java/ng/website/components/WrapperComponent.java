@@ -1,11 +1,14 @@
 package ng.website.components;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import ng.appserver.NGContext;
 import ng.appserver.templating.NGComponent;
 import ng.website.Navigation;
 import ng.website.Seo;
+import ng.website.Theme;
 import ng.website.Navigation.Node;
 import ng.website.Navigation.Section;
 
@@ -33,11 +36,33 @@ public class WrapperComponent extends NGComponent {
 	 * @return Title, description and indexability of the page being viewed, for the head's meta tags
 	 */
 	public Seo.Meta meta() {
-		return Seo.meta( context().request().uri() );
+		return Seo.meta( context().request().uri() ).withSiteName( theme().name() );
 	}
 
 	public String canonicalURL() {
 		return Seo.canonicalURL( context().request().uri() );
+	}
+
+	/**
+	 * @return The look the visitor picked, engifer or glytta
+	 */
+	public Theme theme() {
+		return Theme.of( context() );
+	}
+
+	/**
+	 * @return Links that switch the look and come back to this page
+	 */
+	public String engiferThemeURL() {
+		return themeURL( Theme.engifer );
+	}
+
+	public String glyttaThemeURL() {
+		return themeURL( Theme.glytta );
+	}
+
+	private String themeURL( final Theme theme ) {
+		return "/theme/" + theme.name() + "?return=" + URLEncoder.encode( context().request().uri(), StandardCharsets.UTF_8 );
 	}
 
 	public String shareImageURL() {

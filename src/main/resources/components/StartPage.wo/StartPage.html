@@ -2,9 +2,10 @@
 	<div class="front">
 		<section class="hero band">
 			<div class="hero-text">
-				<p class="hero-brand"><wo:img filename="glytta-glow.svg" alt="" width="104" height="104" /><span class="wordmark">gly<span class="kt1">t</span><span class="kt2">t</span><span class="ka">a</span></span></p>
+				<wo:if condition="$theme.isGlytta"><p class="hero-brand"><wo:img filename="glytta-glow.svg" alt="" width="104" height="104" /><span class="wordmark">gly<span class="kt1">t</span><span class="kt2">t</span><span class="ka">a</span></span></p></wo:if>
+				<wo:if condition="$theme.isEngifer"><wo:img class="hero-logo" filename="engifer-logo-hero.svg" alt="engifer" width="320" height="87" /></wo:if>
 				<h1>A Java web framework in the spirit of WebObjects</h1>
-				<p class="lead">Free and open source. Components pair an HTML template with a Java class, and glytta apps deploy alongside your existing WO apps.</p>
+				<p class="lead">Free and open source. Components pair an HTML template with a Java class, and <wo:str value="$theme.name" /> apps deploy alongside your existing WO apps.</p>
 				<div class="actions">
 					<a class="button" href="/page/getting-started">Get started</a>
 					<a class="button secondary" href="https://github.com/ngobjects/ng-objects">View on GitHub</a>
@@ -48,12 +49,12 @@
 		<div class="front-grid">
 			<div class="front-main">
 				<section class="pitch" aria-labelledby="pitch-title">
-					<p class="section-label" id="pitch-title">Why glytta</p>
-					<p class="pitch-lead">Most web frameworks make you translate: state into URLs, clicks into routes, pages into JSON and back. In glytta you write the page, and the framework keeps track of the rest.</p>
+					<p class="section-label" id="pitch-title">Why <wo:str value="$theme.name" /></p>
+					<p class="pitch-lead">Most web frameworks make you translate: state into URLs, clicks into routes, pages into JSON and back. In <wo:str value="$theme.name" /> you write the page, and the framework keeps track of the rest.</p>
 					<ul>
 						<li>
 							<h3>A click is a method call</h3>
-							<p>Bind a link to a Java method. glytta remembers the page it was on, so the method runs with all its state in place. No route, no form parsing, no IDs in hidden fields.</p>
+							<p>Bind a link to a Java method. <wo:str value="$theme.name" /> remembers the page it was on, so the method runs with all its state in place. No route, no form parsing, no IDs in hidden fields.</p>
 						</li>
 						<li>
 							<h3>Templates are HTML</h3>
@@ -94,7 +95,7 @@
 			<div class="front-side">
 				<aside class="status">
 					<h2>Status</h2>
-					<p>glytta is under active development, and it's already running production sites. Interim releases (the 0.1.x series) are on Maven Central, and Java 25 or later is required.</p>
+					<p><wo:str value="$theme.name" /> is under active development, and it's already running production sites. Interim releases (the 0.1.x series) are on Maven Central, and Java 25 or later is required.</p>
 					<p>We're in the "make the API nice" phase: the framework works, and what we learn from using it shapes how it ends up. So expect APIs to change between releases until 1.0, and these docs to grow. Ideas and feedback are very welcome.</p>
 				</aside>
 

@@ -31,7 +31,15 @@ public class Seo {
 	 * @param type The Open Graph type: "website" or "article"
 	 * @param indexable false for pages search engines shouldn't list, like search results
 	 */
-	public record Meta( String title, String description, String type, boolean indexable ) {}
+	public record Meta( String title, String description, String type, boolean indexable ) {
+
+		/**
+		 * @return The same metadata, naming the site siteName instead (for the engifer look, see Theme)
+		 */
+		public Meta withSiteName( final String siteName ) {
+			return new Meta( title.replace( SITE_NAME, siteName ), description.replace( SITE_NAME, siteName ), type, indexable );
+		}
+	}
 
 	/**
 	 * @return The metadata for the page at the given request URI

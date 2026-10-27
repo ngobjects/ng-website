@@ -1,0 +1,134 @@
+/*
+ * The engifer look, layered over main.css: palette "Torch", after the torch ginger. Red-pink flowers on green
+ * leaves; the start page hero is a vivid emerald panel with a faint blueprint grid, turmeric marks the primary
+ * action and torch pink marks links and the current place. Loaded only when a visitor picks engifer (see Theme).
+ */
+
+:root {
+	--paper: #f5f8f6;
+	--ink: #121a17;
+	--muted: #56635c;
+	--rule: #dde6e1;
+	--code-bg: #ecf2ef;
+
+	--band: #074b3c;
+	--band-ink: #f0f7f3;
+	--band-muted: #a8d5c0;
+	--band-rule: rgba(240, 247, 243, 0.18);
+	--band-surface: #053329;
+	--band-grid: rgba(168, 230, 200, 0.04);
+	--band-grid-major: rgba(168, 230, 200, 0.08);
+
+	--torch: #ff5a82;
+	--highlight: #ffb320;
+	--accent: #c41e4a;
+	--link: #c41e4a;
+	--link-decoration: #ff9ab3;
+	--callout: #fff8e6;
+	--callout-border: #ffb320;
+
+	--tok-tag: #b0174f;
+	--tok-attr: #6a3fb5;
+	--tok-string: #1f7a5a;
+	--tok-keyword: #2b5bb8;
+	--tok-comment: #7d8a83;
+	--tok-punct: #66736c;
+
+	--font-text: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+	--font-display: var(--font-text);
+	--font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+	--card-shadow: 0 1px 2px rgba(18, 26, 23, 0.06), 0 4px 16px rgba(18, 26, 23, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--paper: #0e1513;
+		--surface: #141d1a;
+		--ink: #e8f1ec;
+		--muted: #9db0a6;
+		--rule: #22302b;
+		--code-bg: #17221e;
+
+		--band-surface: #042a22;
+
+		--accent: #ff8aa6;
+		--link: #ff8aa6;
+		--link-decoration: rgba(255, 138, 166, 0.5);
+		--callout: #2a2112;
+
+		--tok-tag: #ff8aa6;
+		--tok-attr: #c9a8ff;
+		--tok-string: #7fe0b0;
+		--tok-keyword: #8cb8ff;
+		--tok-comment: #74867d;
+		--tok-punct: #9db0a6;
+	}
+}
+
+body {
+	font-feature-settings: "cv11";
+}
+
+.brand img {
+	width: 132px;
+	height: auto;
+}
+
+/* The ng is coloured as in the logo: torch red on light, turmeric on dark */
+.powered-text .ng {
+	color: #c41e4a;
+}
+
+@media (prefers-color-scheme: dark) {
+	.powered-text .ng {
+		color: var(--highlight);
+	}
+}
+
+.band {
+	/* A faint blueprint grid with one soft glow */
+	background-image:
+		radial-gradient(ellipse 60% 140% at 100% 0%, rgba(62, 232, 165, 0.16), transparent 65%),
+		linear-gradient(var(--band-grid-major) 1px, transparent 1px),
+		linear-gradient(90deg, var(--band-grid-major) 1px, transparent 1px),
+		linear-gradient(var(--band-grid) 1px, transparent 1px),
+		linear-gradient(90deg, var(--band-grid) 1px, transparent 1px);
+	background-size: auto, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+	background-position: 0 0, -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+
+	--tok-tag: #ffb320;
+	--tok-attr: #ffa3bb;
+	--tok-string: #b8f5d6;
+	--tok-keyword: #9fd0ff;
+	--tok-comment: #86b8a1;
+	--tok-punct: #a8d5c0;
+}
+
+.hero-logo {
+	display: block;
+	width: min(20rem, 100%);
+	height: auto;
+	margin: 0 0 1.75rem;
+}
+
+.button {
+	color: #121a17;
+}
+
+.hero-line {
+	background: rgba(255, 179, 32, 0.13);
+}
+
+.hero-output-link,
+.hero-output-back {
+	color: #c41e4a;
+}
+
+.hero-output-link {
+	text-decoration-color: #ff9ab3;
+}
+
+.hero-output-link.pressed {
+	background: rgba(255, 90, 130, 0.18);
+}
