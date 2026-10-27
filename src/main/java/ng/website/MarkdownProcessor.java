@@ -19,8 +19,8 @@ public class MarkdownProcessor {
 		final Map<String, String> v = new HashMap<>();
 		// The framework's current release, as used in the docs' code samples. Named so they don't collide with ${...} placeholders shown in those samples.
 		v.put( "ng.groupId", "is.rebbi.ng" );
-		v.put( "ng.release", "0.1.5" );
-		v.put( "vermilingua.release", "1.1.11" );
+		v.put( "ng.release", "0.1.6" );
+		v.put( "vermilingua.release", "1.2.0" );
 		v.put( "java.release", "25" );
 		return v;
 	}

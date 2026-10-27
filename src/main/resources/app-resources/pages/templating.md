@@ -44,7 +44,7 @@ All built-in elements: [Dynamic elements](dynamic-elements).
 
 | Value | Meaning |
 | --- | --- |
-| `$name`, `$user.name` | Key or keypath, resolved with [KeyValueCoding](key-value-coding) |
+| `$name`, `$user.name` | Key or keypath, resolved with [KeyValueCoding](#keyvaluecoding) |
 | `Some text` | Constant string. Escapes: `\n \r \t \\ \" \$` |
 | `$true`, `$false` | Boolean constants |
 | `$42`, `$1.5` | Integer and Double constants |
@@ -52,6 +52,30 @@ All built-in elements: [Dynamic elements](dynamic-elements).
 | `$^name` | The value the parent bound to this component's `name` binding |
 
 No WebObjects `@` operators, and no binding twice on one tag.
+
+## KeyValueCoding
+
+KVC resolves a key like `$name` to a public method or field on the component. First match wins:
+
+1. Methods: `getName()`, `name()`, `isName()`, then `_getName()`, `_name()`, `_isName()`
+2. Fields: `name`, `isName`, `_name`, `_isName`
+
+No match throws `UnknownKeyException`, shown as an error box in the page with a suggestion: *"Did you mean 'name'?"*.
+
+Forms set bindings on submit, through `setName( value )` or the field `name`. Strings are converted when the target is a number.
+
+In a keypath like `$company.manager.name`, each key resolves on the result of the previous one. A `null` anywhere makes the whole keypath `null`, without a `NullPointerException`. Setting through a `null` fails.
+
+Maps aren't supported: `$map.key` doesn't read the map's entry ([#36](https://github.com/ngobjects/ng-objects/issues/36)). To customise lookups, implement `NGKeyValueCoding` (`valueForKey`, `takeValueForKey`). From Java:
+
+```java
+Object name = NGKeyValueCoding.Utility.valueForKey( user, "name" );
+NGKeyValueCoding.Utility.takeValueForKey( user, "Jane", "name" );
+```
+
+Lookups are cached per class and key in production, not in development.
+
+Coming from WebObjects: `NGKeyValueCoding` is Apple's `NSKeyValueCoding`, almost unchanged. There's no `KeyValueCodingProtectedAccessor`, so only public members are read. WO tries the underscored fields first (`_name`, `_isName`, `name`, `isName`), which only matters for a class with more than one public field for the same key.
 
 ## Embedding components
 

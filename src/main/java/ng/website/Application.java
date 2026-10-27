@@ -45,6 +45,13 @@ public class Application extends NGApplication {
 	private NGActionResults servePage( NGRequest request ) {
 		final String id = NGParsedURI.of( request.uri() ).getString( 1 );
 
+		// KeyValueCoding used to have its own page, now it's a section of Templating
+		if( "key-value-coding".equals( id ) ) {
+			final NGResponse response = NGResponses.of( 301, "" );
+			response.setHeader( "Location", "/page/templating#keyvaluecoding" );
+			return response;
+		}
+
 		for( Page page : Page.allPages() ) {
 			if( page.id().equals( id ) ) {
 				return switch( page.type() ) {

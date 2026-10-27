@@ -45,7 +45,6 @@ public record Page( String name, String id, String description, Type type, Class
 				new Page( "Setting up for development", "setting-up", "JDK, Maven, IDE and the project layout." ),
 				new Page( "Creating a component", "creating-a-component", "A class, a template, and bindings between them." ),
 				new Page( "Templating", "templating", "Components, dynamic tags and bindings: what you can write in a template." ),
-				new Page( "KeyValueCoding", "key-value-coding", "How a binding like $someName is resolved to a method or field." ),
 				new Page( "Component actions", "component-actions", "Links and forms that call methods on the page itself, and the request–response loop behind them." ),
 				new Page( "Partial page updates", "partial-page-updates", "Re-render part of a page with the Ajax elements." ),
 				new Page( "Sessions", "sessions", "Per-user state, your own session class, and its lifetime." ),

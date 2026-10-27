@@ -92,7 +92,7 @@ Keys joined with periods: `$user.address.city`. A `null` along the way makes it 
 
 ### KeyValueCoding
 
-The rules for finding a method or field by name. KVC for short. `NGKeyValueCoding`. See [KeyValueCoding](key-value-coding).
+The rules for finding a method or field by name. KVC for short. `NGKeyValueCoding`. See [Templating](templating#keyvaluecoding).
 
 ### Lifebeat
 

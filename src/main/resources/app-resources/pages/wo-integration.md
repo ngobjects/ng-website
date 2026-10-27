@@ -8,7 +8,7 @@ engifer is built on WO's ideas, not a clone of it.
 ## The same
 
 * Components: template plus Java class, `.wo` folders and `.wod` files included. See [Templating](templating).
-* Bindings and [KeyValueCoding](key-value-coding).
+* Bindings and [KeyValueCoding](templating#keyvaluecoding).
 * [Component actions](component-actions): the three phases, `pageWithName()`.
 * Direct actions, sessions, wrappers with `<wo:content />`, and Wonder's inline `<wo:…>` tags.
 * `.woa` bundles, run by wotaskd and JavaMonitor.

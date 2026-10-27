@@ -40,7 +40,7 @@ public class Navigation {
 	public static List<Section> sections() {
 		return List.of(
 				new Section( "Start here", nodes( "getting-started", "setting-up" ) ),
-				new Section( "Guides", nodes( "creating-a-component", "templating", "key-value-coding", "component-actions", "partial-page-updates", "sessions", "resources", "routing", "creating-a-dynamic-element" ) ),
+				new Section( "Guides", nodes( "creating-a-component", "templating", "component-actions", "partial-page-updates", "sessions", "resources", "routing", "creating-a-dynamic-element" ) ),
 				new Section( "Running your app", nodes( "configuration", "development-tools", "deployment" ) ),
 				new Section( "Coming from WebObjects", nodes( "wo-integration" ) ),
 				new Section( "Reference", nodes( "dynamic-elements", "plugins", "glossary" ) ) );
