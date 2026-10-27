@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>glytta usages</title>
+<meta name="description" content="glytta: marks, lockups, states and errors for the jellyfish brand concept.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300..800&family=IBM+Plex+Sans:wght@400;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root {
+	--abyss: #0b1a2e;
+	--deep: #14385a;
+	--sea-glass: #9fdbe9;
+	--jelly: #f08bb4;
+	--foam: #eef7f9;
+	--line: #d3e4ea;
+	--muted: #3f5468;
+	--coral: #d63b33;
+	--amber: #a35f00;
+	--sand: #f5efe2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0;
+	padding: 2rem 1rem 4rem;
+	background: var(--foam);
+	color: var(--abyss);
+	font: 15px/1.5 "IBM Plex Sans", system-ui, sans-serif;
+}
+
+main { max-width: 1100px; margin: 0 auto; }
+
+h1, h2, h3 { font-family: "Sora", sans-serif; font-weight: 650; letter-spacing: -.01em; }
+h1 { font-size: 1.6rem; margin: 0 0 .25rem; }
+h2 { font-size: 1.15rem; margin: 2.75rem 0 .25rem; }
+h3 { font-size: 1rem; margin: 0; }
+
+.intro, .note { color: var(--muted); max-width: 70ch; margin: 0 0 1.25rem; }
+.sheets { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: 0 0 1.25rem; font-size: .9rem; }
+.sheets a, .intro a { color: var(--deep); }
+
+svg.mark { display: block; width: 100%; height: 100%; }
+code { font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace; }
+
+/* Grids of tiles, as on the engifer errors sheet */
+
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.tile { background: #fff; padding: 1.25rem; }
+.tile .big { width: 128px; height: 128px; margin: 0 auto .75rem; }
+.tile .small { display: flex; gap: .75rem; align-items: end; justify-content: center; margin-bottom: .9rem; }
+.tile p { color: var(--muted); font-size: .85rem; margin: .25rem 0 0; }
+.dark .tile { background: var(--abyss); color: #e9f8fa; }
+.dark .tile p { color: #b9d3dc; }
+.dark .tile .big { width: 72px; height: 72px; }
+
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+
+/* Lockups */
+
+.lockup { display: flex; align-items: center; gap: .9rem; padding: 1.25rem 1.5rem; border-radius: 12px; border: 1px solid var(--line); background: #fff; }
+.lockup .m { flex: none; width: 64px; height: 64px; }
+.lockup .word { font-family: "Sora", sans-serif; font-size: 48px; font-weight: 650; letter-spacing: -.04em; line-height: 1; }
+.lockup.on-dark { background: var(--abyss); border-color: var(--abyss); color: #e9f8fa; }
+.lockup.long { flex-direction: column; align-items: flex-start; gap: .35rem; background: var(--deep); border-color: var(--deep); color: #e9f8fa; }
+.lockup.long .word { font-size: 40px; font-weight: 300; letter-spacing: -.03em; }
+.lockup.long .word b { font-weight: 650; }
+.lockup.long small { font-size: .85rem; color: #b9d3dc; }
+.lockup.long .eyebrow { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--sea-glass); }
+
+/* Demos */
+
+.demo { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+.demo .label { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 .75rem; }
+.fake h2 { margin: 0 0 .5rem; font-size: 1.4rem; }
+
+/* The inline message. In a real app it lands in pages with unknown CSS, so it would carry its styles inline and reset what it inherits */
+.ngerr { display: inline-flex; align-items: flex-start; gap: .65rem; max-width: 36rem; vertical-align: middle; margin: .2rem 0;
+	padding: .55rem .8rem .6rem .6rem; border-radius: 8px; background: var(--tint); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+	box-shadow: inset 3px 0 0 var(--accent); font: 400 13px/1.45 "IBM Plex Sans", system-ui, sans-serif; color: var(--abyss); text-align: left; letter-spacing: 0; }
+.ngerr-mark { flex: none; width: 32px; height: 32px; }
+.ngerr-kind { font-weight: 700; color: var(--accent); }
+.ngerr-el { font-size: 12px; font-weight: 600; }
+.ngerr-msg { display: block; color: #2c3e50; }
+.ngerr-msg b { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 12px; }
+
+.ngchip { display: inline-flex; align-items: center; gap: .3rem; padding: .05rem .45rem .05rem .2rem; border-radius: 999px; vertical-align: middle;
+	background: var(--tint); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); font: 600 11px/1.6 "IBM Plex Sans", sans-serif; color: var(--accent); }
+.ngchip-mark { width: 18px; height: 18px; }
+.ngchip code { font-size: 11px; }
+
+.error { --accent: var(--coral); --tint: #fdeceb; }
+.warning { --accent: var(--amber); --tint: #fff6e3; }
+.fine { --accent: #1d6f86; --tint: #e3f4f8; }
+
+.expired { display: grid; grid-template-columns: 180px 1fr; gap: 2rem; align-items: center; background: var(--sand); border-color: #ddd0b0; }
+.expired .big { width: 180px; height: auto; }
+.expired h3 { font-size: 1.4rem; margin: 0 0 .4rem; }
+.expired p { color: #4a4a3a; margin: 0 0 1rem; max-width: 46ch; }
+.expired a { display: inline-block; background: var(--abyss); color: #e9f8fa; font-weight: 600; text-decoration: none; padding: .55rem 1.1rem; border-radius: 8px; }
+@media (max-width: 40rem) { .expired { grid-template-columns: 1fr; } }
+
+/* Colour and type */
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: .75rem; }
+.swatch div { height: 64px; border-radius: 10px; border: 1px solid rgba(11, 26, 46, .08); }
+.swatch strong { display: block; font-size: .85rem; margin-top: .4rem; }
+.swatch code { font-size: .78rem; color: var(--muted); }
+
+.type { display: grid; gap: .6rem; }
+.type div { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; }
+.type span:last-child { font-size: .85rem; color: var(--muted); }
+
+.code { margin: 0; padding: 1.1rem 1.25rem; border-radius: 12px; background: var(--abyss); color: #e9f6f8; font: 14px/1.65 "IBM Plex Mono", ui-monospace, monospace; overflow-x: auto; }
+.code .t { color: var(--sea-glass); } .code .a { color: #b9d3dc; } .code .v { color: var(--jelly); }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position: absolute" aria-hidden="true">
+	<defs>
+		<g id="tentacles">
+			<g fill="none" stroke="#5fb8d0" stroke-width="1.3" stroke-linecap="round">
+				<path d="M15 32 C14 40 18 46 15 54" />
+				<path d="M22 33.5 C21 42 24 49 22 58" />
+				<path d="M42 33.5 C43 42 40 49 42 58" />
+				<path d="M49 32 C50 40 46 46 49 54" />
+			</g>
+			<g fill="none" stroke="#f08bb4" stroke-width="2.6" stroke-linecap="round" stroke-opacity=".85">
+				<path d="M29 34 C26 40 32 44 28 50 C26 53 28 56 27 59" />
+				<path d="M35 34 C38 40 32 45 36 51 C38 54 36 57 37 60" />
+			</g>
+		</g>
+		<path id="bell-shape" d="M12 30 C12 16 21 8 32 8 C43 8 52 16 52 30 C50 32.5 47.5 31 46 32.5 C43.5 34.5 41 32.5 39 33.5 C36.5 35 34 33.5 32 34.5 C30 33.5 27.5 35 25 33.5 C23 32.5 20.5 34.5 18 32.5 C16.5 31 14 32.5 12 30 Z" />
+		<path id="bell-sheen" d="M17 27 C17 18 24 12.5 32 12.5 C40 12.5 47 18 47 27 C40 25 24 25 17 27 Z" />
+		<g id="rings" fill="none" stroke="#f08bb4" stroke-width="2">
+			<ellipse cx="26" cy="22" rx="3.6" ry="2.8" />
+			<ellipse cx="38" cy="22" rx="3.6" ry="2.8" />
+		</g>
+		<g id="bell">
+			<use href="#bell-shape" fill="#9fdbe9" fill-opacity=".85" stroke="#3b8fb3" />
+			<use href="#bell-sheen" fill="#e9f8fa" fill-opacity=".6" />
+			<use href="#rings" />
+		</g>
+
+		<!-- Drifting: the mark -->
+		<symbol id="j-drifting" viewBox="0 0 64 64">
+			<use href="#tentacles" />
+			<use href="#bell" />
+		</symbol>
+
+		<!-- Glowing: success, lit from within -->
+		<symbol id="j-glowing" viewBox="0 0 64 64">
+			<circle cx="32" cy="26" r="25" fill="#9fdbe9" fill-opacity=".22" />
+			<circle cx="32" cy="24" r="18" fill="#9fdbe9" fill-opacity=".2" />
+			<g fill="#7fd0e0">
+				<circle cx="7" cy="14" r="1.2" />
+				<circle cx="57" cy="11" r="1" />
+				<circle cx="59" cy="40" r="1.3" />
+				<circle cx="5" cy="44" r="1" />
+				<circle cx="52" cy="58" r=".9" />
+			</g>
+			<use href="#tentacles" />
+			<use href="#bell-shape" fill="#b8ecf3" fill-opacity=".9" stroke="#3b8fb3" />
+			<use href="#bell-sheen" fill="#ffffff" fill-opacity=".7" />
+			<use href="#rings" />
+		</symbol>
+
+		<!-- Stinging: a warning, sparks at the tentacle tips -->
+		<symbol id="j-stinging" viewBox="0 0 64 64">
+			<use href="#tentacles" />
+			<use href="#bell" />
+			<g fill="none" stroke="#e8930c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M11 49 l-3.5 2 l3.5 2 l-3.5 2" />
+				<path d="M53 49 l3.5 2 l-3.5 2 l3.5 2" />
+				<path d="M18 59 l-3 1.5 l3 1.5" />
+				<path d="M46 59 l3 1.5 l-3 1.5" />
+			</g>
+		</symbol>
+
+		<!-- Tangled: an error, tied in knots and tipped over -->
+		<symbol id="j-tangled" viewBox="0 0 64 64">
+			<g fill="none" stroke="#5fb8d0" stroke-width="1.4" stroke-linecap="round">
+				<path d="M15 31 C12 42 30 40 26 48 C22 56 40 54 34 46 C30 40 44 42 42 52" />
+				<path d="M22 33 C20 44 36 38 33 50 C31 57 22 54 27 49 C30 46 34 50 31 58" />
+				<path d="M48 30 C52 42 36 44 40 52 C44 58 52 52 46 48 C42 45 38 50 44 57" />
+			</g>
+			<path d="M30 34 C27 40 38 41 34 46 C31 50 27 46 31 44 C34 42 36 47 33 52" fill="none" stroke="#f08bb4" stroke-width="2.6" stroke-linecap="round" stroke-opacity=".85" />
+			<g transform="rotate(-14 32 30)"><use href="#bell" /></g>
+		</symbol>
+
+		<!-- Washed up: expired, flat on the sand, the colour gone out of it -->
+		<symbol id="j-stranded" viewBox="0 0 64 64">
+			<path d="M2 56.5 H62" fill="none" stroke="#d9c9a3" stroke-width="2" stroke-linecap="round" />
+			<g fill="none" stroke="#8fb0bb" stroke-width="1.2" stroke-linecap="round">
+				<path d="M6 56 C12 58.5 17 54.5 23 57.5" />
+				<path d="M41 57.5 C47 54.5 51 59 58 56.5" />
+				<path d="M28 56 C30 59 34 59 36 56.5" />
+			</g>
+			<path d="M4 56 C5 47 20 42.5 32 42.5 C44 42.5 59 47 60 56 Z" fill="#c9dbe1" fill-opacity=".9" stroke="#8fb0bb" />
+			<path d="M10 54 C12 48 22 46 32 46 C42 46 52 48 54 54 C46 52 18 52 10 54 Z" fill="#eef4f5" fill-opacity=".6" />
+			<g fill="none" stroke="#d4a6b9" stroke-width="1.6">
+				<ellipse cx="24" cy="50.5" rx="3.6" ry="1.6" />
+				<ellipse cx="40" cy="50.5" rx="3.6" ry="1.6" />
+			</g>
+		</symbol>
+
+		<!-- The moon jelly from above: four rings, round, for favicons -->
+		<symbol id="j-moon" viewBox="0 0 64 64">
+			<circle cx="32" cy="32" r="27" fill="#9fdbe9" fill-opacity=".85" />
+			<circle cx="32" cy="32" r="28.6" fill="none" stroke="#3b8fb3" stroke-width="1.8" stroke-dasharray="3 2.6" stroke-linecap="round" />
+			<circle cx="32" cy="32" r="19" fill="#e9f8fa" fill-opacity=".5" />
+			<g fill="none" stroke="#f08bb4" stroke-width="2.8" stroke-linecap="round" stroke-dasharray="26 8.56">
+				<circle cx="41.5" cy="32" r="5.5" transform="rotate(-135.4 41.5 32)" />
+				<circle cx="32" cy="41.5" r="5.5" transform="rotate(-45.4 32 41.5)" />
+				<circle cx="22.5" cy="32" r="5.5" transform="rotate(44.6 22.5 32)" />
+				<circle cx="32" cy="22.5" r="5.5" transform="rotate(134.6 32 22.5)" />
+			</g>
+			<path d="M29 29 L35 35 M35 29 L29 35" fill="none" stroke="#f08bb4" stroke-width="1.6" stroke-linecap="round" />
+		</symbol>
+	</defs>
+</svg>
+
+<main>
+<h1>glytta usages</h1>
+<nav class="sheets"><a href="index.html">glytta</a> <a href="../logo-explorations/errors.html">engifer errors, for comparison</a></nav>
+<p class="intro">The jellyfish at work: the marks and lockups, five states matched to kinds of problem, and the inline messages, chips and expired page built on them, as on the <a href="../logo-explorations/errors.html">engifer errors sheet</a>. A concept only: nothing here is in the framework.</p>
+
+<h2>Marks</h2>
+<p class="note">One animal, seen two ways. At 128, 32 and 16 pixels.</p>
+<div class="tiles">
+	<div class="tile">
+		<div class="big"><svg class="mark" role="img" aria-label="Jellyfish from the side"><use href="#j-drifting" /></svg></div>
+		<div class="small">
+			<div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-drifting" /></svg></div>
+			<div style="width: 16px; height: 16px"><svg class="mark" aria-hidden="true"><use href="#j-drifting" /></svg></div>
+		</div>
+		<h3>From the side</h3>
+		<p>The main mark: bell, frilly arms, trailing tentacles.</p>
+	</div>
+	<div class="tile">
+		<div class="big"><svg class="mark" role="img" aria-label="Moon jelly from above"><use href="#j-moon" /></svg></div>
+		<div class="small">
+			<div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-moon" /></svg></div>
+			<div style="width: 16px; height: 16px"><svg class="mark" aria-hidden="true"><use href="#j-moon" /></svg></div>
+		</div>
+		<h3>From above</h3>
+		<p>A moon jelly's four rings. Round, so it holds up as a favicon.</p>
+	</div>
+	<div class="tile">
+		<div class="big"><svg class="mark" role="img" aria-label="Glowing jellyfish"><use href="#j-glowing" /></svg></div>
+		<div class="small">
+			<div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></div>
+			<div style="width: 16px; height: 16px"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></div>
+		</div>
+		<h3>Glowing</h3>
+		<p>The hero version, for dark grounds.</p>
+	</div>
+</div>
+
+<h2>Lockups</h2>
+<p class="note">The wordmark is Sora, set tight. glytta for short, marglytta in full.</p>
+<div class="two">
+	<div class="lockup on-dark"><svg class="mark m" aria-hidden="true"><use href="#j-glowing" /></svg><span class="word">glytta</span></div>
+	<div class="lockup"><svg class="mark m" aria-hidden="true" style="width: 56px; height: 56px"><use href="#j-moon" /></svg><span class="word">glytta</span></div>
+	<div class="lockup long"><span class="eyebrow">The long form</span><span class="word">mar<b>glytta</b></span><small>Icelandic for jellyfish: mar, sea, and glytta.</small></div>
+</div>
+
+<h2>A jellyfish in trouble</h2>
+<p class="note">Four ways a jellyfish has a bad day, each matched to a kind of problem. At 128, 32 and 20 pixels. The inline messages use them at about 32.</p>
+<div class="tiles">
+	<div class="tile">
+		<div class="big"><svg class="mark" aria-hidden="true"><use href="#j-drifting" /></svg></div>
+		<div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-drifting" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#j-drifting" /></svg></div></div>
+		<h3>Drifting</h3>
+		<p>For reference: the mark. All is well.</p>
+	</div>
+	<div class="tile">
+		<div class="big"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></div>
+		<div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></div></div>
+		<h3>Glowing</h3>
+		<p>Success, all clear. Lit from within.</p>
+	</div>
+	<div class="tile">
+		<div class="big"><svg class="mark" aria-hidden="true"><use href="#j-stinging" /></svg></div>
+		<div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-stinging" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#j-stinging" /></svg></div></div>
+		<h3>Stinging</h3>
+		<p>A warning. Sparks at the tentacle tips: careful, but it still works.</p>
+	</div>
+	<div class="tile">
+		<div class="big"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></div>
+		<div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></div></div>
+		<h3>Tangled</h3>
+		<p>An error. Tentacles tied in knots, the bell tipped over.</p>
+	</div>
+	<div class="tile">
+		<div class="big"><svg class="mark" aria-hidden="true"><use href="#j-stranded" /></svg></div>
+		<div class="small"><div style="width: 32px; height: 32px"><svg class="mark" aria-hidden="true"><use href="#j-stranded" /></svg></div><div style="width: 20px; height: 20px"><svg class="mark" aria-hidden="true"><use href="#j-stranded" /></svg></div></div>
+		<h3>Washed up</h3>
+		<p>Expired. Flat on the sand, the colour gone out of it.</p>
+	</div>
+</div>
+<div class="tiles dark" style="margin-top: 1rem">
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#j-drifting" /></svg></div><h3>Drifting</h3></div>
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></div><h3>Glowing</h3></div>
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#j-stinging" /></svg></div><h3>Stinging</h3></div>
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></div><h3>Tangled</h3></div>
+	<div class="tile"><div class="big"><svg class="mark" aria-hidden="true"><use href="#j-stranded" /></svg></div><h3>Washed up</h3></div>
+</div>
+
+<h2>Inline, where the error happened</h2>
+<p class="note">The message renders in place of the element that failed, so you see it where you'd see the content. Same parts as today: what went wrong, which element, the message.</p>
+<div class="demo"><p class="label">Inbox, with <code>$user.nmae</code></p>
+<div class="fake"><h2>Hello <span class="ngerr error"><span class="ngerr-mark"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></span><span class="ngerr-text"><span class="ngerr-kind">Unknown key</span> <code class="ngerr-el">&lt;wo:str&gt;</code><span class="ngerr-msg">While resolving keypath 'user.nmae': Unable to resolve key 'nmae' against class 'app.User'. Did you mean '<b>name</b>'?</span></span></span></h2></div></div>
+<div class="demo"><p class="label">A repetition missing its list</p>
+<div class="fake"><p>Your messages:</p><span class="ngerr error"><span class="ngerr-mark"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></span><span class="ngerr-text"><span class="ngerr-kind">Binding configuration error</span> <code class="ngerr-el">&lt;wo:repetition&gt;</code><span class="ngerr-msg">You must bind either [list] or [count]</span></span></span></div></div>
+<div class="demo"><p class="label">A warning (made up: ng has no warnings yet). The page still renders</p>
+<div class="fake"><p><span class="ngerr warning"><span class="ngerr-mark"><svg class="mark" aria-hidden="true"><use href="#j-stinging" /></svg></span><span class="ngerr-text"><span class="ngerr-kind">Deprecated binding</span> <code class="ngerr-el">&lt;wo:link&gt;</code><span class="ngerr-msg">[string] is deprecated. Put the link text between the tags instead.</span></span></span></p><p><a href="#" style="color: var(--deep)">Lunch on Friday?</a></p></div></div>
+
+<h2>Compact, for tight spots</h2>
+<p class="note">Inside a table cell, a button or a line of text, a full message breaks the layout. A chip says where; hovering it, or <code>/ng/dev/problems</code>, says what.</p>
+<div class="demo"><div class="fake">
+<p>Signed in as <span class="ngchip error"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></span><code>user.nmae</code></span> · <a href="#" style="color: var(--deep)">Sign out</a></p>
+<table style="border-collapse: collapse; font-size: 14px">
+	<tr><th style="text-align: left; padding: .3rem 1.5rem .3rem 0">Subject</th><th style="text-align: left">Received</th></tr>
+	<tr><td style="padding: .3rem 1.5rem .3rem 0">Lunch on Friday?</td><td><span class="ngchip error"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#j-tangled" /></svg></span><code>&lt;wo:str&gt;</code></span></td></tr>
+	<tr><td style="padding: .3rem 1.5rem .3rem 0">Build #412 passed</td><td><span class="ngchip warning"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#j-stinging" /></svg></span><code>&lt;wo:str&gt;</code></span></td></tr>
+</table>
+<p style="margin: 1rem 0 0"><span class="ngchip fine"><span class="ngchip-mark"><svg class="mark" aria-hidden="true"><use href="#j-glowing" /></svg></span>All clear: no problems on this page</span></p>
+</div></div>
+
+<h2>Expired</h2>
+<p class="note">Not a programming error, so not dev-only: the page a visitor gets when the page cache or session has let go of what they clicked.</p>
+<div class="demo expired"><svg class="big" viewBox="0 38 64 22" aria-hidden="true"><use href="#j-stranded" width="64" height="64" /></svg><div>
+<h3>This page washed up</h3><p>The tide went out while you were away, and the page you were on is gone. Start again from the front page.</p><a href="#">Start again</a></div></div>
+
+<h2>In a template</h2>
+<pre class="code"><span class="t">&lt;wo:if</span> <span class="a">condition</span>=<span class="v">"$user.messages"</span><span class="t">&gt;</span>
+  <span class="t">&lt;ul&gt;</span>
+    <span class="t">&lt;wo:repetition</span> <span class="a">list</span>=<span class="v">"$user.messages"</span> <span class="a">item</span>=<span class="v">"$message"</span><span class="t">&gt;</span>
+      <span class="t">&lt;li&gt;&lt;wo:link</span> <span class="a">action</span>=<span class="v">"$open"</span><span class="t">&gt;&lt;wo:str</span> <span class="a">value</span>=<span class="v">"$message.subject"</span> <span class="t">/&gt;&lt;/wo:link&gt;&lt;/li&gt;</span>
+    <span class="t">&lt;/wo:repetition&gt;</span>
+  <span class="t">&lt;/ul&gt;</span>
+<span class="t">&lt;/wo:if&gt;</span></pre>
+
+<h2>Colour</h2>
+<div class="swatches">
+	<div class="swatch"><div style="background: #0b1a2e"></div><strong>Abyss</strong><code>#0b1a2e</code></div>
+	<div class="swatch"><div style="background: #14385a"></div><strong>Deep</strong><code>#14385a</code></div>
+	<div class="swatch"><div style="background: #9fdbe9"></div><strong>Sea glass</strong><code>#9fdbe9</code></div>
+	<div class="swatch"><div style="background: #f08bb4"></div><strong>Jelly</strong><code>#f08bb4</code></div>
+	<div class="swatch"><div style="background: #eef7f9"></div><strong>Foam</strong><code>#eef7f9</code></div>
+	<div class="swatch"><div style="background: #d63b33"></div><strong>Coral, errors</strong><code>#d63b33</code></div>
+	<div class="swatch"><div style="background: #e8930c"></div><strong>Amber, warnings</strong><code>#e8930c</code></div>
+	<div class="swatch"><div style="background: #e9dfc8"></div><strong>Sand, expired</strong><code>#e9dfc8</code></div>
+</div>
+
+<h2>Type</h2>
+<div class="demo type">
+	<div><span style="font-family: 'Sora', sans-serif; font-size: 30px; font-weight: 650; letter-spacing: -.02em">Sora</span><span>wordmark and headings</span></div>
+	<div><span style="font-size: 22px">IBM Plex Sans</span><span>body text</span></div>
+	<div><span style="font-family: 'IBM Plex Mono', monospace; font-size: 20px">IBM Plex Mono</span><span>code and templates</span></div>
+</div>
+</main>
+
+</body>
+</html>
