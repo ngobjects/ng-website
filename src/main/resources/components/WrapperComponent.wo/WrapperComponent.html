@@ -8,7 +8,7 @@
 		<wo:element elementName="meta" name="description" content="$meta.description" />
 		<wo:if condition="$robotsContent"><wo:element elementName="meta" name="robots" content="$robotsContent" /></wo:if>
 		<wo:element elementName="link" rel="canonical" href="$canonicalURL" />
-		<meta property="og:site_name" content="engifer" />
+		<meta property="og:site_name" content="glytta" />
 		<meta property="og:locale" content="en_US" />
 		<wo:element elementName="meta" property="og:type" content="$meta.type" />
 		<wo:element elementName="meta" property="og:title" content="$meta.title" />
@@ -17,15 +17,18 @@
 		<wo:element elementName="meta" property="og:image" content="$shareImageURL" />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="engifer: a Java web framework" />
+		<meta property="og:image:alt" content="glytta: a Java web framework" />
 		<meta name="twitter:card" content="summary_large_image" />
 		<wo:if condition="$structuredData"><script type="application/ld+json"><wo:str value="$structuredData" escapeHTML="$false" /></script></wo:if>
 		<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
-		<link rel="icon" type="image/svg+xml" href="<wo:resourceURL filename="engifer.svg" />" />
+		<link rel="icon" type="image/svg+xml" href="<wo:resourceURL filename="glytta.svg" />" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="theme-color" content="#f5f8f6" media="(prefers-color-scheme: light)" />
-		<meta name="theme-color" content="#0e1513" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#eef7f9" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#08131f" media="(prefers-color-scheme: dark)" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500..700&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Mono:wght@400;500;700&amp;display=swap" />
 		<wo:stylesheet filename="prism.css" />
 		<wo:stylesheet filename="main.css" />
 		
@@ -36,10 +39,8 @@
 		<div class="shell">
 			<aside class="sidebar">
 				<a href="/" class="brand">
-					<picture>
-						<source srcset="<wo:resourceURL filename="engifer-logo-on-dark.svg" />" media="(prefers-color-scheme: dark)" />
-						<wo:img filename="engifer-logo.svg" alt="engifer" width="132" height="36" />
-					</picture>
+					<wo:img filename="glytta.svg" alt="" width="36" height="36" />
+					<span class="brand-word">glytta</span>
 					<span class="badge">alpha</span>
 				</a>
 				<nav class="tree" id="contents" aria-label="Contents">
@@ -67,9 +68,9 @@
 					</wo:repetition>
 				</nav>
 				<div class="powered-slot">
-					<a href="https://www.engifer.com/" class="powered" title="Powered by engifer, an homage to the 88×31 badges of the WebObjects era">
-						<wo:img filename="engifer.svg" alt="" width="20" height="20" />
-						<span class="powered-text"><span class="k">Powered by</span><span class="v">e<span class="ng">ng</span>ifer</span></span>
+					<a href="https://www.engifer.com/" class="powered" title="Powered by glytta, an homage to the 88×31 badges of the WebObjects era">
+						<wo:img filename="glytta.svg" alt="" width="20" height="20" />
+						<span class="powered-text"><span class="k">Powered by</span><span class="v">glytta</span></span>
 					</a>
 				</div>
 			</aside>
@@ -92,7 +93,7 @@
 					<wo:content />
 				</main>
 				<footer class="site-footer">
-					<p>This site runs on engifer. <a href="https://github.com/ngobjects/ng-website">View its source on GitHub</a>.</p>
+					<p>This site runs on glytta. <a href="https://github.com/ngobjects/ng-website">View its source on GitHub</a>.</p>
 					<a class="maker" href="https://godurkodi.is/en/" hreflang="en">
 						<span>Made by</span>
 						<svg class="maker-mark" viewBox="-571.54 -324.06 1143.09 648.11" width="30" height="17" aria-hidden="true">

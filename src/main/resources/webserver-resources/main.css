@@ -1,81 +1,79 @@
 /*
- * Site-wide look for the engifer website.
+ * Site-wide look for the website.
  *
- * Palette "Torch", after the torch ginger: red-pink flowers on green leaves. The start page hero is a vivid
- * emerald panel with a faint blueprint grid; turmeric marks the primary action, torch pink marks links and
- * the current place. Everything else is neutral. The layout is a full-height sidebar and a wide content area,
- * the same structure as whoacommunity.com.
+ * Palette "glytta", after the jellyfish: abyss navy, sea glass and jelly pink. The start page hero is a dark
+ * sea panel with a soft glow; jelly pink marks the primary action, links and the current place. Everything else
+ * is neutral. The layout is a full-height sidebar and a wide content area, the same structure as whoacommunity.com.
  * Earlier palettes are kept in brand/index.html.
  */
 
 :root {
-	--paper: #f5f8f6;
+	--paper: #eef7f9;
 	--surface: #ffffff;
-	--ink: #121a17;
-	--muted: #56635c;
-	--rule: #dde6e1;
-	--code-bg: #ecf2ef;
+	--ink: #0b1a2e;
+	--muted: #3f5468;
+	--rule: #d3e4ea;
+	--code-bg: #e5f1f4;
 
-	--band: #074b3c;
-	--band-ink: #f0f7f3;
-	--band-muted: #a8d5c0;
-	--band-rule: rgba(240, 247, 243, 0.18);
-	--band-surface: #053329;
-	--band-grid: rgba(168, 230, 200, 0.04);
-	--band-grid-major: rgba(168, 230, 200, 0.08);
+	--band: #0b1a2e;
+	--band-ink: #e9f8fa;
+	--band-muted: #b9d3dc;
+	--band-rule: rgba(233, 248, 250, 0.16);
+	--band-surface: #07121f;
 
-	--torch: #ff5a82;
-	--highlight: #ffb320;
-	--accent: #c41e4a;
-	--link: #c41e4a;
-	--link-decoration: #ff9ab3;
-	--callout: #fff8e6;
-	--callout-border: #ffb320;
+	--torch: #f08bb4;
+	--highlight: #f08bb4;
+	--accent: #b8326e;
+	--link: #b8326e;
+	--link-decoration: #f3a9c7;
+	--callout: #e3f4f8;
+	--callout-border: #9fdbe9;
 
 	/* Syntax colors (used by the prism overrides below) */
-	--tok-tag: #b0174f;
-	--tok-attr: #6a3fb5;
-	--tok-string: #1f7a5a;
+	--tok-tag: #b8326e;
+	--tok-attr: #5b46b0;
+	--tok-string: #1d6f86;
 	--tok-keyword: #2b5bb8;
-	--tok-comment: #7d8a83;
-	--tok-punct: #66736c;
+	--tok-comment: #6b8290;
+	--tok-punct: #5a6f7d;
 
-	--font-text: "Inter", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-	--font-code: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+	--font-text: "IBM Plex Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+	--font-display: "Sora", var(--font-text);
+	--font-code: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
 	--measure: 74ch;
 	--sidebar: 16.5rem;
 	--radius: 6px;
-	--card-shadow: 0 1px 2px rgba(18, 26, 23, 0.06), 0 4px 16px rgba(18, 26, 23, 0.05);
+	--card-shadow: 0 1px 2px rgba(11, 26, 46, 0.06), 0 4px 16px rgba(11, 26, 46, 0.05);
 
 	color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--paper: #0e1513;
-		--surface: #141d1a;
-		--ink: #e8f1ec;
-		--muted: #9db0a6;
-		--rule: #22302b;
-		--code-bg: #17221e;
+		--paper: #08131f;
+		--surface: #0d1b2a;
+		--ink: #e6f2f5;
+		--muted: #9cb3be;
+		--rule: #1c2e40;
+		--code-bg: #102233;
 
-		--band-surface: #042a22;
+		--band-surface: #050d17;
 
-		--accent: #ff8aa6;
-		--link: #ff8aa6;
-		--link-decoration: rgba(255, 138, 166, 0.5);
-		--callout: #2a2112;
+		--accent: #f08bb4;
+		--link: #f08bb4;
+		--link-decoration: rgba(240, 139, 180, 0.5);
+		--callout: #10283a;
 		--card-shadow: 0 0 0 1px var(--rule);
 
 		--hero-border: 1px solid var(--band-rule);
 
-		--tok-tag: #ff8aa6;
-		--tok-attr: #c9a8ff;
-		--tok-string: #7fe0b0;
+		--tok-tag: #f08bb4;
+		--tok-attr: #c9b8ff;
+		--tok-string: #9fdbe9;
 		--tok-keyword: #8cb8ff;
-		--tok-comment: #74867d;
-		--tok-punct: #9db0a6;
+		--tok-comment: #6f8a99;
+		--tok-punct: #9cb3be;
 
 		color-scheme: dark;
 	}
@@ -211,7 +209,6 @@ body {
 	font-size: 1.0625rem;
 	line-height: 1.65;
 	-webkit-font-smoothing: antialiased;
-	font-feature-settings: "cv11";
 }
 
 img {
@@ -242,6 +239,7 @@ strong, b, th {
 }
 
 h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font-display);
 	line-height: 1.2;
 	font-weight: 600;
 	margin: 2em 0 0.6em;
@@ -402,8 +400,17 @@ pre code[class*="language-"] {
 
 .brand img {
 	display: block;
-	width: 132px;
-	height: auto;
+	width: 36px;
+	height: 36px;
+}
+
+.brand-word {
+	font-family: var(--font-display);
+	font-size: 1.75rem;
+	font-weight: 650;
+	line-height: 1;
+	letter-spacing: -0.04em;
+	color: var(--ink);
 }
 
 .brand .badge {
@@ -774,7 +781,7 @@ pre code[class*="language-"] {
 	border: 1px solid var(--rule);
 	border-radius: 4px;
 	background: var(--paper);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(18, 26, 23, 0.06);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 0 rgba(11, 26, 46, 0.06);
 	text-decoration: none;
 	text-align: left;
 	line-height: 1;
@@ -806,6 +813,7 @@ pre code[class*="language-"] {
 }
 
 .powered-text .v {
+	font-family: var(--font-display);
 	font-size: 12.5px;
 	font-weight: 600;
 	letter-spacing: -0.02em;
@@ -813,18 +821,9 @@ pre code[class*="language-"] {
 	white-space: nowrap;
 }
 
-/* The ng is coloured as in the logo: torch red on light, turmeric on dark */
-.powered-text .ng {
-	color: #c41e4a;
-}
-
 @media (prefers-color-scheme: dark) {
 	.powered {
 		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 1px 0 rgba(0, 0, 0, 0.25);
-	}
-
-	.powered-text .ng {
-		color: var(--highlight);
 	}
 }
 
@@ -848,18 +847,13 @@ pre code[class*="language-"] {
 .band {
 	color: var(--band-ink);
 
-	/* A faint blueprint grid with one soft glow */
+	/* Deep water with a glow where the light comes down */
 	background-color: var(--band);
 	background-image:
-		radial-gradient(ellipse 60% 140% at 100% 0%, rgba(62, 232, 165, 0.16), transparent 65%),
-		linear-gradient(var(--band-grid-major) 1px, transparent 1px),
-		linear-gradient(90deg, var(--band-grid-major) 1px, transparent 1px),
-		linear-gradient(var(--band-grid) 1px, transparent 1px),
-		linear-gradient(90deg, var(--band-grid) 1px, transparent 1px);
-	background-size: auto, 120px 120px, 120px 120px, 24px 24px, 24px 24px;
-	background-position: 0 0, -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+		radial-gradient(ellipse 55% 120% at 100% 0%, rgba(159, 219, 233, 0.16), transparent 65%),
+		radial-gradient(ellipse 45% 90% at 0% 100%, rgba(240, 139, 180, 0.08), transparent 70%);
 
-	/* Content shown inside the band uses colors that read on the emerald */
+	/* Content shown inside the band uses colors that read on the abyss */
 	--ink: var(--band-ink);
 	--muted: var(--band-muted);
 	--rule: var(--band-rule);
@@ -869,12 +863,12 @@ pre code[class*="language-"] {
 	--link-decoration: var(--highlight);
 	--accent: var(--highlight);
 
-	--tok-tag: #ffb320;
-	--tok-attr: #ffa3bb;
-	--tok-string: #b8f5d6;
-	--tok-keyword: #9fd0ff;
-	--tok-comment: #86b8a1;
-	--tok-punct: #a8d5c0;
+	--tok-tag: #f08bb4;
+	--tok-attr: #c9b8ff;
+	--tok-string: #9fdbe9;
+	--tok-keyword: #8cb8ff;
+	--tok-comment: #7f9aa8;
+	--tok-punct: #b9d3dc;
 }
 
 .hero {
@@ -887,11 +881,25 @@ pre code[class*="language-"] {
 	border: var(--hero-border, 0);
 }
 
-.hero-logo {
-	display: block;
-	width: min(20rem, 100%);
-	height: auto;
+.hero-brand {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 	margin: 0 0 1.75rem;
+}
+
+.hero-brand img {
+	flex: none;
+	width: 6.5rem;
+	height: auto;
+}
+
+.hero-brand span {
+	font-family: var(--font-display);
+	font-size: clamp(3.5rem, 6vw, 5rem);
+	font-weight: 650;
+	line-height: 0.9;
+	letter-spacing: -0.04em;
 }
 
 .hero h1 {
@@ -927,7 +935,7 @@ pre code[class*="language-"] {
 	border-radius: var(--radius);
 	border: 1px solid var(--highlight);
 	background: var(--highlight);
-	color: #121a17;
+	color: #0b1a2e;
 }
 
 .button:hover {
@@ -984,7 +992,7 @@ pre code[class*="language-"] {
 	position: absolute;
 	left: 0;
 	right: 0;
-	background: rgba(255, 179, 32, 0.13);
+	background: rgba(240, 139, 180, 0.14);
 	box-shadow: inset 3px 0 0 var(--highlight);
 	opacity: 0;
 	transition: top 0.25s ease, opacity 0.25s ease;
@@ -999,8 +1007,8 @@ pre code[class*="language-"] {
 	margin: 0 0.85rem 0.85rem;
 	border-radius: 6px;
 	overflow: hidden;
-	background: #fbfdfc;
-	color: #121a17;
+	background: #fbfeff;
+	color: #0b1a2e;
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
@@ -1009,10 +1017,10 @@ pre code[class*="language-"] {
 	align-items: center;
 	gap: 0.75rem;
 	padding: 0.4rem 0.7rem;
-	background: #e6eeea;
+	background: #e3eef2;
 	font-family: var(--font-code);
 	font-size: 0.7rem;
-	color: #56635c;
+	color: #3f5468;
 }
 
 .hero-output-dots {
@@ -1024,14 +1032,14 @@ pre code[class*="language-"] {
 	width: 0.5rem;
 	height: 0.5rem;
 	border-radius: 50%;
-	background: #c3d0c9;
+	background: #c0d3da;
 }
 
 .hero-output-url {
 	flex: 1;
 	padding: 0.1rem 0.6rem;
 	border-radius: 4px;
-	background: #fbfdfc;
+	background: #fbfeff;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -1058,7 +1066,7 @@ pre code[class*="language-"] {
 	letter-spacing: -0.01em;
 	margin: 0 0 0.45rem;
 	min-height: 1.3em;
-	color: #121a17;
+	color: #0b1a2e;
 }
 
 .hero-output ul {
@@ -1074,33 +1082,33 @@ pre code[class*="language-"] {
 	content: "No messages. Nothing to repeat.";
 	display: block;
 	margin-left: -1.1rem;
-	color: #7d8a83;
+	color: #6b8290;
 	font-style: italic;
 	animation: hero-page-in 0.3s ease;
 }
 
 .hero-output-link {
-	color: #c41e4a;
+	color: #b8326e;
 	text-decoration: underline;
-	text-decoration-color: #ff9ab3;
+	text-decoration-color: #f3a9c7;
 	text-underline-offset: 0.15em;
 	border-radius: 3px;
 	transition: background 0.15s ease;
 }
 
 .hero-output-link.pressed {
-	background: rgba(255, 90, 130, 0.18);
+	background: rgba(240, 139, 180, 0.22);
 }
 
 .hero-output-back {
 	margin: 0 0 0.35rem;
 	font-size: 0.75rem;
-	color: #c41e4a;
+	color: #b8326e;
 }
 
 .hero-output-text {
 	margin: 0;
-	color: #56635c;
+	color: #3f5468;
 }
 
 @keyframes hero-item-in {

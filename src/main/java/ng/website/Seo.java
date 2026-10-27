@@ -14,9 +14,9 @@ public class Seo {
 
 	public static final String BASE_URL = "https://www.engifer.com";
 
-	public static final String SITE_NAME = "engifer";
+	public static final String SITE_NAME = "glytta";
 
-	public static final String SITE_DESCRIPTION = "engifer is an open source, component-based Java web framework: HTML templates paired with Java classes, stateful component actions, and deployment alongside WebObjects apps.";
+	public static final String SITE_DESCRIPTION = "glytta is an open source, component-based Java web framework: HTML templates paired with Java classes, stateful component actions, and deployment alongside WebObjects apps.";
 
 	private static final String REPOSITORY_URL = "https://github.com/ngobjects/ng-objects";
 
