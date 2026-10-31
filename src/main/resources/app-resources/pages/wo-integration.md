@@ -1,7 +1,7 @@
 # For WebObjects developers
 
 | 🚧 **Changing fast**\
-This area is moving quickly ahead of the November conference. Expect updates.
+This area changes fast and frequently. Expect updates.
 
 engifer is built on WO's ideas, not a clone of it.
 
