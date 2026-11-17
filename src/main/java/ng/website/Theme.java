@@ -9,15 +9,14 @@ import ng.appserver.http.NGResponse;
 import ng.appserver.http.NGResponses;
 
 /**
- * The site's look while the framework's name is being decided: engifer (ginger), glytta (jellyfish) or Skoffín (the cat-fox of Icelandic folklore).
+ * The site's look while the framework's name is being decided: engifer (ginger) or glytta (jellyfish).
  * A visitor picks one at /theme/{name}, which remembers it in a cookie.
  */
 
 public enum Theme {
 
 	glytta( "glytta" ),
-	engifer( "engifer" ),
-	skoffin( "Skoffín" );
+	engifer( "engifer" );
 
 	private final String displayName;
 
@@ -42,10 +41,6 @@ public enum Theme {
 
 	public boolean isEngifer() {
 		return this == engifer;
-	}
-
-	public boolean isSkoffin() {
-		return this == skoffin;
 	}
 
 	/**
